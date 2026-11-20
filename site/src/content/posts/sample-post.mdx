@@ -1,6 +1,6 @@
 ---
 title: How this site turns one token file into CSS
-description: A sample post to check the type, colors and themes of joost.engineer.
+description: A sample post to check the type, colors, components and themes of joost.engineer.
 date: 2026-11-20
 type: notes
 ---
@@ -11,6 +11,10 @@ Every color on this page comes from a single file, `tokens.json`, written during
 
 If a value is typed into a stylesheet by hand, it drifts. With one source, the light and dark themes can't disagree about what `teal-10` is.
 
+<Callout title="Method">
+Run `npm run tokens:export` after changing `tokens.json`, then `npm run build`. The build runs Terrazzo first.
+</Callout>
+
 ### What gets generated
 
 The light theme lands on `:root`, the dark theme on `:root[data-theme="dark"]` and on the system preference.
@@ -19,5 +23,9 @@ The light theme lands on `:root`, the dark theme on `:root[data-theme="dark"]` a
 const variableName = (token) =>
   `--${token.id.replace(/^color\./, "").replace(/\./g, "-")}`;
 ```
+
+<Figure src="/textures/drawing-light.webp" alt="The j.e mark as a dimensioned construction drawing, in font units">
+  The short form j.e as a technical drawing. The period is centered optically: gaps of 146 and 147 units.
+</Figure>
 
 This is a sample post. It goes away when the first real post arrives.

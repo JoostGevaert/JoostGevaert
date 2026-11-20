@@ -10,7 +10,8 @@
     "tokens:export": "node scripts/export-tokens.mjs",
     "tokens:build": "tz build",
     "tokens:check": "tz check",
-    "icons": "node scripts/build-icons.mjs"
+    "icons": "node scripts/build-icons.mjs",
+    "textures": "node scripts/build-textures.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.6",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@terrazzo/cli": "^2.10.0",
-    "@terrazzo/plugin-css": "^2.10.0"
+    "@terrazzo/plugin-css": "^2.10.0",
+    "svgo": "^4.1.0"
   }
 }

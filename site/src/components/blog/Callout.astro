@@ -1,0 +1,27 @@
+---
+// An aside set off by a hairline and a teal rule (borders, not shadows).
+interface Props {
+  /** Short label in label style, e.g. "Note", "Method", "Result". */
+  title?: string;
+}
+const { title = "Note" } = Astro.props;
+---
+<aside class="callout">
+  <p class="label">{title}</p>
+  <div class="body"><slot /></div>
+</aside>
+
+<style>
+  .callout {
+    margin: var(--space-4) 0;
+    padding: var(--space-3) var(--space-4);
+    background: var(--teal-2);
+    border: 1px solid var(--teal-6);
+    border-left: 3px solid var(--brand);
+    border-radius: var(--radius-sm);
+  }
+  .label { margin: 0 0 var(--space-1); }
+  .body :global(> :first-child) { margin-top: 0; }
+  .body :global(> :last-child) { margin-bottom: 0; }
+  .body :global(> * + *) { margin-top: 0.75em; }
+</style>

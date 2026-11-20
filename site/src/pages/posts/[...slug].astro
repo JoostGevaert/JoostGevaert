@@ -1,14 +1,16 @@
 ---
 import { render } from "astro:content";
-import { getPosts } from "../../lib/posts";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { isoDate } from "../../lib/format";
+import PostHeader from "../../components/blog/PostHeader.astro";
+import Figure from "../../components/blog/Figure.astro";
+import Callout from "../../components/blog/Callout.astro";
+import { getPosts, textureFor } from "../../lib/posts";
 
 export async function getStaticPaths() {
   const posts = await getPosts();
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, texture: textureFor(post, posts) } }));
 }
-const { post } = Astro.props;
+const { post, texture } = Astro.props;
 const { Content } = await render(post);
 ---
 <BaseLayout
@@ -19,19 +21,9 @@ const { Content } = await render(post);
   published={post.data.date}
 >
   <article>
-    <header class="post-header">
-      <p class="label">{isoDate(post.data.date)} · {post.data.type}</p>
-      <h1 class="display">{post.data.title}</h1>
-      {post.data.description && <p class="lede">{post.data.description}</p>}
-    </header>
+    <PostHeader post={post} texture={texture} />
     <div class="prose">
-      <Content />
+      <Content components={{ Figure, Callout }} />
     </div>
   </article>
 </BaseLayout>
-
-<style>
-  .post-header { margin-bottom: var(--space-5); max-width: 68ch; }
-  .post-header .label { margin: 0 0 var(--space-2); }
-  .post-header .lede { margin: var(--space-3) 0 0; }
-</style>
