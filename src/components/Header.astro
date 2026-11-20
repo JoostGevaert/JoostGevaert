@@ -1,6 +1,6 @@
 ---
 import Logo from "./Logo.astro";
-import ThemeToggle from "./ThemeToggle.astro";
+import ThemeSwitch from "./ThemeSwitch.astro";
 import Icon from "./icons/Icon.astro";
 import BrandLogo from "./icons/BrandLogo.astro";
 import { site } from "../site.config";
@@ -45,7 +45,7 @@ const iconButtonClasses =
     ))}
   </ul>
 
-  <ThemeToggle />
+  <ThemeSwitch />
 
   <!-- Narrow screens: links and profiles move into the menu, with their names. -->
   <details class="group/menu relative sm:hidden">

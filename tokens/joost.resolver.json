@@ -9,6 +9,7 @@
         { "$ref": "space.tokens.json" },
         { "$ref": "radius.tokens.json" },
         { "$ref": "opacity.tokens.json" },
+        { "$ref": "motion.tokens.json" },
         { "$ref": "color/semantic.tokens.json" }
       ]
     }
