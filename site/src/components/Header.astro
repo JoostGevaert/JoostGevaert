@@ -5,6 +5,7 @@ import ThemeToggle from "./ThemeToggle.astro";
 <header class="site-header">
   <a href="/" class="home" aria-label="joost.engineer, home">
     <Logo variant="wordmark" id="hdr-wordmark" />
+    <Logo variant="mark" id="hdr-mark" />
   </a>
   <nav aria-label="Main">
     <a href="/">Writing</a>
@@ -31,6 +32,17 @@ import ThemeToggle from "./ThemeToggle.astro";
   .home :global(.logo-wordmark) {
     height: 26px;
     width: auto;
+  }
+  .home :global(.logo-mark) {
+    display: none;
+    height: 28px;
+    width: auto;
+  }
+  /* j.e replaces the wordmark where the full name doesn't fit beside the nav. */
+  @media (max-width: 560px) {
+    .home :global(.logo-wordmark) { display: none; }
+    .home :global(.logo-mark) { display: block; }
+    .site-header { gap: var(--space-3); padding-inline: var(--space-3); }
   }
   nav {
     margin-left: auto;
