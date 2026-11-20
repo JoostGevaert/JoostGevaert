@@ -16,7 +16,7 @@
         ],
         "hex": "#ffffff"
       },
-      "$description": "Icons and text on a brand (teal-10) fill, in both themes: the theme switch's chosen icon."
+      "$description": "Icons and large or bold text on a brand (teal-10) fill, in both themes, such as the theme switch's chosen icon (4.4:1). Small body-size text on teal needs a teal-11 fill instead (5.5:1)."
     },
     "link": {
       "$type": "color",

@@ -1,0 +1,42 @@
+{
+  "ease": {
+    "overshoot": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.175,
+        0.885,
+        0.32,
+        1.1
+      ],
+      "$description": "Bedrock.engineer's overshooting swing: the theme switch indicator, and other small parts that snap into place."
+    },
+    "standard": {
+      "$type": "cubicBezier",
+      "$value": [
+        0,
+        0,
+        0.58,
+        1
+      ],
+      "$description": "Plain changes that should not draw attention: hover and focus colors."
+    }
+  },
+  "duration": {
+    "fast": {
+      "$type": "duration",
+      "$value": {
+        "value": 150,
+        "unit": "ms"
+      },
+      "$description": "Color changes on hover and focus (links, buttons, brand logos, the switch's triangles), with ease-standard."
+    },
+    "swing": {
+      "$type": "duration",
+      "$value": {
+        "value": 450,
+        "unit": "ms"
+      },
+      "$description": "Swings with ease-overshoot: the theme switch indicator's 60° rotation."
+    }
+  }
+}

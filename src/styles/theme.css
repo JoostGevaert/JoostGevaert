@@ -7,6 +7,7 @@
   --shadow-*: initial;
   --inset-shadow-*: initial;
   --drop-shadow-*: initial;
+  --ease-*: initial;
   --color-transparent: transparent;
   --color-current: currentColor;
   --color-teal-1: var(--teal-1);
@@ -126,4 +127,20 @@
 }
 @utility opacity-texture-card {
   opacity: var(--opacity-texture-card);
+}
+@utility ease-overshoot {
+  --tw-ease: var(--ease-overshoot);
+  transition-timing-function: var(--ease-overshoot);
+}
+@utility ease-standard {
+  --tw-ease: var(--ease-standard);
+  transition-timing-function: var(--ease-standard);
+}
+@utility duration-fast {
+  --tw-duration: var(--duration-fast);
+  transition-duration: var(--duration-fast);
+}
+@utility duration-swing {
+  --tw-duration: var(--duration-swing);
+  transition-duration: var(--duration-swing);
 }

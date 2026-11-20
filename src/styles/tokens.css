@@ -53,6 +53,14 @@
   --div-8: rgb(34.51% 58.43% 62.75%);
   /* Diverging scale plum ← gray → teal, step 9 of 9 (teal side). For data with a meaningful middle. */
   --div-9: rgb(20.78% 44.31% 48.24%);
+  /* Color changes on hover and focus (links, buttons, brand logos, the switch's triangles), with ease-standard. */
+  --duration-fast: 150ms;
+  /* Swings with ease-overshoot: the theme switch indicator's 60° rotation. */
+  --duration-swing: 450ms;
+  /* Bedrock.engineer's overshooting swing: the theme switch indicator, and other small parts that snap into place. */
+  --ease-overshoot: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  /* Plain changes that should not draw attention: hover and focus colors. */
+  --ease-standard: cubic-bezier(0, 0, 0.58, 1);
   /* Focus rings, 2px with 2px offset. */
   --focus: var(--teal-9);
   --font-mono: "Source Code Pro", ui-monospace, monospace;
@@ -72,7 +80,7 @@
   --link: var(--teal-11);
   /* The teal dots of the logo: j, period and i. Lighter in dark mode so they stay visible. */
   --logo-dot: var(--teal-10);
-  /* Icons and text on a brand (teal-10) fill, in both themes: the theme switch's chosen icon. */
+  /* Icons and large or bold text on a brand (teal-10) fill, in both themes, such as the theme switch's chosen icon (4.4:1). Small body-size text on teal needs a teal-11 fill instead (5.5:1). */
   --on-brand: rgb(100% 100% 100%);
   /* Background texture behind a post header, masked to fade in from the left. */
   --opacity-texture-card: 0.18;
@@ -82,7 +90,7 @@
   --radius-lg: 16px;
   /* Cards and post headers. */
   --radius-md: 12px;
-  /* Segmented controls and the theme switch. */
+  /* Pill buttons and chips (end-of-post buttons, repo chips, tags). */
   --radius-pill: 999px;
   /* Swatches, inputs, code chips. */
   --radius-sm: 6px;
