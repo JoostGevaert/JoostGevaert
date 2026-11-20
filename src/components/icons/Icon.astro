@@ -1,0 +1,38 @@
+---
+// Lucide interface icon at the house stroke (BRAND.md, Icons): 1.5 px at
+// every display size (absoluteStrokeWidth), currentColor, aria-hidden.
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+interface Props {
+  name: string;
+  size?: 16 | 20 | 24;
+  class?: string;
+}
+const { name, size = 20, class: className } = Astro.props;
+const raw = readFileSync(
+  resolve(process.cwd(), `node_modules/lucide-static/icons/${name}.svg`),
+  "utf8",
+);
+const inner = raw
+  .replace(/<!--[\s\S]*?-->/, "")
+  .replace(/^[\s\S]*?<svg[^>]*>/, "")
+  .replace(/<\/svg>\s*$/, "");
+const stroke = (1.5 * 24) / size;
+---
+
+<svg
+  class={className}
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width={stroke}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+  set:html={inner}
+/>

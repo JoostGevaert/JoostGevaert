@@ -1,0 +1,10 @@
+dist/
+.astro/
+node_modules/
+pnpm-lock.yaml
+public/
+design-system/
+tokens/
+src/styles/fonts.css
+src/styles/tokens.css
+src/styles/theme.css

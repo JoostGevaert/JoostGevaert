@@ -1,0 +1,37 @@
+---
+// A faint background texture (BRAND.md, Textures), swapped per theme.
+// Files are the optimized copies in public/textures/ (pnpm textures).
+import type { Texture } from "../../lib/posts";
+interface Props {
+  kind: Texture;
+  /** Opacity token: texture-card (post headers) or texture-hero. */
+  strength?: "card" | "hero";
+}
+const { kind, strength = "card" } = Astro.props;
+const ext = kind === "drawing" ? "webp" : "svg";
+const imgClasses = "absolute top-0 right-0 h-full w-auto max-w-none";
+---
+
+<!-- Fades in from the left so the title sits on a clean ground. -->
+<div
+  class:list={[
+    "pointer-events-none absolute inset-0 mask-l-from-45% mask-l-to-0%",
+    strength === "hero" ? "opacity-texture-hero" : "opacity-texture-card",
+  ]}
+  aria-hidden="true"
+>
+  <img
+    class:list={[imgClasses, "dark:hidden"]}
+    src={`/textures/${kind}-light.${ext}`}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+  <img
+    class:list={[imgClasses, "hidden dark:block"]}
+    src={`/textures/${kind}-dark.${ext}`}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+</div>

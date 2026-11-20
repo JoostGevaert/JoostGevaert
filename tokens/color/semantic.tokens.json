@@ -1,0 +1,538 @@
+{
+  "color": {
+    "brand": {
+      "$type": "color",
+      "$value": "{color.teal.10}",
+      "$description": "The brand color: buttons and solid fills."
+    },
+    "link": {
+      "$type": "color",
+      "$value": "{color.teal.11}",
+      "$description": "Links and teal text such as the date line."
+    },
+    "focus": {
+      "$type": "color",
+      "$value": "{color.teal.9}",
+      "$description": "Focus rings, 2px with 2px offset."
+    },
+    "biv": {
+      "10": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6314,
+            0.8039,
+            0.8314
+          ],
+          "hex": "#a1cdd4"
+        },
+        "$description": "Bivariate map class 10: mid teal, low plum. Maps and charts only, never UI; identical in both themes."
+      },
+      "11": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5922,
+            0.6353,
+            0.7686
+          ],
+          "hex": "#97a2c4"
+        },
+        "$description": "Bivariate map class 11: mid teal, mid plum. Maps and charts only, never UI; identical in both themes."
+      },
+      "12": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.498,
+            0.4196,
+            0.6157
+          ],
+          "hex": "#7f6b9d"
+        },
+        "$description": "Bivariate map class 12: mid teal, high plum. Maps and charts only, never UI; identical in both themes."
+      },
+      "20": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3922,
+            0.6353,
+            0.6784
+          ],
+          "hex": "#64a2ad"
+        },
+        "$description": "Bivariate map class 20: high teal, low plum. Maps and charts only, never UI; identical in both themes."
+      },
+      "21": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3333,
+            0.5098,
+            0.6235
+          ],
+          "hex": "#55829f"
+        },
+        "$description": "Bivariate map class 21: high teal, mid plum. Maps and charts only, never UI; identical in both themes."
+      },
+      "22": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2745,
+            0.3098,
+            0.5176
+          ],
+          "hex": "#464f84"
+        },
+        "$description": "Bivariate map class 22: high teal, high plum (the indigo corner). Maps and charts only, never UI; identical in both themes."
+      },
+      "00": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9059,
+            0.9176,
+            0.9294
+          ],
+          "hex": "#e7eaed"
+        },
+        "$description": "Bivariate map class 00: low teal, low plum. Maps and charts only, never UI; identical in both themes."
+      },
+      "01": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8549,
+            0.7137,
+            0.8078
+          ],
+          "hex": "#dab6ce"
+        },
+        "$description": "Bivariate map class 01: low teal, mid plum. Maps and charts only, never UI; identical in both themes."
+      },
+      "02": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7059,
+            0.4863,
+            0.6392
+          ],
+          "hex": "#b47ca3"
+        },
+        "$description": "Bivariate map class 02: low teal, high plum. Maps and charts only, never UI; identical in both themes."
+      }
+    },
+    "seq": {
+      "teal": {
+        "1": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9059,
+              0.9176,
+              0.9294
+            ],
+            "hex": "#e7eaed"
+          },
+          "$description": "Sequential teal scale, step 1 of 7, from light gray to deep teal. Map and chart fills; the same in both themes."
+        },
+        "2": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7686,
+              0.8627,
+              0.8784
+            ],
+            "hex": "#c4dce0"
+          },
+          "$description": "Sequential teal scale, step 2 of 7, from light gray to deep teal. Map and chart fills; the same in both themes."
+        },
+        "3": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6314,
+              0.8039,
+              0.8314
+            ],
+            "hex": "#a1cdd4"
+          },
+          "$description": "Sequential teal scale, step 3 of 7, from light gray to deep teal. Map and chart fills; the same in both themes."
+        },
+        "4": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5137,
+              0.7176,
+              0.7529
+            ],
+            "hex": "#83b7c0"
+          },
+          "$description": "Sequential teal scale, step 4 of 7, from light gray to deep teal. Map and chart fills; the same in both themes."
+        },
+        "5": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3922,
+              0.6353,
+              0.6784
+            ],
+            "hex": "#64a2ad"
+          },
+          "$description": "Sequential teal scale, step 5 of 7, from light gray to deep teal. Map and chart fills; the same in both themes."
+        },
+        "6": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.298,
+              0.5373,
+              0.5804
+            ],
+            "hex": "#4c8994"
+          },
+          "$description": "Sequential teal scale, step 6 of 7, from light gray to deep teal. Map and chart fills; the same in both themes."
+        },
+        "7": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2078,
+              0.4431,
+              0.4824
+            ],
+            "hex": "#35717b"
+          },
+          "$description": "Sequential teal scale, step 7 of 7, from light gray to deep teal. Map and chart fills; the same in both themes."
+        }
+      },
+      "plum": {
+        "1": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9059,
+              0.9176,
+              0.9294
+            ],
+            "hex": "#e7eaed"
+          },
+          "$description": "Sequential plum scale, step 1 of 7, from light gray to deep plum. Map and chart fills; the same in both themes."
+        },
+        "2": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8824,
+              0.8157,
+              0.8667
+            ],
+            "hex": "#e1d0dd"
+          },
+          "$description": "Sequential plum scale, step 2 of 7, from light gray to deep plum. Map and chart fills; the same in both themes."
+        },
+        "3": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8549,
+              0.7137,
+              0.8078
+            ],
+            "hex": "#dab6ce"
+          },
+          "$description": "Sequential plum scale, step 3 of 7, from light gray to deep plum. Map and chart fills; the same in both themes."
+        },
+        "4": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7804,
+              0.6,
+              0.7216
+            ],
+            "hex": "#c799b8"
+          },
+          "$description": "Sequential plum scale, step 4 of 7, from light gray to deep plum. Map and chart fills; the same in both themes."
+        },
+        "5": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7059,
+              0.4863,
+              0.6392
+            ],
+            "hex": "#b47ca3"
+          },
+          "$description": "Sequential plum scale, step 5 of 7, from light gray to deep plum. Map and chart fills; the same in both themes."
+        },
+        "6": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6078,
+              0.3961,
+              0.5412
+            ],
+            "hex": "#9b658a"
+          },
+          "$description": "Sequential plum scale, step 6 of 7, from light gray to deep plum. Map and chart fills; the same in both themes."
+        },
+        "7": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5137,
+              0.3098,
+              0.4471
+            ],
+            "hex": "#834f72"
+          },
+          "$description": "Sequential plum scale, step 7 of 7, from light gray to deep plum. Map and chart fills; the same in both themes."
+        }
+      },
+      "indigo": {
+        "1": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9059,
+              0.9176,
+              0.9294
+            ],
+            "hex": "#e7eaed"
+          },
+          "$description": "Sequential indigo (the diagonal of the color field) scale, step 1 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes."
+        },
+        "2": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7451,
+              0.7765,
+              0.851
+            ],
+            "hex": "#bec6d9"
+          },
+          "$description": "Sequential indigo (the diagonal of the color field) scale, step 2 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes."
+        },
+        "3": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5922,
+              0.6353,
+              0.7686
+            ],
+            "hex": "#97a2c4"
+          },
+          "$description": "Sequential indigo (the diagonal of the color field) scale, step 3 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes."
+        },
+        "4": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4275,
+              0.4706,
+              0.6431
+            ],
+            "hex": "#6d78a4"
+          },
+          "$description": "Sequential indigo (the diagonal of the color field) scale, step 4 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes."
+        },
+        "5": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2745,
+              0.3098,
+              0.5176
+            ],
+            "hex": "#464f84"
+          },
+          "$description": "Sequential indigo (the diagonal of the color field) scale, step 5 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes."
+        },
+        "6": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2196,
+              0.251,
+              0.4353
+            ],
+            "hex": "#38406f"
+          },
+          "$description": "Sequential indigo (the diagonal of the color field) scale, step 6 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes."
+        },
+        "7": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1686,
+              0.1922,
+              0.3569
+            ],
+            "hex": "#2b315b"
+          },
+          "$description": "Sequential indigo (the diagonal of the color field) scale, step 7 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes."
+        }
+      }
+    },
+    "div": {
+      "1": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5137,
+            0.3098,
+            0.4471
+          ],
+          "hex": "#834f72"
+        },
+        "$description": "Diverging scale plum ← gray → teal, step 1 of 9 (plum side). For data with a meaningful middle."
+      },
+      "2": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6588,
+            0.4392,
+            0.5882
+          ],
+          "hex": "#a87096"
+        },
+        "$description": "Diverging scale plum ← gray → teal, step 2 of 9 (plum side). For data with a meaningful middle."
+      },
+      "3": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7804,
+            0.6,
+            0.7216
+          ],
+          "hex": "#c799b8"
+        },
+        "$description": "Diverging scale plum ← gray → teal, step 3 of 9 (plum side). For data with a meaningful middle."
+      },
+      "4": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8706,
+            0.7647,
+            0.8392
+          ],
+          "hex": "#dec3d6"
+        },
+        "$description": "Diverging scale plum ← gray → teal, step 4 of 9 (plum side). For data with a meaningful middle."
+      },
+      "5": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9059,
+            0.9176,
+            0.9294
+          ],
+          "hex": "#e7eaed"
+        },
+        "$description": "Diverging scale plum ← gray → teal, step 5 of 9 (the neutral middle). For data with a meaningful middle."
+      },
+      "6": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.702,
+            0.8314,
+            0.8549
+          ],
+          "hex": "#b3d4da"
+        },
+        "$description": "Diverging scale plum ← gray → teal, step 6 of 9 (teal side). For data with a meaningful middle."
+      },
+      "7": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.5137,
+            0.7176,
+            0.7529
+          ],
+          "hex": "#83b7c0"
+        },
+        "$description": "Diverging scale plum ← gray → teal, step 7 of 9 (teal side). For data with a meaningful middle."
+      },
+      "8": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3451,
+            0.5843,
+            0.6275
+          ],
+          "hex": "#5895a0"
+        },
+        "$description": "Diverging scale plum ← gray → teal, step 8 of 9 (teal side). For data with a meaningful middle."
+      },
+      "9": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2078,
+            0.4431,
+            0.4824
+          ],
+          "hex": "#35717b"
+        },
+        "$description": "Diverging scale plum ← gray → teal, step 9 of 9 (teal side). For data with a meaningful middle."
+      }
+    }
+  }
+}

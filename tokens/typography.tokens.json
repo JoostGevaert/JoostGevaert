@@ -1,0 +1,200 @@
+{
+  "font": {
+    "sans": {
+      "$type": "fontFamily",
+      "$value": [
+        "Source Sans 3",
+        "system-ui",
+        "sans-serif"
+      ]
+    },
+    "serif": {
+      "$type": "fontFamily",
+      "$value": [
+        "Source Serif 4",
+        "Georgia",
+        "serif"
+      ]
+    },
+    "mono": {
+      "$type": "fontFamily",
+      "$value": [
+        "Source Code Pro",
+        "ui-monospace",
+        "monospace"
+      ]
+    }
+  },
+  "type": {
+    "display": {
+      "$type": "typography",
+      "$description": "Post and page titles. Source Sans 3 Bold, balanced wrapping.",
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": {
+          "value": 44,
+          "unit": "px"
+        },
+        "lineHeight": 1.1,
+        "fontWeight": 700,
+        "letterSpacing": {
+          "value": -0.01,
+          "unit": "em"
+        }
+      }
+    },
+    "heading": {
+      "$type": "typography",
+      "$description": "Section headings inside posts.",
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": {
+          "value": 28,
+          "unit": "px"
+        },
+        "lineHeight": 1.15,
+        "fontWeight": 700,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "subheading": {
+      "$type": "typography",
+      "$description": "Card titles, third-level headings.",
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": {
+          "value": 20,
+          "unit": "px"
+        },
+        "lineHeight": 1.2,
+        "fontWeight": 700,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "ui": {
+      "$type": "typography",
+      "$description": "Navigation, buttons, captions.",
+      "$value": {
+        "fontFamily": "{font.sans}",
+        "fontSize": {
+          "value": 15,
+          "unit": "px"
+        },
+        "lineHeight": 1.4,
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "lede": {
+      "$type": "typography",
+      "$description": "The intro paragraph under a title, in ink-muted.",
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 19,
+          "unit": "px"
+        },
+        "lineHeight": 1.55,
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "body": {
+      "$type": "typography",
+      "$description": "All running text. Keep lines under 70 characters.",
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 17,
+          "unit": "px"
+        },
+        "lineHeight": 1.6,
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "small": {
+      "$type": "typography",
+      "$description": "Footnotes and figure notes.",
+      "$value": {
+        "fontFamily": "{font.serif}",
+        "fontSize": {
+          "value": 15,
+          "unit": "px"
+        },
+        "lineHeight": 1.5,
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "wordmark": {
+      "$type": "typography",
+      "$description": "The wordmark, only as the logo. Use the SVG files where possible.",
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": {
+          "value": 30,
+          "unit": "px"
+        },
+        "lineHeight": 1,
+        "fontWeight": 600,
+        "letterSpacing": {
+          "value": -0.04,
+          "unit": "em"
+        }
+      }
+    },
+    "label": {
+      "$type": "typography",
+      "$description": "Date lines, tags, figure labels, in link (teal-11).",
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": {
+          "value": 12,
+          "unit": "px"
+        },
+        "lineHeight": 1.4,
+        "fontWeight": 600,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    },
+    "code": {
+      "$type": "typography",
+      "$description": "Inline code and code blocks.",
+      "$value": {
+        "fontFamily": "{font.mono}",
+        "fontSize": {
+          "value": 14,
+          "unit": "px"
+        },
+        "lineHeight": 1.5,
+        "fontWeight": 400,
+        "letterSpacing": {
+          "value": 0,
+          "unit": "em"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,108 @@
+/* Entry stylesheet. Markup styles itself with Tailwind utilities; every
+   value comes from the theme, which is generated from the design tokens:
+   tokens.css (values, light and dark) and theme.css (Tailwind's view of
+   them), both written by `pnpm tokens:export` + `tz build`. */
+@import "tailwindcss";
+@import "./fonts.css";
+@import "./tokens.css";
+@import "./theme.css";
+
+/* The theme switch sets data-theme on <html> (System resolves to light or dark). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* <summary> without the disclosure triangle, in every engine. */
+@utility no-marker {
+  list-style: none;
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/* stylelint-disable selector-max-type -- document-wide defaults for elements no component renders (html, body, rendered links and headings) */
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--ink);
+  }
+  body {
+    font: var(--type-body);
+  }
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  a {
+    color: var(--link);
+    text-underline-offset: 0.15em;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-sans);
+    text-wrap: balance;
+  }
+}
+/* stylelint-enable selector-max-type */
+
+/* Rendered Markdown: posts are MDX, so their elements can't carry classes.
+   Every selector below targets markup inside [data-prose]. */
+/* stylelint-disable selector-max-type, selector-max-attribute -- rendered Markdown (MDX) can't take utility classes */
+[data-prose] {
+  & :where(p, ul, ol, pre, blockquote, table) + :where(p, ul, ol, pre, blockquote, table) {
+    margin-top: 1em;
+  }
+  & :where(ul, ol) {
+    padding-left: 1.25em;
+  }
+  & :where(ul) {
+    list-style: disc;
+  }
+  & :where(ol) {
+    list-style: decimal;
+  }
+  & :where(h2) {
+    font: var(--type-heading);
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-2);
+  }
+  & :where(h3) {
+    font: var(--type-subheading);
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
+  & :where(:not(pre) > code) {
+    font: var(--type-code);
+    font-size: 0.88em;
+    background: var(--teal-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 0.05em 0.3em;
+  }
+  & :where(pre) {
+    font: var(--type-code);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: var(--space-3) var(--space-4);
+    overflow-x: auto;
+  }
+  & :where(figcaption p) {
+    margin: 0;
+  }
+}
+/* stylelint-enable selector-max-type, selector-max-attribute */
+
+/* Shiki's "css-variables" theme, mapped onto the teal palette. */
+:root {
+  --astro-code-foreground: var(--ink);
+  --astro-code-background: var(--teal-2);
+  --astro-code-token-keyword: var(--teal-11);
+  --astro-code-token-constant: var(--teal-11);
+  --astro-code-token-function: var(--ink);
+  --astro-code-token-string: var(--ink-muted);
+  --astro-code-token-string-expression: var(--ink-muted);
+  --astro-code-token-comment: var(--ink-muted);
+  --astro-code-token-parameter: var(--ink);
+  --astro-code-token-punctuation: var(--ink-muted);
+  --astro-code-token-link: var(--link);
+}

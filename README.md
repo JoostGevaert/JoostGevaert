@@ -1,16 +1,13 @@
-## Hi there 👋
+<a href="https://joost.engineer">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="design-system/assets/logos/wordmark-dark.svg">
+    <img alt="joost.engineer" src="design-system/assets/logos/wordmark-light.svg" width="320">
+  </picture>
+</a>
 
-<!--
-**JoostGevaert/JoostGevaert** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Joost Gevaert's blog for his (thought) experiments and side projects.
 
-Here are some ideas to get you started:
+- Blog: [joost.engineer](https://joost.engineer)
+- Work: [Bedrock.engineer](https://bedrock.engineer)
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+<sub>This repository also holds the source of joost.engineer; see [DEVELOPMENT.md](DEVELOPMENT.md).</sub>

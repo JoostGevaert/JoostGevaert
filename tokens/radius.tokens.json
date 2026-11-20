@@ -1,0 +1,49 @@
+{
+  "radius": {
+    "sm": {
+      "$type": "dimension",
+      "$value": {
+        "value": 6,
+        "unit": "px"
+      },
+      "$description": "Swatches, inputs, code chips."
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": {
+        "value": 12,
+        "unit": "px"
+      },
+      "$description": "Cards and post headers."
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      },
+      "$description": "The hero."
+    },
+    "tile": {
+      "$type": "dimension",
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "The j.e app tile and favicon background (22% of its side).",
+      "$extensions": {
+        "engineer.joost.css": {
+          "value": "22%"
+        }
+      }
+    },
+    "pill": {
+      "$type": "dimension",
+      "$value": {
+        "value": 999,
+        "unit": "px"
+      },
+      "$description": "Segmented controls and the theme switch."
+    }
+  }
+}

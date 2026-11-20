@@ -1,0 +1,330 @@
+{
+  "color": {
+    "teal": {
+      "1": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.9725,
+            0.9843,
+            0.9843
+          ],
+          "hex": "#f8fbfb"
+        },
+        "$description": "Bedrock.engineer teal scale, step 1. App background tint."
+      },
+      "2": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.949,
+            0.9725,
+            0.9765
+          ],
+          "hex": "#f2f8f9"
+        },
+        "$description": "Bedrock.engineer teal scale, step 2. Subtle background: code blocks, table stripes."
+      },
+      "3": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8902,
+            0.949,
+            0.9569
+          ],
+          "hex": "#e3f2f4"
+        },
+        "$description": "Bedrock.engineer teal scale, step 3. Tinted fill: badges, selected rows."
+      },
+      "4": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.8353,
+            0.9216,
+            0.9373
+          ],
+          "hex": "#d5ebef"
+        },
+        "$description": "Bedrock.engineer teal scale, step 4. Tinted fill, hover."
+      },
+      "5": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7765,
+            0.8902,
+            0.9098
+          ],
+          "hex": "#c6e3e8"
+        },
+        "$description": "Bedrock.engineer teal scale, step 5. Tinted fill, pressed."
+      },
+      "6": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7137,
+            0.8549,
+            0.8784
+          ],
+          "hex": "#b6dae0"
+        },
+        "$description": "Bedrock.engineer teal scale, step 6. Subtle teal border."
+      },
+      "7": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.6314,
+            0.8039,
+            0.8314
+          ],
+          "hex": "#a1cdd4"
+        },
+        "$description": "Bedrock.engineer teal scale, step 7. Teal border, dividers on tinted areas."
+      },
+      "8": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.498,
+            0.7255,
+            0.7647
+          ],
+          "hex": "#7fb9c3"
+        },
+        "$description": "Bedrock.engineer teal scale, step 8. Strong teal border, hover outlines."
+      },
+      "9": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.3216,
+            0.5569,
+            0.5961
+          ],
+          "hex": "#528e98"
+        },
+        "$description": "Bedrock.engineer teal scale, step 9. Solid teal; focus ring."
+      },
+      "10": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2706,
+            0.5059,
+            0.5451
+          ],
+          "hex": "#45818b"
+        },
+        "$description": "Bedrock.engineer teal scale, step 10. THE brand teal: solid fills, primary buttons, logo dots in light mode. Graphics only on white (4.4:1): use teal-11 for body-size text."
+      },
+      "11": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2078,
+            0.4431,
+            0.4824
+          ],
+          "hex": "#35717b"
+        },
+        "$description": "Bedrock.engineer teal scale, step 11. Teal text and links (5.5:1 on white in light; 9.5:1 on the dark ground). Logo dots in dark mode."
+      },
+      "12": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0824,
+            0.1843,
+            0.2
+          ],
+          "hex": "#152f33"
+        },
+        "$description": "Bedrock.engineer teal scale, step 12. Darkest teal text, headings on teal-3."
+      }
+    },
+    "bg": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.9882,
+          0.9882,
+          0.9922
+        ],
+        "hex": "#fcfcfd"
+      },
+      "$description": "Page background."
+    },
+    "surface": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#ffffff"
+      },
+      "$description": "Cards, panels, the hero. Sits on bg."
+    },
+    "ink": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.1098,
+          0.1255,
+          0.1412
+        ],
+        "hex": "#1c2024"
+      },
+      "$description": "Body text, titles and the logo letters, on bg or surface (15:1+ in both themes)."
+    },
+    "ink-muted": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.3765,
+          0.3922,
+          0.4235
+        ],
+        "hex": "#60646c"
+      },
+      "$description": "Secondary text: ledes, captions, nav (5.9:1 light, 9:1 dark on bg)."
+    },
+    "line": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8784,
+          0.8824,
+          0.902
+        ],
+        "hex": "#e0e1e6"
+      },
+      "$description": "Hairline borders on cards and section rules. The system uses borders, not shadows."
+    },
+    "guide": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.6627,
+          0.7804,
+          0.8
+        ],
+        "hex": "#a9c7cc"
+      },
+      "$description": "Construction lines in technical drawings: baseline, x-height, dimensions."
+    },
+    "grid-cell": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          0.8431,
+          0.902,
+          0.9137
+        ],
+        "hex": "#d7e6e9"
+      },
+      "$description": "Drawing-paper grid and grid-texture lines behind the drawing."
+    },
+    "logo-dot": {
+      "$type": "color",
+      "$value": "{color.teal.10}",
+      "$description": "The teal dots of the logo: j, period and i. Lighter in dark mode so they stay visible."
+    },
+    "texture": {
+      "$type": "color",
+      "$value": "{color.teal.10}",
+      "$description": "Stroke color of background textures, used at 16–22% opacity."
+    },
+    "cat": {
+      "teal": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2706,
+            0.5059,
+            0.5451
+          ],
+          "hex": "#45818b"
+        },
+        "$description": "Categorical color for lines, bars and points. First series, and the only one when a chart has one series. Lighter in dark mode so it stays visible."
+      },
+      "plum": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.7059,
+            0.4863,
+            0.6392
+          ],
+          "hex": "#b47ca3"
+        },
+        "$description": "Categorical color for lines, bars and points. Second series. Lighter in dark mode so it stays visible."
+      },
+      "indigo": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2745,
+            0.3098,
+            0.5176
+          ],
+          "hex": "#464f84"
+        },
+        "$description": "Categorical color for lines, bars and points. Third series. Lighter in dark mode so it stays visible."
+      },
+      "violet": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.498,
+            0.4196,
+            0.6157
+          ],
+          "hex": "#7f6b9d"
+        },
+        "$description": "Categorical color for lines, bars and points. Fourth series. Lighter in dark mode so it stays visible."
+      },
+      "gray": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.4353,
+            0.451,
+            0.4863
+          ],
+          "hex": "#6f737c"
+        },
+        "$description": "Categorical color for lines, bars and points. 'Other', or a fifth series. More than five categories: use another palette. Lighter in dark mode so it stays visible."
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+---
+import TypeTag from "./TypeTag.astro";
+import { isoDate } from "../../lib/format";
+import type { Post } from "../../lib/posts";
+
+interface Props {
+  posts: Post[];
+}
+const { posts } = Astro.props;
+---
+
+<ol class="list-none border-b border-line">
+  {posts.map((p) => (
+    <li class="flex flex-col gap-2 border-t border-line py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+      <a href={`/posts/${p.id}/`} class="group grid gap-1 text-ink no-underline">
+        <span class="text-balance type-subheading group-hover:text-link">{p.data.title}</span>
+        {p.data.description && <span class="text-ink-muted type-small">{p.data.description}</span>}
+      </a>
+      <div class="-order-1 flex shrink-0 items-center gap-2 sm:order-0">
+        <time class="text-link type-label" datetime={isoDate(p.data.date)}>
+          {isoDate(p.data.date)}
+        </time>
+        <TypeTag type={p.data.type} />
+      </div>
+    </li>
+  ))}
+</ol>
