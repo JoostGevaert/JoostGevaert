@@ -3,9 +3,9 @@ name: Deploy joost.engineer to GitHub Pages
 on:
   push:
     branches: [main]
-    paths: ["site/**", ".github/workflows/deploy.yml"]
+    paths-ignore: ["README.md", "LICENSE"]
   pull_request:
-    paths: ["site/**", ".github/workflows/deploy.yml"]
+    paths-ignore: ["README.md", "LICENSE"]
   workflow_dispatch:
 
 permissions:
@@ -17,10 +17,6 @@ concurrency:
   group: pages-${{ github.ref }}
   cancel-in-progress: true
 
-defaults:
-  run:
-    working-directory: site
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,13 +26,13 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: site/package-lock.json
+          cache-dependency-path: package-lock.json
       - run: npm ci
       - run: npm run build
       - uses: actions/upload-pages-artifact@v4
         if: github.event_name != 'pull_request'
         with:
-          path: site/dist
+          path: dist
 
   deploy:
     if: github.event_name != 'pull_request'

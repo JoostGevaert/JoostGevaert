@@ -1,4 +1,4 @@
-# joost.engineer
+# Developing joost.engineer
 
 Joost Gevaert's blog for his (thought) experiments and side projects. Astro + MDX, with design tokens compiled by Terrazzo.
 
