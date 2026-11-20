@@ -58,7 +58,7 @@ const imageUrl = image && new URL(image, Astro.site);
     <link rel="alternate" type="application/rss+xml" title="joost.engineer" href="/rss.xml" />
     <meta name="theme-color" content="#fcfcfd" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#111113" media="(prefers-color-scheme: dark)" />
-    <!-- Set the resolved theme before first paint (System is the default). -->
+    <!-- Set the resolved theme before first paint (Auto, following the system, is the default). -->
     <script is:inline>
       (() => {
         const s = localStorage.getItem("theme");

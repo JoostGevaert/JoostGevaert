@@ -5,6 +5,19 @@
       "$value": "{color.teal.10}",
       "$description": "The brand color: buttons and solid fills."
     },
+    "on-brand": {
+      "$type": "color",
+      "$value": {
+        "colorSpace": "srgb",
+        "components": [
+          1,
+          1,
+          1
+        ],
+        "hex": "#ffffff"
+      },
+      "$description": "Icons and text on a brand (teal-10) fill, in both themes: the theme switch's chosen icon."
+    },
     "link": {
       "$type": "color",
       "$value": "{color.teal.11}",

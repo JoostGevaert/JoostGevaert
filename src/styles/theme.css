@@ -29,6 +29,7 @@
   --color-guide: var(--guide);
   --color-grid-cell: var(--grid-cell);
   --color-brand: var(--brand);
+  --color-on-brand: var(--on-brand);
   --color-link: var(--link);
   --color-logo-dot: var(--logo-dot);
   --color-texture: var(--texture);

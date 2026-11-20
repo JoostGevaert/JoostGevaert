@@ -1,0 +1,148 @@
+---
+// Three-way color theme switch: Light, Auto (default, follows the system),
+// Dark. Bedrock.engineer's triangle toggle, restyled for joost.engineer
+// (design system, components/ThemeSwitch): three 40 px triangles and an
+// indicator that rotates 60° around its bottom-right corner to the choice.
+// Same localStorage key ("theme"), roving tabindex and keyboard handling.
+import Icon from "./icons/Icon.astro";
+
+const length = 40;
+const altitude = (Math.sqrt(3) / 2) * length; // ≈ 34.64
+const iconSize = 13;
+const iconX = length / 2 - iconSize / 2;
+const trianglePath = `M${length / 2} 0 L${length} ${altitude} L0 ${altitude} Z`;
+
+// Auto points down and sits between the other two; its icon sits near its top.
+const options = [
+  { theme: "light", label: "Light", icon: "sun", x: 0, inverted: false },
+  { theme: "auto", label: "Auto", icon: "sun-moon", x: length / 2, inverted: true },
+  { theme: "dark", label: "Dark", icon: "moon", x: length, inverted: false },
+] as const;
+const iconY = (inverted: boolean) => (inverted ? iconSize / 2 : altitude / 2) - 1;
+
+const invertedClasses = "origin-center rotate-180 transform-fill";
+---
+
+<svg
+  data-theme-switch
+  class="block shrink-0 overflow-visible"
+  role="radiogroup"
+  aria-label="Color theme"
+  width={length * 2}
+  height={altitude}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  {options.map((o) => (
+    <g
+      class="group cursor-pointer outline-none"
+      data-theme={o.theme}
+      role="radio"
+      tabindex="-1"
+      aria-label={o.label}
+      aria-checked="false"
+      transform={o.x ? `translate(${o.x} 0)` : undefined}
+    >
+      <path
+        d={trianglePath}
+        stroke-linejoin="round"
+        class:list={[
+          "fill-teal-3 stroke-teal-6 stroke-1 group-hover:fill-teal-4",
+          o.inverted && invertedClasses,
+        ]}
+      />
+      <path
+        d={trianglePath}
+        stroke-linejoin="round"
+        class:list={[
+          "pointer-events-none fill-none stroke-teal-9 stroke-2 opacity-0 group-focus-visible:opacity-100",
+          o.inverted && invertedClasses,
+        ]}
+      />
+    </g>
+  ))}
+  <!-- Indicator: the same triangle, rotated 0°, 60° or 120° around its
+       bottom-right corner onto Light, Auto or Dark. -->
+  <path
+    d={trianglePath}
+    data-theme-indicator
+    class="pointer-events-none origin-bottom-right fill-teal-10 transform-fill motion-safe:transition-transform motion-safe:duration-450 motion-safe:ease-overshoot"
+  />
+  <!-- Icons above the indicator, so the chosen one shows on its solid fill. -->
+  {options.map((o) => (
+    <g
+      data-theme-icon={o.theme}
+      class="pointer-events-none text-ink-muted data-on:text-on-brand"
+      transform={`translate(${o.x + iconX} ${iconY(o.inverted)})`}
+    >
+      <Icon name={o.icon} size={iconSize} />
+    </g>
+  ))}
+</svg>
+
+<!-- is:inline so it runs while the page parses, before first paint: a bundled
+     module runs later, and the indicator would visibly swing from Light to the
+     stored choice. The page's data-theme itself is set even earlier, in
+     BaseLayout's <head>. Inline scripts aren't deduplicated, so this is an
+     IIFE whose steps tolerate re-running: init is guarded per instance and
+     applyTheme updates every instance rendered so far (desktop + menu). -->
+<script is:inline>
+  (() => {
+    const rotations = { light: "rotate-0", auto: "rotate-60", dark: "rotate-120" };
+
+    const getTheme = () => {
+      const s = localStorage.getItem("theme");
+      return s === "light" || s === "dark" || s === "auto" ? s : "auto";
+    };
+    const resolve = (t) =>
+      t === "auto" ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : t;
+
+    function applyTheme(theme) {
+      document.documentElement.dataset.theme = resolve(theme);
+      localStorage.setItem("theme", theme);
+      document.querySelectorAll("[data-theme-switch]").forEach((root) => {
+        const indicator = root.querySelector("[data-theme-indicator]");
+        indicator.classList.remove(...Object.values(rotations));
+        indicator.classList.add(rotations[theme]);
+        root.querySelectorAll("[role=radio]").forEach((btn) => {
+          const on = btn.dataset.theme === theme;
+          btn.setAttribute("aria-checked", String(on));
+          // Roving tabindex: only the chosen radio is in the tab order.
+          btn.setAttribute("tabindex", on ? "0" : "-1");
+        });
+        root.querySelectorAll("[data-theme-icon]").forEach((icon) => {
+          icon.toggleAttribute("data-on", icon.dataset.themeIcon === theme);
+        });
+      });
+    }
+
+    document.querySelectorAll("[data-theme-switch]:not([data-init])").forEach((root) => {
+      root.setAttribute("data-init", "");
+      const btns = [...root.querySelectorAll("[role=radio]")];
+      btns.forEach((btn, i) => {
+        btn.addEventListener("click", () => applyTheme(btn.dataset.theme));
+        btn.addEventListener("keydown", (e) => {
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            applyTheme(btn.dataset.theme);
+            return;
+          }
+          const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+          if (!step) return;
+          e.preventDefault();
+          const next = btns[(i + step + btns.length) % btns.length];
+          applyTheme(next.dataset.theme);
+          next.focus();
+        });
+      });
+    });
+
+    applyTheme(getTheme());
+
+    if (!window.__themeMediaBound) {
+      window.__themeMediaBound = true;
+      matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+        if (getTheme() === "auto") applyTheme("auto");
+      });
+    }
+  })();
+</script>

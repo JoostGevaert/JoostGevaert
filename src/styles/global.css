@@ -7,7 +7,13 @@
 @import "./tokens.css";
 @import "./theme.css";
 
-/* The theme switch sets data-theme on <html> (System resolves to light or dark). */
+/* Motion values the design tokens don't cover yet. */
+@theme {
+  /* The theme switch indicator's overshooting swing (Bedrock.engineer's). */
+  --ease-overshoot: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+/* The theme switch sets data-theme on <html> (Auto resolves to light or dark). */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* <summary> without the disclosure triangle, in every engine. */

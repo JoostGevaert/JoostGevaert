@@ -72,6 +72,8 @@
   --link: var(--teal-11);
   /* The teal dots of the logo: j, period and i. Lighter in dark mode so they stay visible. */
   --logo-dot: var(--teal-10);
+  /* Icons and text on a brand (teal-10) fill, in both themes: the theme switch's chosen icon. */
+  --on-brand: rgb(100% 100% 100%);
   /* Background texture behind a post header, masked to fade in from the left. */
   --opacity-texture-card: 0.18;
   /* Background texture behind the home-page hero. */
