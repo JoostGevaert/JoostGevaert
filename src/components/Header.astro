@@ -1,58 +1,144 @@
 ---
 import Logo from "./Logo.astro";
 import ThemeToggle from "./ThemeToggle.astro";
+import Icon from "./icons/Icon.astro";
+import BrandLogo from "./icons/BrandLogo.astro";
+import { site } from "../site.config";
+
+// Profiles, GitHub and LinkedIn first (BRAND.md, Brand logos: header).
+const profiles = [
+  { brand: "github" as const, name: "GitHub", url: site.github.url },
+  ...(site.linkedin ? [{ brand: "linkedin" as const, name: "LinkedIn", url: site.linkedin.url }] : []),
+];
 ---
 <header class="site-header">
   <a href="/" class="home" aria-label="joost.engineer, home">
     <Logo variant="wordmark" id="hdr-wordmark" />
     <Logo variant="mark" id="hdr-mark" />
   </a>
-  <nav aria-label="Main">
+
+  <nav class="wide" aria-label="Main">
     <a href="/">Writing</a>
   </nav>
+
+  <ul class="profiles wide" aria-label="Profiles">
+    {profiles.map((p) => (
+      <li>
+        <a class="icon-button" href={p.url} aria-label={p.name} data-tip={p.name} rel="me noopener">
+          <BrandLogo brand={p.brand} />
+        </a>
+      </li>
+    ))}
+  </ul>
+
   <ThemeToggle />
+
+  <!-- Narrow screens: links and profiles move into the menu, with their names. -->
+  <details class="menu narrow">
+    <summary class="icon-button" aria-label="Menu"><Icon name="menu" size={20} /></summary>
+    <ul>
+      <li><a href="/">Writing</a></li>
+      {profiles.map((p) => (
+        <li><a href={p.url} rel="me noopener"><BrandLogo brand={p.brand} />{p.name}</a></li>
+      ))}
+    </ul>
+  </details>
 </header>
 
 <style>
   .site-header {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-3);
     max-width: 1200px;
     margin: 0 auto;
-    padding: var(--space-4) var(--space-4);
+    padding: var(--space-4);
     border-bottom: 1px solid var(--line);
   }
   .home {
     display: block;
-    /* clear space: the height of the j's dot */
-    padding: 4px 0;
+    padding: 4px 0; /* clear space: the height of the j's dot */
     line-height: 0;
+    margin-right: auto;
   }
-  .home :global(.logo-wordmark) {
-    height: 26px;
-    width: auto;
+  .home :global(.logo-wordmark) { height: 26px; width: auto; }
+  .home :global(.logo-mark) { display: none; height: 28px; width: auto; }
+
+  nav { font: var(--type-ui); margin-right: var(--space-2); }
+  nav a { color: var(--ink); text-decoration: none; }
+  nav a:hover { color: var(--link); }
+
+  .profiles { display: flex; gap: 0; list-style: none; margin: 0; padding: 0; }
+
+  /* 36 px round hit area; logo in ink, teal on hover like any link. */
+  .icon-button {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: var(--ink);
+    cursor: pointer;
   }
-  .home :global(.logo-mark) {
-    display: none;
-    height: 28px;
-    width: auto;
-  }
-  /* j.e replaces the wordmark where the full name doesn't fit beside the nav. */
-  @media (max-width: 560px) {
-    .home :global(.logo-wordmark) { display: none; }
-    .home :global(.logo-mark) { display: block; }
-    .site-header { gap: var(--space-3); padding-inline: var(--space-3); }
-  }
-  nav {
-    margin-left: auto;
+  .icon-button:hover { color: var(--link); background: var(--teal-3); }
+
+  /* Tooltip with the platform's name. */
+  .icon-button[data-tip]::after {
+    content: attr(data-tip);
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    translate: -50% 0;
     font: var(--type-ui);
+    font-size: 13px;
+    white-space: nowrap;
+    color: var(--ink);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 2px 8px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
   }
-  nav a {
+  .icon-button[data-tip]:hover::after,
+  .icon-button[data-tip]:focus-visible::after { opacity: 1; }
+
+  .menu { position: relative; }
+  .menu summary { list-style: none; }
+  .menu summary::-webkit-details-marker { display: none; }
+  .menu[open] summary { background: var(--teal-3); }
+  .menu ul {
+    position: absolute;
+    right: 0;
+    top: calc(100% + var(--space-2));
+    z-index: 20;
+    min-width: 180px;
+    list-style: none;
+    margin: 0;
+    padding: var(--space-2) 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+  .menu a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    font: var(--type-ui);
     color: var(--ink);
     text-decoration: none;
   }
-  nav a:hover {
-    color: var(--link);
+  .menu a:hover { color: var(--link); background: var(--teal-2); }
+
+  .narrow { display: none; }
+  @media (max-width: 640px) {
+    .wide { display: none; }
+    .narrow { display: block; }
+    .site-header { gap: var(--space-2); padding-inline: var(--space-3); }
+    .home :global(.logo-wordmark) { display: none; }
+    .home :global(.logo-mark) { display: block; }
   }
 </style>

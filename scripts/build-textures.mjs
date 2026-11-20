@@ -1,7 +1,7 @@
 // Web versions of the background textures in public/textures/:
 // SVG textures through svgo (1 decimal is plenty at texture opacity; the
 // contours drop from ~600 KB to ~150 KB), the drawing PNGs as WebP.
-// Run with `npm run textures` when the design system's textures change.
+// Run with `pnpm textures` when the design system's textures change.
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { optimize } from "svgo";
 import sharp from "sharp";

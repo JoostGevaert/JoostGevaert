@@ -1,6 +1,6 @@
 // Converts design-system/tokens.json (the design session's list format) into
 // DTCG token files under tokens/, which Terrazzo compiles to CSS variables.
-// Re-run with `npm run tokens:export` whenever tokens.json changes.
+// Re-run with `pnpm tokens:export` whenever tokens.json changes.
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 
 const src = JSON.parse(readFileSync(new URL("../design-system/tokens.json", import.meta.url)));

@@ -3,6 +3,7 @@ title: How this site turns one token file into CSS
 description: A sample post to check the type, colors, components and themes of joost.engineer.
 date: 2026-11-20
 type: notes
+repo: JoostGevaert/JoostGevaert
 ---
 
 Every color on this page comes from a single file, `tokens.json`, written during the design of the site. A script turns it into DTCG token files, and Terrazzo compiles those into CSS custom properties: 94 tokens, two themes.
@@ -12,7 +13,7 @@ Every color on this page comes from a single file, `tokens.json`, written during
 If a value is typed into a stylesheet by hand, it drifts. With one source, the light and dark themes can't disagree about what `teal-10` is.
 
 <Callout title="Method">
-Run `npm run tokens:export` after changing `tokens.json`, then `npm run build`. The build runs Terrazzo first.
+Run `pnpm tokens:export` after changing `tokens.json`, then `pnpm build`. The build runs Terrazzo first.
 </Callout>
 
 ### What gets generated

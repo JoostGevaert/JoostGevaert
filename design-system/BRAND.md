@@ -128,9 +128,52 @@ The image shown when a link is shared (`og:image`, 1200 × 630 px). Layout: the 
 - Content up to 1200 px wide.
 - A three-way theme switch (System, Light, Dark) sits at the top right, styled as a `radius-pill` segmented control; System is the default. It is the Bedrock.engineer switch, restyled.
 
-## Iconography
+## Icons
 
-No icon set yet. Use words in navigation and buttons. If an icon is unavoidable, draw it as a 1.5 px stroke in `ink`, square caps, on a 24 px grid, in the spirit of the technical drawing.
+Lucide as the base, custom icons drawn to the same rules. The rules below are the style: an icon that follows them belongs to the set, whoever or whatever drew it.
+
+- **Base set: [Lucide](https://lucide.dev)** (ISC license), with the stroke set to **1.5 px** instead of Lucide's default 2. The stroke stays 1.5 px at every display size (Lucide's `absoluteStrokeWidth`), so large icons don't turn heavy.
+- **Custom icons** fill the gaps (a rowing boat, an A5 pentagon, a turbine blade). They are drawn on demand to the spec below, reuse Lucide's shapes where they can, and must pass the icon lint before they ship.
+
+Spec, for Lucide and custom icons alike:
+
+| Rule | Value |
+|---|---|
+| Canvas | 24 × 24, `viewBox="0 0 24 24"` |
+| Padding | at least 1 px on every side (live area 22 × 22) |
+| Stroke | `stroke="currentColor"`, `stroke-width="1.5"`, round caps, round joins |
+| Fill | `fill="none"`. No filled shapes, no gradients |
+| Grid | coordinates, arc centers and radii on whole or half pixels |
+| Elements | `path`, `line`, `polyline`, `polygon`, `rect`, `circle`, `ellipse` only; no transforms, no `style`, no ids |
+| Detail | about as much as a Lucide icon: simplify, keep what makes the subject recognizable |
+| Names | kebab-case nouns, as in Lucide (`rowing-boat`, `pentagon-cell`) |
+
+Use:
+
+- **Sizes:** 16 px next to `small` and `label` text, 20 px next to `ui` and `body`, 24 px next to headings. Center icons on the text's x-height, not its line box.
+- **Color:** `ink` by default, `ink-muted` for secondary icons. `link` teal only when the icon itself is clickable. Data colors (`cat-*`) only inside a legend or a post-type tag.
+- **With words:** in navigation and buttons an icon goes with a word, never instead of one, except for universal controls (close, menu, search, the theme switch).
+- **One set:** never mix in icons from another library. If Lucide lacks something, draw it to the spec.
+
+### Brand logos
+
+Logos of other platforms (GitHub, LinkedIn, Mastodon, Bluesky, ORCID, Mattermost…) are not icons: they are trademarks, used as their owners draw them.
+
+- **Source:** [Simple Icons](https://simpleicons.org) (CC0 for the files; each brand's own guidelines still apply). LinkedIn is no longer in Simple Icons: take its "in" logo from LinkedIn's own brand page.
+- **Style:** solid, one color, `ink`; `link` teal on hover like any link. Never the brand's own colors, never redrawn in the 1.5 px line style, outlined, cropped or recolored within the shape.
+- **Size:** 18 px next to 20 px line icons (solid shapes look bigger), and about the text's cap height when inline.
+- **Label:** always the platform's name, visible or as an accessible label.
+
+Where they appear:
+
+| Place | Form |
+|---|---|
+| Header | GitHub and LinkedIn as icon-only buttons (36 px round hit area) next to the theme switch, with tooltip and label. The only place a logo stands without its name. On narrow screens they move into the menu with their names. |
+| End of a post | Pill buttons with logo and word: "Discuss on LinkedIn", "Code on GitHub" plus the repo name in `label` mono. |
+| Project cards | A chip with the GitHub logo and the repo name (`owner/repo`); a live site gets Lucide's `arrow-up-right` instead. |
+| Inside text | A small logo before a link to a repo or profile, first mention only. |
+| About page | "Find me on": a list of logo, platform and handle, GitHub and LinkedIn first. |
+| Footer | Logo and name for GitHub and LinkedIn, plus RSS (a Lucide icon). |
 
 ## Building with it
 

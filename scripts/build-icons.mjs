@@ -1,5 +1,5 @@
 // Builds the favicon set in public/ from the design system's j.e tiles.
-// Run with `npm run icons` when the tiles change; outputs are committed.
+// Run with `pnpm icons` when the tiles change; outputs are committed.
 //   favicon.svg          switches tile with prefers-color-scheme
 //   favicon.ico          16/32/48 (PNG-in-ICO), light-chrome tile
 //   favicon-32.png, apple-touch-icon.png (180), icon-192.png, icon-512.png

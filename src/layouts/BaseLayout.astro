@@ -2,6 +2,7 @@
 import "../styles/tokens.css";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
   title: string;
@@ -54,6 +55,7 @@ const imageUrl = image && new URL(image, Astro.site);
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/rss+xml" title="joost.engineer" href="/rss.xml" />
     <meta name="theme-color" content="#fcfcfd" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#111113" media="(prefers-color-scheme: dark)" />
     <!-- Set the resolved theme before first paint (System is the default). -->
@@ -78,5 +80,6 @@ const imageUrl = image && new URL(image, Astro.site);
     <main id="main">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
