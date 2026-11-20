@@ -1,0 +1,30 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { isoDate } from "../../lib/format";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts", (p) => !p.data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article>
+    <header class="post-header">
+      <p class="label">{isoDate(post.data.date)} · {post.data.type}</p>
+      <h1 class="display">{post.data.title}</h1>
+      {post.data.description && <p class="lede">{post.data.description}</p>}
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-header { margin-bottom: var(--space-5); max-width: 68ch; }
+  .post-header .label { margin: 0 0 var(--space-2); }
+  .post-header .lede { margin: var(--space-3) 0 0; }
+</style>

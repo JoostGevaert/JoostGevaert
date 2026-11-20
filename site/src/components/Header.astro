@@ -1,0 +1,46 @@
+---
+import Logo from "./Logo.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+---
+<header class="site-header">
+  <a href="/" class="home" aria-label="joost.engineer, home">
+    <Logo variant="wordmark" id="hdr-wordmark" />
+  </a>
+  <nav aria-label="Main">
+    <a href="/">Writing</a>
+  </nav>
+  <ThemeToggle />
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-4) var(--space-4);
+    border-bottom: 1px solid var(--line);
+  }
+  .home {
+    display: block;
+    /* clear space: the height of the j's dot */
+    padding: 4px 0;
+    line-height: 0;
+  }
+  .home :global(.logo-wordmark) {
+    height: 26px;
+    width: auto;
+  }
+  nav {
+    margin-left: auto;
+    font: var(--type-ui);
+  }
+  nav a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  nav a:hover {
+    color: var(--link);
+  }
+</style>

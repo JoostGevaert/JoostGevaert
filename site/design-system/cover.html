@@ -1,0 +1,52 @@
+<!-- @dsCard height=288 -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Code+Pro:wght@600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; background: var(--bg); }
+  .cover { position: relative; width: 960px; height: 288px; background: var(--bg); overflow: hidden; }
+  .cover svg { position: absolute; left: 0; top: 0; }
+  .brand { fill: var(--teal-10); }
+  .indigo { fill: var(--biv-22); }
+  .plum { fill: var(--biv-02); }
+  .tint { fill: var(--teal-6); }
+  .deep { fill: var(--teal-12); }
+  .mark { stroke: var(--teal-3); stroke-width: 1.5; fill: none; }
+  .mark-on-tint { stroke: var(--teal-10); stroke-width: 1.5; fill: none; }
+  .text { position: absolute; left: 48px; top: 150px; max-width: 864px; }
+  .text > .name:first-child { position: relative; }
+  .name { margin: 0; font-family: var(--font-mono); font-weight: 600; font-size: 64px; line-height: .95; letter-spacing: -0.04em; color: var(--ink); }
+  .name span { color: var(--logo-dot); }
+  /* the same name again in teal, masked to the dots of the j and the i: above the x-height, inside their character cells (0.56em each) */
+  .name.dots { position: absolute; left: 0; top: 0; color: var(--logo-dot);
+    -webkit-mask: linear-gradient(#000 0 .30em, transparent .30em), linear-gradient(90deg, #000 0 .56em, transparent .56em 5.04em, #000 5.04em 5.6em, transparent 5.6em);
+    -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .tagline { margin: 12px 0 0; font-family: var(--font-sans); font-size: 14px; color: var(--ink-muted); }
+</style>
+<div class="cover">
+  <svg width="960" height="112" viewBox="0 0 960 112" aria-hidden="true">
+    <!--
+      blocks: teal-10 (brand) 312 wide, biv-22 indigo 136, biv-02 plum 88, teal-6 tint 232, teal-12 deep 192; all 112 tall (space-6 + space-5 + space-1 x2)
+      arrangement: one flush strip of unequal bands across the top, like the legend strip of a bivariate map
+      pattern: precise, technical, mono -> a plus grid; the plus is the centre mark of the technical drawing, at a space-4 (24px) pitch, 14 marks on the brand slab and 6 on the tint
+      steps/radii: widths are multiples of space-2 (8px), pitch space-4, square corners (bands, not cards)
+    -->
+    <rect class="brand" x="0" y="0" width="312" height="112"/>
+    <rect class="indigo" x="312" y="0" width="136" height="112"/>
+    <rect class="plum" x="448" y="0" width="88" height="112"/>
+    <rect class="tint" x="536" y="0" width="232" height="112"/>
+    <rect class="deep" x="768" y="0" width="192" height="112"/>
+    <g class="mark">
+      <path d="M44 32h12M50 26v12 M92 32h12M98 26v12 M140 32h12M146 26v12 M188 32h12M194 26v12 M236 32h12M242 26v12 M284 32h12M290 26v12"/>
+      <path d="M44 80h12M50 74v12 M92 80h12M98 74v12 M140 80h12M146 74v12 M188 80h12M194 74v12 M236 80h12M242 74v12 M284 80h12M290 74v12"/>
+      <path d="M68 56h12M74 50v12 M260 56h12M266 50v12"/>
+    </g>
+    <g class="mark-on-tint">
+      <path d="M572 32h12M578 26v12 M644 32h12M650 26v12 M716 32h12M722 26v12"/>
+      <path d="M572 80h12M578 74v12 M644 80h12M650 74v12 M716 80h12M722 74v12"/>
+    </g>
+  </svg>
+  <div class="text">
+    <p class="name">joost<span>.</span>engineer</p>
+    <p class="name dots" aria-hidden="true">joost<span>.</span>engineer</p>
+    <p class="tagline">Joost Gevaert's blog for his (thought) experiments and side projects.</p>
+  </div>
+</div>

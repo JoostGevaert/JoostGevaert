@@ -1,0 +1,25 @@
+---
+// Inlines the outlined logo SVG from the design system and maps its fixed
+// fills onto tokens, so one file follows all three theme modes:
+// letters -> --ink, dots -> --logo-dot. The SVG itself is never retyped.
+import wordmark from "../../design-system/assets/logos/wordmark-light.svg?raw";
+import mark from "../../design-system/assets/logos/je-mark-light.svg?raw";
+
+interface Props {
+  variant?: "wordmark" | "mark";
+  class?: string;
+  /** Unique per page: the SVGs carry clipPath ids. */
+  id?: string;
+}
+const { variant = "wordmark", class: className, id = variant } = Astro.props;
+const raw = variant === "wordmark" ? wordmark : mark;
+
+const svg = raw
+  .replace(/ width="[\d.]+" height="[\d.]+"/, "")
+  .replace("<svg ", `<svg role="img" aria-label="joost.engineer" class="logo logo-${variant}${className ? " " + className : ""}" `)
+  .replace(/fill="#1c2024"/gi, 'fill="var(--ink)"')
+  .replace(/fill="#(45818b|35717b)"/gi, 'fill="var(--logo-dot)"')
+  .replace(/id="(below|above)"/g, `id="${id}-$1"`)
+  .replace(/url\(#(below|above)\)/g, `url(#${id}-$1)`);
+---
+<Fragment set:html={svg} />

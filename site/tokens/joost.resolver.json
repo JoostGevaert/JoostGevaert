@@ -1,0 +1,26 @@
+{
+  "name": "joost.engineer",
+  "version": "2025.10",
+  "description": "joost.engineer design tokens, exported from design-system/tokens.json. Compiled by Terrazzo to src/styles/tokens.css.",
+  "sets": {
+    "base": {
+      "sources": [
+        { "$ref": "typography.tokens.json" },
+        { "$ref": "space.tokens.json" },
+        { "$ref": "radius.tokens.json" },
+        { "$ref": "opacity.tokens.json" },
+        { "$ref": "color/semantic.tokens.json" }
+      ]
+    }
+  },
+  "modifiers": {
+    "theme": {
+      "contexts": {
+        "light": [{ "$ref": "color/scales.light.tokens.json" }],
+        "dark": [{ "$ref": "color/scales.dark.tokens.json" }]
+      },
+      "default": "light"
+    }
+  },
+  "resolutionOrder": [{ "$ref": "#/sets/base" }, { "$ref": "#/modifiers/theme" }]
+}

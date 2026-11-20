@@ -1,0 +1,14 @@
+{
+  "opacity": {
+    "texture-hero": {
+      "$type": "number",
+      "$value": 0.22,
+      "$description": "Background texture behind the home-page hero."
+    },
+    "texture-card": {
+      "$type": "number",
+      "$value": 0.18,
+      "$description": "Background texture behind a post header, masked to fade in from the left."
+    }
+  }
+}

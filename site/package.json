@@ -1,0 +1,22 @@
+{
+  "name": "joost-engineer",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "tz build && astro dev",
+    "build": "tz build && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "tokens:export": "node scripts/export-tokens.mjs",
+    "tokens:build": "tz build",
+    "tokens:check": "tz check"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^8.1.6",
+    "astro": "^7.4.13"
+  },
+  "devDependencies": {
+    "@terrazzo/cli": "^2.10.0",
+    "@terrazzo/plugin-css": "^2.10.0"
+  }
+}

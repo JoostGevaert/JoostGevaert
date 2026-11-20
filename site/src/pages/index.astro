@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { isoDate } from "../lib/format";
+
+const posts = (await getCollection("posts", (p) => !p.data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout title="joost.engineer">
+  <p class="lede intro">Joost Gevaert's blog for his (thought) experiments and side projects.</p>
+  <ul class="posts">
+    {posts.map((p) => (
+      <li>
+        <p class="label">{isoDate(p.data.date)} · {p.data.type}</p>
+        <a class="subheading" href={`/posts/${p.id}/`}>{p.data.title}</a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
+
+<style>
+  .intro { margin: 0 0 var(--space-5); max-width: 40ch; }
+  .posts { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+  .posts .label { margin: 0 0 var(--space-1); }
+  .posts a { color: var(--ink); text-decoration: none; }
+  .posts a:hover { color: var(--link); }
+</style>

@@ -1,0 +1,44 @@
+---
+import "../styles/tokens.css";
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = "Joost Gevaert's blog for his (thought) experiments and side projects." } = Astro.props;
+const fullTitle = title === "joost.engineer" ? title : `${title} · joost.engineer`;
+---
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light dark" />
+    <!-- Set the resolved theme before first paint (System is the default). -->
+    <script is:inline>
+      (() => {
+        const s = localStorage.getItem("theme");
+        const t = s === "light" || s === "dark" ? s
+          : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = t;
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap"
+    />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+  </body>
+</html>

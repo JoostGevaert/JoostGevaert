@@ -1,0 +1,23 @@
+---
+title: How this site turns one token file into CSS
+description: A sample post to check the type, colors and themes of joost.engineer.
+date: 2026-11-20
+type: notes
+---
+
+Every color on this page comes from a single file, `tokens.json`, written during the design of the site. A script turns it into DTCG token files, and Terrazzo compiles those into CSS custom properties: 94 tokens, two themes.
+
+## Why one file
+
+If a value is typed into a stylesheet by hand, it drifts. With one source, the light and dark themes can't disagree about what `teal-10` is.
+
+### What gets generated
+
+The light theme lands on `:root`, the dark theme on `:root[data-theme="dark"]` and on the system preference.
+
+```js
+const variableName = (token) =>
+  `--${token.id.replace(/^color\./, "").replace(/\./g, "-")}`;
+```
+
+This is a sample post. It goes away when the first real post arrives.
