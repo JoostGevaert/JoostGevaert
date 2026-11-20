@@ -23,7 +23,7 @@ const { Content } = await render(post);
 >
   <article>
     <PostHeader post={post} texture={texture} />
-    <div class="prose">
+    <div data-prose class="max-w-prose">
       <Content components={{ Figure, Callout }} />
       <PostLinks linkedin={post.data.linkedin} repo={post.data.repo} />
     </div>

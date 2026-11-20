@@ -9,31 +9,16 @@ interface Props {
 }
 const { kind, strength = "card" } = Astro.props;
 const ext = kind === "drawing" ? "webp" : "svg";
+const img = "absolute top-0 right-0 h-full w-auto max-w-none";
 ---
-<div class:list={["texture", `texture-${kind}`]} style={`--tex-opacity: var(--opacity-texture-${strength})`} aria-hidden="true">
-  <img class="tex-light" src={`/textures/${kind}-light.${ext}`} alt="" loading="lazy" decoding="async" />
-  <img class="tex-dark" src={`/textures/${kind}-dark.${ext}`} alt="" loading="lazy" decoding="async" />
+<!-- Fades in from the left so the title sits on a clean ground. -->
+<div
+  class:list={[
+    "pointer-events-none absolute inset-0 mask-l-from-45% mask-l-to-0%",
+    strength === "hero" ? "opacity-texture-hero" : "opacity-texture-card",
+  ]}
+  aria-hidden="true"
+>
+  <img class:list={[img, "dark:hidden"]} src={`/textures/${kind}-light.${ext}`} alt="" loading="lazy" decoding="async" />
+  <img class:list={[img, "hidden dark:block"]} src={`/textures/${kind}-dark.${ext}`} alt="" loading="lazy" decoding="async" />
 </div>
-
-<style>
-  .texture {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: var(--tex-opacity);
-    /* fade in from the left so the title sits on a clean ground */
-    mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
-  }
-  img {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    translate: 0 -50%;
-    height: 135%;
-    width: auto;
-    max-width: none;
-  }
-  .tex-dark { display: none; }
-  :global(:root[data-theme="dark"]) .tex-dark { display: block; }
-  :global(:root[data-theme="dark"]) .tex-light { display: none; }
-</style>

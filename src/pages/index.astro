@@ -7,24 +7,10 @@ import { getPosts } from "../lib/posts";
 const posts = await getPosts();
 ---
 <BaseLayout title="joost.engineer">
-  <section class="hero">
+  <section class="relative isolate mb-16 overflow-hidden rounded-lg border border-line bg-surface px-6 py-16 sm:px-10">
     <Texture kind="drawing" strength="hero" />
-    <p class="lede">Joost Gevaert's blog for his (thought) experiments and side projects.</p>
+    <p class="relative max-w-sm text-ink type-lede">Joost Gevaert's blog for his (thought) experiments and side projects.</p>
   </section>
-  <h2 class="label section-label">Writing</h2>
+  <h2 class="mb-2 text-link type-label">Writing</h2>
   <PostList posts={posts} />
 </BaseLayout>
-
-<style>
-  .hero {
-    position: relative;
-    overflow: hidden;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: var(--space-6) var(--space-5);
-    margin-bottom: var(--space-6);
-  }
-  .hero .lede { position: relative; margin: 0; max-width: 32ch; font-size: 24px; color: var(--ink); }
-  .section-label { margin-bottom: var(--space-2); }
-</style>

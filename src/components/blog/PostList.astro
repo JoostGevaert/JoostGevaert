@@ -6,39 +6,17 @@ import type { Post } from "../../lib/posts";
 interface Props { posts: Post[] }
 const { posts } = Astro.props;
 ---
-<ol class="post-list">
+<ol class="list-none border-b border-line">
   {posts.map((p) => (
-    <li>
-      <a href={`/posts/${p.id}/`}>
-        <span class="title">{p.data.title}</span>
-        {p.data.description && <span class="desc">{p.data.description}</span>}
+    <li class="flex flex-col gap-2 border-t border-line py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+      <a href={`/posts/${p.id}/`} class="group grid gap-1 text-ink no-underline">
+        <span class="type-subheading text-balance group-hover:text-link">{p.data.title}</span>
+        {p.data.description && <span class="text-ink-muted type-small">{p.data.description}</span>}
       </a>
-      <div class="meta">
-        <time class="label" datetime={isoDate(p.data.date)}>{isoDate(p.data.date)}</time>
+      <div class="-order-1 flex shrink-0 items-center gap-2 sm:order-none">
+        <time class="text-link type-label" datetime={isoDate(p.data.date)}>{isoDate(p.data.date)}</time>
         <TypeTag type={p.data.type} />
       </div>
     </li>
   ))}
 </ol>
-
-<style>
-  .post-list { list-style: none; margin: 0; padding: 0; }
-  li {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: var(--space-2) var(--space-4);
-    align-items: baseline;
-    padding: var(--space-3) 0;
-    border-top: 1px solid var(--line);
-  }
-  li:last-child { border-bottom: 1px solid var(--line); }
-  a { text-decoration: none; color: var(--ink); display: grid; gap: var(--space-1); }
-  .title { font: var(--type-subheading); text-wrap: balance; }
-  a:hover .title { color: var(--link); }
-  .desc { font: var(--type-small); color: var(--ink-muted); }
-  .meta { display: flex; gap: var(--space-2); align-items: center; }
-  @media (max-width: 640px) {
-    li { grid-template-columns: 1fr; }
-    .meta { order: -1; }
-  }
-</style>

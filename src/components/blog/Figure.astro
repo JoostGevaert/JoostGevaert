@@ -6,31 +6,19 @@ interface Props {
   src?: string | ImageMetadata;
   alt?: string;
   caption?: string;
-  /** Let the figure use the full content width instead of the reading column. */
-  wide?: boolean;
 }
-const { src, alt = "", caption, wide = false } = Astro.props;
+const { src, alt = "", caption } = Astro.props;
 const url = typeof src === "string" ? src : src?.src;
 const hasSlot = Astro.slots.has("default");
 const slotHtml = hasSlot ? await Astro.slots.render("default") : "";
 // With an image, the slot is the caption; without, the slot is the figure body.
 ---
-<figure class:list={["figure", { wide }]}>
-  {url && <img src={url} alt={alt} loading="lazy" decoding="async" />}
-  {!url && hasSlot && <div class="body" set:html={slotHtml} />}
+<figure class="my-10">
+  {url && <img class="block h-auto max-w-full rounded-sm border border-line" src={url} alt={alt} loading="lazy" decoding="async" />}
+  {!url && hasSlot && <div set:html={slotHtml} />}
   {(caption || (url && hasSlot)) && (
-    <figcaption>{caption}{url && hasSlot && <Fragment set:html={slotHtml} />}</figcaption>
+    <figcaption class="mt-2 text-ink-muted type-small">
+      {caption}{url && hasSlot && <Fragment set:html={slotHtml} />}
+    </figcaption>
   )}
 </figure>
-
-<style>
-  .figure { margin: var(--space-5) 0; }
-  .figure.wide { max-width: min(1100px, 100vw - 2 * var(--space-4)); }
-  img { display: block; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius-sm); }
-  figcaption {
-    font: var(--type-small);
-    color: var(--ink-muted);
-    margin-top: var(--space-2);
-  }
-  figcaption :global(p) { margin: 0; }
-</style>

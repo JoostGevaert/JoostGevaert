@@ -26,3 +26,5 @@ export function textureFor(post: Post, all: Post[]): Texture {
 
 /** Category color token per post type: experiments teal, maps indigo, notes plum. */
 export const typeColor = { experiments: "cat-teal", maps: "cat-indigo", notes: "cat-plum" } as const;
+
+export type PostType = Post["data"]["type"];

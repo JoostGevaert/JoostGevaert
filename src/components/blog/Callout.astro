@@ -6,22 +6,7 @@ interface Props {
 }
 const { title = "Note" } = Astro.props;
 ---
-<aside class="callout">
-  <p class="label">{title}</p>
-  <div class="body"><slot /></div>
+<aside class="my-6 rounded-sm border border-l-3 border-teal-6 border-l-brand bg-teal-2 px-6 py-4">
+  <p class="mb-1 text-link type-label">{title}</p>
+  <div><slot /></div>
 </aside>
-
-<style>
-  .callout {
-    margin: var(--space-4) 0;
-    padding: var(--space-3) var(--space-4);
-    background: var(--teal-2);
-    border: 1px solid var(--teal-6);
-    border-left: 3px solid var(--brand);
-    border-radius: var(--radius-sm);
-  }
-  .label { margin: 0 0 var(--space-1); }
-  .body :global(> :first-child) { margin-top: 0; }
-  .body :global(> :last-child) { margin-bottom: 0; }
-  .body :global(> * + *) { margin-top: 0.75em; }
-</style>

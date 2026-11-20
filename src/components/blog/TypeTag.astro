@@ -1,28 +1,11 @@
 ---
 // Post-type tag: a small dot in the type's category color, text in ink
 // (BRAND.md: the one place plum and indigo appear in the interface).
-import { typeColor } from "../../lib/posts";
-interface Props { type: keyof typeof typeColor }
+import type { PostType } from "../../lib/posts";
+interface Props { type: PostType }
 const { type } = Astro.props;
+const dot = { experiments: "bg-cat-teal", maps: "bg-cat-indigo", notes: "bg-cat-plum" }[type];
 ---
-<span class="tag" style={`--dot: var(--${typeColor[type]})`}><i aria-hidden="true"></i>{type}</span>
-
-<style>
-  .tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font: var(--type-label);
-    color: var(--ink);
-    padding: 2px 9px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-pill);
-    background: var(--surface);
-  }
-  i {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--dot);
-  }
-</style>
+<span class="inline-flex items-center gap-1.5 rounded-pill border border-line bg-surface px-2 py-0.5 text-ink type-label">
+  <i class:list={["size-2 rounded-full", dot]} aria-hidden="true"></i>{type}
+</span>

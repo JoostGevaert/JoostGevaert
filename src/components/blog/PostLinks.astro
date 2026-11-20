@@ -3,34 +3,18 @@
 import BrandLogo from "../icons/BrandLogo.astro";
 interface Props { linkedin?: string; repo?: string }
 const { linkedin, repo } = Astro.props;
+const pill =
+  "inline-flex items-center gap-2 rounded-pill border border-line bg-surface py-1.5 pr-3.5 pl-3 text-ink no-underline type-ui hover:border-teal-7 hover:bg-teal-2 hover:text-link";
 ---
 {(linkedin || repo) && (
-  <div class="post-links">
+  <div class="mt-16 flex flex-wrap gap-2">
     {linkedin && (
-      <a class="pill" href={linkedin} rel="noopener"><BrandLogo brand="linkedin" />Discuss on LinkedIn</a>
+      <a class={pill} href={linkedin} rel="noopener"><BrandLogo brand="linkedin" />Discuss on LinkedIn</a>
     )}
     {repo && (
-      <a class="pill" href={`https://github.com/${repo}`} rel="noopener">
-        <BrandLogo brand="github" />Code on GitHub <span class="label">{repo}</span>
+      <a class={pill} href={`https://github.com/${repo}`} rel="noopener">
+        <BrandLogo brand="github" />Code on GitHub <span class="text-link type-label">{repo}</span>
       </a>
     )}
   </div>
 )}
-
-<style>
-  .post-links { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-6); }
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: 6px 14px 6px 12px;
-    font: var(--type-ui);
-    color: var(--ink);
-    text-decoration: none;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-pill);
-    background: var(--surface);
-  }
-  .pill:hover { color: var(--link); border-color: var(--teal-7); background: var(--teal-2); }
-  .label { color: var(--link); }
-</style>

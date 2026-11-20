@@ -16,7 +16,7 @@ const raw = variant === "wordmark" ? wordmark : mark;
 
 const svg = raw
   .replace(/ width="[\d.]+" height="[\d.]+"/, "")
-  .replace("<svg ", `<svg role="img" aria-label="joost.engineer" class="logo logo-${variant}${className ? " " + className : ""}" `)
+  .replace("<svg ", `<svg role="img" aria-label="joost.engineer"${className ? ` class="${className}"` : ""} `)
   .replace(/fill="#1c2024"/gi, 'fill="var(--ink)"')
   .replace(/fill="#(45818b|35717b)"/gi, 'fill="var(--logo-dot)"')
   .replace(/id="(below|above)"/g, `id="${id}-$1"`)

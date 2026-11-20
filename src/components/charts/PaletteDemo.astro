@@ -2,8 +2,8 @@
 // Demo of the chart theme: categorical lines and a diverging/sequential
 // cell grid. Used by the sample post to check both themes.
 ---
-<div class="chart" data-chart="lines"></div>
-<div class="chart" data-chart="cells"></div>
+<div class="my-4" data-chart="lines"></div>
+<div class="my-4" data-chart="cells"></div>
 
 <script>
   import { renderPlot } from "../../lib/chart/theme";
@@ -36,8 +36,3 @@
       marks: [Plot.cell(grid2, { x: "x", y: "y", fill: "v", inset: 0.5 })],
     }));
 </script>
-
-<style>
-  .chart { margin: var(--space-4) 0; }
-  .chart :global(svg) { max-width: 100%; height: auto; }
-</style>
