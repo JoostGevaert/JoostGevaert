@@ -9,6 +9,7 @@ const options = [
   { value: "dark", label: "Dark" },
 ];
 ---
+
 <div
   data-theme-toggle
   class="inline-flex gap-0.5 rounded-pill border border-line bg-surface p-0.5"
@@ -22,7 +23,7 @@ const options = [
       data-theme={o.value}
       aria-checked="false"
       tabindex="-1"
-      class="cursor-pointer rounded-pill border border-transparent px-3 py-1.5 text-ink-muted type-ui transition-colors hover:bg-teal-3 hover:text-ink aria-checked:border-teal-7 aria-checked:bg-teal-4 aria-checked:text-teal-12 motion-reduce:transition-none"
+      class="cursor-pointer rounded-pill border border-transparent px-3 py-1.5 text-ink-muted transition-colors type-ui hover:bg-teal-3 hover:text-ink aria-checked:border-teal-7 aria-checked:bg-teal-4 aria-checked:text-teal-12 motion-reduce:transition-none"
     >
       {o.label}
     </button>

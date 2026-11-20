@@ -31,7 +31,9 @@ const color = (v) => {
 };
 const token = (value, usage) => ({ $type: "color", $value: color(value), $description: usage });
 
-const light = {}, dark = {}, base = {};
+const light = {},
+  dark = {},
+  base = {};
 for (const { name, value, usage } of src.color.tokens) {
   const path = pathOf(name);
   // The teal scale stays whole in the theme files, even where steps match.
@@ -61,7 +63,7 @@ for (const g of src.type.groups) {
         fontSize: { value: parseFloat(s.fontSize), unit: "px" },
         lineHeight: s.lineHeight,
         fontWeight: s.fontWeight,
-        letterSpacing: { value: parseFloat(s.letterSpacing ?? "0") , unit: "em" },
+        letterSpacing: { value: parseFloat(s.letterSpacing ?? "0"), unit: "em" },
       },
     };
   }
@@ -72,11 +74,16 @@ const dims = (group, prefix) => {
   for (const { name, value, usage } of group.tokens) {
     const key = name.replace(`${prefix}-`, "");
     const unit = value.endsWith("%") ? "%" : "px";
-    o[prefix][key] = unit === "%"
-      // DTCG dimensions are px/rem only; keep the % in a CSS override.
-      ? { $type: "dimension", $value: { value: 0, unit: "px" }, $description: usage,
-          $extensions: { "engineer.joost.css": { value } } }
-      : { $type: "dimension", $value: { value: parseFloat(value), unit }, $description: usage };
+    o[prefix][key] =
+      unit === "%"
+        ? // DTCG dimensions are px/rem only; keep the % in a CSS override.
+          {
+            $type: "dimension",
+            $value: { value: 0, unit: "px" },
+            $description: usage,
+            $extensions: { "engineer.joost.css": { value } },
+          }
+        : { $type: "dimension", $value: { value: parseFloat(value), unit }, $description: usage };
   }
   return o;
 };
@@ -122,7 +129,8 @@ for (const { name, value } of src.spacing.tokens) {
   if (parseFloat(value) % unit) throw new Error(`${name} is not a multiple of space-1`);
 }
 tw.push(`  --spacing: var(--space-1);`);
-for (const { name } of src.radius.tokens) tw.push(`  --radius-${name.replace("radius-", "")}: var(--${name});`);
+for (const { name } of src.radius.tokens)
+  tw.push(`  --radius-${name.replace("radius-", "")}: var(--${name});`);
 tw.push("}", "");
 // Type styles as utilities: the font shorthand plus letter spacing.
 for (const g of src.type.groups) {

@@ -9,11 +9,13 @@
 import { color } from "../tokens";
 
 export type Theme = "light" | "dark";
-const steps = (prefix: string, n: number) => Array.from({ length: n }, (_, i) => color(`${prefix}-${i + 1}`));
+const steps = (prefix: string, n: number) =>
+  Array.from({ length: n }, (_, i) => color(`${prefix}-${i + 1}`));
 
 export const CATEGORIES = ["teal", "plum", "indigo", "violet", "gray"] as const;
 /** Categorical colors in their fixed order; gray is "other". */
-export const categorical = (theme: Theme = "light") => CATEGORIES.map((c) => color(`cat-${c}`, theme));
+export const categorical = (theme: Theme = "light") =>
+  CATEGORIES.map((c) => color(`cat-${c}`, theme));
 
 export const sequential = {
   teal: steps("seq-teal", 7),
@@ -33,7 +35,10 @@ export const bivariate: Record<string, string> = Object.fromEntries(
 // ---------- OKLab ----------
 type Lab = [number, number, number];
 const s2l = (c: number) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
-const l2s = (c: number) => { c = Math.max(0, Math.min(1, c)); return c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055; };
+const l2s = (c: number) => {
+  c = Math.max(0, Math.min(1, c));
+  return c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055;
+};
 
 export function toLab(h: string): Lab {
   const [r, g, b] = [1, 3, 5].map((i) => s2l(parseInt(h.slice(i, i + 2), 16) / 255));
@@ -52,19 +57,31 @@ export function toHex([L, a, b]: Lab): string {
   const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3;
   const m = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3;
   const s = (L - 0.0894841775 * a - 1.291485548 * b) ** 3;
-  return "#" + [
-    4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
-    -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
-    -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s,
-  ].map((v) => Math.round(l2s(v) * 255).toString(16).padStart(2, "0")).join("");
+  return (
+    "#" +
+    [
+      4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+      -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+      -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s,
+    ]
+      .map((v) =>
+        Math.round(l2s(v) * 255)
+          .toString(16)
+          .padStart(2, "0"),
+      )
+      .join("")
+  );
 }
-const mix = (a: Lab, b: Lab, f: number): Lab => [0, 1, 2].map((k) => a[k] + (b[k] - a[k]) * f) as Lab;
+const mix = (a: Lab, b: Lab, f: number): Lab =>
+  [0, 1, 2].map((k) => a[k] + (b[k] - a[k]) * f) as Lab;
 
 /** Interpolator t in [0, 1] -> hex, piecewise in OKLab through `colors`. */
 export function interpolate(colors: readonly string[]): (t: number) => string {
-  const labs = colors.map(toLab), n = labs.length - 1;
+  const labs = colors.map(toLab),
+    n = labs.length - 1;
   return (t) => {
-    const x = Math.max(0, Math.min(1, t)) * n, i = Math.min(n - 1, Math.floor(x));
+    const x = Math.max(0, Math.min(1, t)) * n,
+      i = Math.min(n - 1, Math.floor(x));
     return toHex(mix(labs[i], labs[i + 1], x - i));
   };
 }
@@ -72,7 +89,11 @@ export function interpolate(colors: readonly string[]): (t: number) => string {
 // ---------- the color field ----------
 const G4: Lab[][] = (() => {
   const g = (x: number, y: number) => toLab(bivariate[`${x}${y}`]);
-  const E = { t: toLab(sequential.teal[6]), p: toLab(sequential.plum[6]), i: toLab(sequential.indigo[6]) };
+  const E = {
+    t: toLab(sequential.teal[6]),
+    p: toLab(sequential.plum[6]),
+    i: toLab(sequential.indigo[6]),
+  };
   const M: Lab[][] = [];
   for (let y = 0; y < 4; y++) {
     M[y] = [];
@@ -90,10 +111,20 @@ const G4: Lab[][] = (() => {
 
 /** Sample the color field: u along teal (0-1), v along plum (0-1); indigo where both are high. */
 export function field(u: number, v: number): string {
-  const gx = Math.max(0, Math.min(1, u)) * 3, gy = Math.max(0, Math.min(1, v)) * 3;
-  const i = Math.min(2, Math.floor(gx)), j = Math.min(2, Math.floor(gy)), fx = gx - i, fy = gy - j;
+  const gx = Math.max(0, Math.min(1, u)) * 3,
+    gy = Math.max(0, Math.min(1, v)) * 3;
+  const i = Math.min(2, Math.floor(gx)),
+    j = Math.min(2, Math.floor(gy)),
+    fx = gx - i,
+    fy = gy - j;
   const c = (x: number, y: number) => G4[y][x];
-  return toHex([0, 1, 2].map((k) =>
-    (1 - fx) * (1 - fy) * c(i, j)[k] + fx * (1 - fy) * c(i + 1, j)[k] +
-    (1 - fx) * fy * c(i, j + 1)[k] + fx * fy * c(i + 1, j + 1)[k]) as Lab);
+  return toHex(
+    [0, 1, 2].map(
+      (k) =>
+        (1 - fx) * (1 - fy) * c(i, j)[k] +
+        fx * (1 - fy) * c(i + 1, j)[k] +
+        (1 - fx) * fy * c(i, j + 1)[k] +
+        fx * fy * c(i + 1, j + 1)[k],
+    ) as Lab,
+  );
 }

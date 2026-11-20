@@ -7,13 +7,24 @@
 //     plot({ color: scales.categorical(), marks: [Plot.lineY(data, { x: "t", y: "v", stroke: "rower" })] }));
 import * as Plot from "@observablehq/plot";
 import { color } from "../tokens";
-import { categorical, sequential, diverging, bivariate, interpolate, field, type Hue, type Theme } from "./color";
+import {
+  categorical,
+  sequential,
+  diverging,
+  bivariate,
+  interpolate,
+  field,
+  type Hue,
+  type Theme,
+} from "./color";
 
 export const currentTheme = (): Theme =>
   document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 
 export function kit(theme: Theme) {
-  const ink = color("ink", theme), muted = color("ink-muted", theme), line = color("line", theme);
+  const ink = color("ink", theme),
+    muted = color("ink-muted", theme),
+    line = color("line", theme);
   const cat = categorical(theme);
 
   const scales = {
@@ -23,12 +34,21 @@ export function kit(theme: Theme) {
     sequential: (hue: Hue = "teal", opts: { classes?: boolean; domain?: [number, number] } = {}) =>
       opts.classes
         ? { type: "quantize" as const, n: 7, range: sequential[hue], domain: opts.domain }
-        : { type: "linear" as const, interpolate: interpolate(sequential[hue]), domain: opts.domain },
+        : {
+            type: "linear" as const,
+            interpolate: interpolate(sequential[hue]),
+            domain: opts.domain,
+          },
     /** Data with a meaningful middle: plum <- gray -> teal. */
     diverging: (opts: { pivot?: number; classes?: boolean; domain?: [number, number] } = {}) =>
       opts.classes
         ? { type: "quantize" as const, n: 9, range: diverging, domain: opts.domain }
-        : { type: "diverging" as const, pivot: opts.pivot ?? 0, interpolate: interpolate(diverging), domain: opts.domain },
+        : {
+            type: "diverging" as const,
+            pivot: opts.pivot ?? 0,
+            interpolate: interpolate(diverging),
+            domain: opts.domain,
+          },
   };
 
   /**
@@ -56,10 +76,19 @@ export function kit(theme: Theme) {
     });
 
   return {
-    theme, Plot, plot, scales, bivariateFill, field, interpolate,
+    theme,
+    Plot,
+    plot,
+    scales,
+    bivariateFill,
+    field,
+    interpolate,
     /** One series: the brand color. */
     brand: color("brand", theme),
-    cat, ink, muted, line,
+    cat,
+    ink,
+    muted,
+    line,
     /** Hairline grid and rules in `line`. */
     grid: { stroke: line, strokeOpacity: 1 },
   };
@@ -76,5 +105,8 @@ export function renderPlot(el: Element, build: (k: ChartKit) => Element) {
     el.replaceChildren(build(kit(t)));
   };
   draw();
-  new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  new MutationObserver(draw).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
 }

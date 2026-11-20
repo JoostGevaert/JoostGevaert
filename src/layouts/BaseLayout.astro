@@ -23,6 +23,7 @@ const fullTitle = title === "joost.engineer" ? title : `${title} · joost.engine
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const imageUrl = image && new URL(image, Astro.site);
 ---
+
 <!doctype html>
 <html lang="en-US">
   <head>
@@ -61,8 +62,12 @@ const imageUrl = image && new URL(image, Astro.site);
     <script is:inline>
       (() => {
         const s = localStorage.getItem("theme");
-        const t = s === "light" || s === "dark" ? s
-          : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        const t =
+          s === "light" || s === "dark"
+            ? s
+            : matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
         document.documentElement.dataset.theme = t;
       })();
     </script>
@@ -70,7 +75,10 @@ const imageUrl = image && new URL(image, Astro.site);
   <body>
     <a
       class="sr-only rounded-sm border border-line bg-surface px-4 py-2 type-ui focus:not-sr-only focus:absolute focus:top-4 focus:left-4"
-      href="#main">Skip to content</a>
+      href="#main"
+    >
+      Skip to content
+    </a>
     <Header />
     <main id="main" class="mx-auto max-w-300 px-6 pt-10 pb-16">
       <slot />

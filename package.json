@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "tz build && astro dev",
-    "build": "tz build && astro build",
+    "build": "tz build && astro sync && tsc && astro build",
     "preview": "astro preview",
+    "test": "vitest run",
+    "lint": "eslint . && stylelint \"src/**/*.{css,astro}\"",
+    "format": "prettier --write .",
+    "deploy": "gh workflow run deploy.yml --ref main",
     "astro": "astro",
     "tokens:export": "node scripts/export-tokens.mjs",
-    "tokens:build": "tz build",
     "tokens:check": "tz check",
     "icons": "node scripts/build-icons.mjs",
     "textures": "node scripts/build-textures.mjs",
@@ -32,9 +35,24 @@
     "tailwindcss": "^4.3.5"
   },
   "devDependencies": {
+    "@babel/core": "^8.1.2",
+    "@babel/eslint-parser": "^8.1.2",
+    "@eslint/js": "^10.0.1",
     "@terrazzo/cli": "^2.10.0",
     "@terrazzo/plugin-css": "^2.10.0",
-    "svgo": "^4.1.0"
+    "@types/node": "^26.6.6",
+    "astro-eslint-parser": "^3.2.0",
+    "eslint": "^10.15.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "eslint-plugin-better-tailwindcss": "^4.11.0",
+    "globals": "^17.14.0",
+    "postcss-html": "^2.0.1",
+    "prettier": "^3.10.1",
+    "prettier-plugin-astro": "^1.1.2",
+    "stylelint": "^18.1.0",
+    "svgo": "^4.1.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.1"
   },
   "packageManager": "pnpm@10.28.0",
   "pnpm": {
@@ -42,5 +60,8 @@
       "esbuild",
       "sharp"
     ]
+  },
+  "engines": {
+    "node": ">=22"
   }
 }

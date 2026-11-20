@@ -5,7 +5,10 @@ import { isoDate } from "../../lib/format";
 
 export const getStaticPaths = (async () => {
   const posts = await getPosts();
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post, texture: textureFor(post, posts) } }));
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post, texture: textureFor(post, posts) },
+  }));
 }) satisfies GetStaticPaths;
 
 export const GET: APIRoute = async ({ props }) => {
@@ -15,7 +18,10 @@ export const GET: APIRoute = async ({ props }) => {
     date: isoDate(post.data.date),
     type: post.data.type,
     texture,
-    figure: post.data.ogFigure && post.filePath ? figurePath(post.filePath, post.data.ogFigure) : undefined,
+    figure:
+      post.data.ogFigure && post.filePath
+        ? figurePath(post.filePath, post.data.ogFigure)
+        : undefined,
   });
   return new Response(new Uint8Array(png), { headers: { "Content-Type": "image/png" } });
 };

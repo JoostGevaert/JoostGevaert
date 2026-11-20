@@ -4,14 +4,20 @@ import Texture from "./Texture.astro";
 import { isoDate } from "../../lib/format";
 import type { Post, Texture as TextureKind } from "../../lib/posts";
 
-interface Props { post: Post; texture: TextureKind }
+interface Props {
+  post: Post;
+  texture: TextureKind;
+}
 const { post, texture } = Astro.props;
 const { title, description, date, type } = post.data;
 ---
+
 <header class="relative isolate mb-10 overflow-hidden rounded-md border border-line bg-surface px-6 pt-10 pb-6 sm:px-10 sm:pt-16 sm:pb-10">
   <Texture kind={texture} strength="card" />
   <div class="relative mb-4 flex items-center gap-2">
-    <time class="text-link type-label" datetime={isoDate(date)}>{isoDate(date)}</time>
+    <time class="text-link type-label" datetime={isoDate(date)}>
+      {isoDate(date)}
+    </time>
     <TypeTag type={type} />
   </div>
   <h1 class="relative max-w-2xl type-heading sm:type-display">{title}</h1>

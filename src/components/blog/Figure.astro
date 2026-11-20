@@ -13,12 +13,22 @@ const hasSlot = Astro.slots.has("default");
 const slotHtml = hasSlot ? await Astro.slots.render("default") : "";
 // With an image, the slot is the caption; without, the slot is the figure body.
 ---
+
 <figure class="my-10">
-  {url && <img class="block h-auto max-w-full rounded-sm border border-line" src={url} alt={alt} loading="lazy" decoding="async" />}
+  {url && (
+    <img
+      class="block h-auto max-w-full rounded-sm border border-line"
+      src={url}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+    />
+  )}
   {!url && hasSlot && <div set:html={slotHtml} />}
   {(caption || (url && hasSlot)) && (
     <figcaption class="mt-2 text-ink-muted type-small">
-      {caption}{url && hasSlot && <Fragment set:html={slotHtml} />}
+      {caption}
+      {url && hasSlot && <Fragment set:html={slotHtml} />}
     </figcaption>
   )}
 </figure>

@@ -9,11 +9,15 @@ import { getPosts, textureFor } from "../../lib/posts";
 
 export async function getStaticPaths() {
   const posts = await getPosts();
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post, texture: textureFor(post, posts) } }));
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post, texture: textureFor(post, posts) },
+  }));
 }
 const { post, texture } = Astro.props;
 const { Content } = await render(post);
 ---
+
 <BaseLayout
   title={post.data.title}
   description={post.data.description}

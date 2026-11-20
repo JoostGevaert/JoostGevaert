@@ -6,7 +6,10 @@ interface Props {
 }
 const { title = "Note" } = Astro.props;
 ---
+
 <aside class="my-6 rounded-sm border border-l-3 border-teal-6 border-l-brand bg-teal-2 px-6 py-4">
   <p class="mb-1 text-link type-label">{title}</p>
-  <div><slot /></div>
+  <div>
+    <slot />
+  </div>
 </aside>

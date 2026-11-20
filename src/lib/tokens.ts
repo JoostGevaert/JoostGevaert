@@ -19,7 +19,10 @@ export function color(name: string, theme: "light" | "dark" = "light"): string {
       const v = node.$value;
       if (typeof v === "string") {
         // alias like {color.teal.10}
-        const ref = v.slice(1, -1).replace(/^color\./, "").replace(/\./g, "-");
+        const ref = v
+          .slice(1, -1)
+          .replace(/^color\./, "")
+          .replace(/\./g, "-");
         return color(ref, theme);
       }
       return v.hex;

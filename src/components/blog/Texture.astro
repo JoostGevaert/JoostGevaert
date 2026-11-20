@@ -9,8 +9,9 @@ interface Props {
 }
 const { kind, strength = "card" } = Astro.props;
 const ext = kind === "drawing" ? "webp" : "svg";
-const img = "absolute top-0 right-0 h-full w-auto max-w-none";
+const imgClasses = "absolute top-0 right-0 h-full w-auto max-w-none";
 ---
+
 <!-- Fades in from the left so the title sits on a clean ground. -->
 <div
   class:list={[
@@ -19,6 +20,18 @@ const img = "absolute top-0 right-0 h-full w-auto max-w-none";
   ]}
   aria-hidden="true"
 >
-  <img class:list={[img, "dark:hidden"]} src={`/textures/${kind}-light.${ext}`} alt="" loading="lazy" decoding="async" />
-  <img class:list={[img, "hidden dark:block"]} src={`/textures/${kind}-dark.${ext}`} alt="" loading="lazy" decoding="async" />
+  <img
+    class:list={[imgClasses, "dark:hidden"]}
+    src={`/textures/${kind}-light.${ext}`}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
+  <img
+    class:list={[imgClasses, "hidden dark:block"]}
+    src={`/textures/${kind}-dark.${ext}`}
+    alt=""
+    loading="lazy"
+    decoding="async"
+  />
 </div>

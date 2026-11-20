@@ -14,7 +14,10 @@ const posts = defineCollection({
     /** LinkedIn post to discuss this one: shows "Discuss on LinkedIn". */
     linkedin: z.string().url().optional(),
     /** GitHub repo as owner/repo: shows "Code on GitHub". */
-    repo: z.string().regex(/^[\w.-]+\/[\w.-]+$/).optional(),
+    repo: z
+      .string()
+      .regex(/^[\w.-]+\/[\w.-]+$/)
+      .optional(),
     draft: z.boolean().default(false),
   }),
 });

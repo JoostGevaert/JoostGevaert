@@ -13,7 +13,8 @@ Every color on this page comes from a single file, `tokens.json`, written during
 If a value is typed into a stylesheet by hand, it drifts. With one source, the light and dark themes can't disagree about what `teal-10` is.
 
 <Callout title="Method">
-Run `pnpm tokens:export` after changing `tokens.json`, then `pnpm build`. The build runs Terrazzo first.
+  Run `pnpm tokens:export` after changing `tokens.json`, then `pnpm build`. The build runs Terrazzo
+  first.
 </Callout>
 
 ### What gets generated
@@ -21,12 +22,15 @@ Run `pnpm tokens:export` after changing `tokens.json`, then `pnpm build`. The bu
 The light theme lands on `:root`, the dark theme on `:root[data-theme="dark"]` and on the system preference.
 
 ```js
-const variableName = (token) =>
-  `--${token.id.replace(/^color\./, "").replace(/\./g, "-")}`;
+const variableName = (token) => `--${token.id.replace(/^color\./, "").replace(/\./g, "-")}`;
 ```
 
-<Figure src="/textures/drawing-light.webp" alt="The j.e mark as a dimensioned construction drawing, in font units">
-  The short form j.e as a technical drawing. The period is centered optically: gaps of 146 and 147 units.
+<Figure
+  src="/textures/drawing-light.webp"
+  alt="The j.e mark as a dimensioned construction drawing, in font units"
+>
+  The short form j.e as a technical drawing. The period is centered optically: gaps of 146 and 147
+  units.
 </Figure>
 
 import PaletteDemo from "../../components/charts/PaletteDemo.astro";

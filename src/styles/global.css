@@ -18,6 +18,7 @@
   }
 }
 
+/* stylelint-disable selector-max-type -- document-wide defaults for elements no component renders (html, body, rendered links and headings) */
 @layer base {
   html {
     background: var(--bg);
@@ -34,22 +35,42 @@
     color: var(--link);
     text-underline-offset: 0.15em;
   }
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-sans);
     text-wrap: balance;
   }
 }
+/* stylelint-enable selector-max-type */
 
 /* Rendered Markdown: posts are MDX, so their elements can't carry classes.
    Every selector below targets markup inside [data-prose]. */
-/* stylelint-disable-next-line -- rendered Markdown can't take utility classes */
+/* stylelint-disable selector-max-type, selector-max-attribute -- rendered Markdown (MDX) can't take utility classes */
 [data-prose] {
-  & :where(p, ul, ol, pre, blockquote, table) + :where(p, ul, ol, pre, blockquote, table) { margin-top: 1em; }
-  & :where(ul, ol) { padding-left: 1.25em; }
-  & :where(ul) { list-style: disc; }
-  & :where(ol) { list-style: decimal; }
-  & :where(h2) { font: var(--type-heading); margin-top: var(--space-5); margin-bottom: var(--space-2); }
-  & :where(h3) { font: var(--type-subheading); margin-top: var(--space-4); margin-bottom: var(--space-2); }
+  & :where(p, ul, ol, pre, blockquote, table) + :where(p, ul, ol, pre, blockquote, table) {
+    margin-top: 1em;
+  }
+  & :where(ul, ol) {
+    padding-left: 1.25em;
+  }
+  & :where(ul) {
+    list-style: disc;
+  }
+  & :where(ol) {
+    list-style: decimal;
+  }
+  & :where(h2) {
+    font: var(--type-heading);
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-2);
+  }
+  & :where(h3) {
+    font: var(--type-subheading);
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+  }
   & :where(:not(pre) > code) {
     font: var(--type-code);
     font-size: 0.88em;
@@ -65,8 +86,11 @@
     padding: var(--space-3) var(--space-4);
     overflow-x: auto;
   }
-  & :where(figcaption p) { margin: 0; }
+  & :where(figcaption p) {
+    margin: 0;
+  }
 }
+/* stylelint-enable selector-max-type, selector-max-attribute */
 
 /* Shiki's "css-variables" theme, mapped onto the teal palette. */
 :root {
