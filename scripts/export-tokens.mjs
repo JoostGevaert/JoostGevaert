@@ -92,6 +92,39 @@ for (const { name, value, usage } of src.opacity.tokens) {
   opacity.opacity[name] = { $type: "number", $value: Number(value), $description: usage };
 }
 
+// Motion: easing curves (DTCG cubicBezier) and durations. CSS keywords are
+// spelled out as their cubic-bezier control points.
+const keywordCurves = {
+  linear: [0, 0, 1, 1],
+  ease: [0.25, 0.1, 0.25, 1],
+  "ease-in": [0.42, 0, 1, 1],
+  "ease-out": [0, 0, 0.58, 1],
+  "ease-in-out": [0.42, 0, 0.58, 1],
+};
+const curve = (v) => {
+  const m = v.match(/^cubic-bezier\(([^)]+)\)$/);
+  const points = m ? m[1].split(",").map(Number) : keywordCurves[v];
+  if (!points || points.length !== 4) throw new Error(`Unsupported easing: ${v}`);
+  return points;
+};
+const motion = { ease: {}, duration: {} };
+for (const { name, value, usage } of src.easing.tokens) {
+  motion.ease[name.replace("ease-", "")] = {
+    $type: "cubicBezier",
+    $value: curve(value),
+    $description: usage,
+  };
+}
+for (const { name, value, usage } of src.duration.tokens) {
+  const m = value.match(/^([\d.]+)(ms|s)$/);
+  if (!m) throw new Error(`Unsupported duration: ${value}`);
+  motion.duration[name.replace("duration-", "")] = {
+    $type: "duration",
+    $value: { value: Number(m[1]), unit: m[2] },
+    $description: usage,
+  };
+}
+
 const w = (f, d) => writeFileSync(new URL(f, out), JSON.stringify(d, null, 2) + "\n");
 w("color/scales.light.tokens.json", light);
 w("color/scales.dark.tokens.json", dark);
@@ -100,6 +133,7 @@ w("typography.tokens.json", type);
 w("space.tokens.json", dims(src.spacing, "space"));
 w("radius.tokens.json", dims(src.radius, "radius"));
 w("opacity.tokens.json", opacity);
+w("motion.tokens.json", motion);
 console.log("Wrote DTCG tokens to tokens/");
 
 // ---------- Tailwind theme ----------
@@ -117,6 +151,7 @@ const tw = [
   "  --shadow-*: initial;",
   "  --inset-shadow-*: initial;",
   "  --drop-shadow-*: initial;",
+  "  --ease-*: initial;",
   "  --color-transparent: transparent;",
   "  --color-current: currentColor;",
 ];
@@ -142,6 +177,17 @@ for (const g of src.type.groups) {
 }
 for (const { name } of src.opacity.tokens) {
   tw.push(`@utility opacity-${name} {`, `  opacity: var(--opacity-${name});`, "}");
+}
+// Easing and duration as utilities: `ease-overshoot`, `duration-swing`. They
+// also set Tailwind's --tw-ease / --tw-duration, which transition-* utilities
+// read, so they win whatever order the utilities are emitted in.
+for (const { name } of src.easing.tokens) {
+  tw.push(`@utility ${name} {`, `  --tw-ease: var(--${name});`);
+  tw.push(`  transition-timing-function: var(--${name});`, "}");
+}
+for (const { name } of src.duration.tokens) {
+  tw.push(`@utility ${name} {`, `  --tw-duration: var(--${name});`);
+  tw.push(`  transition-duration: var(--${name});`, "}");
 }
 writeFileSync(new URL("../src/styles/theme.css", import.meta.url), tw.join("\n") + "\n");
 console.log("Wrote src/styles/theme.css");

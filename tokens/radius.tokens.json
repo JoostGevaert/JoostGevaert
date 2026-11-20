@@ -43,7 +43,7 @@
         "value": 999,
         "unit": "px"
       },
-      "$description": "Segmented controls and the theme switch."
+      "$description": "Pill buttons and chips (end-of-post buttons, repo chips, tags)."
     }
   }
 }
