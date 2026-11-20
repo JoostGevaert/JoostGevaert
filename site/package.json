@@ -17,6 +17,7 @@
     "@astrojs/mdx": "^8.1.6",
     "@fontsource/source-code-pro": "^5.3.1",
     "@fontsource/source-sans-3": "^5.3.1",
+    "@observablehq/plot": "^0.6.19",
     "astro": "^7.4.13",
     "satori": "^0.63.2",
     "sharp": "^0.35.5"
