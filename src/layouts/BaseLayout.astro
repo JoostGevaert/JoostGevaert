@@ -74,15 +74,54 @@ const imageUrl = image && new URL(image, Astro.site);
   </head>
   <body>
     <a
-      class="sr-only rounded-sm border border-line bg-surface px-4 py-2 type-ui focus:not-sr-only focus:absolute focus:top-4 focus:left-4"
+      class="sr-only rounded-sm border border-line bg-surface px-4 py-2 type-ui focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-40"
       href="#main"
     >
       Skip to content
     </a>
-    <Header />
+    <!-- Sticky: slides out while scrolling down, back in on scrolling up (script below). -->
+    <div
+      data-site-header
+      class="sticky top-0 z-30 bg-bg transition-transform duration-200 ease-out data-hidden:-translate-y-full motion-reduce:transition-none"
+    >
+      <Header />
+    </div>
     <main id="main" class="mx-auto max-w-300 px-6 pt-10 pb-16">
       <slot />
     </main>
     <Footer />
+    <script>
+      import { initialHeaderScroll, nextHeaderScroll } from "../lib/header-scroll";
+
+      const header = document.querySelector<HTMLElement>("[data-site-header]");
+      if (header) {
+        const menu = header.querySelector("details");
+        let state = initialHeaderScroll(scrollY);
+        let queued = false;
+
+        const show = () => {
+          state = { ...state, hidden: false };
+          delete header.dataset.hidden;
+        };
+
+        const update = () => {
+          queued = false;
+          state = nextHeaderScroll(state, scrollY, header.offsetHeight);
+          // Keep it in view while its menu is open or it holds keyboard focus.
+          if (!state.hidden || menu?.open || header.matches(":focus-within")) show();
+          else header.dataset.hidden = "";
+        };
+
+        addEventListener(
+          "scroll",
+          () => {
+            if (!queued) requestAnimationFrame(update);
+            queued = true;
+          },
+          { passive: true },
+        );
+        header.addEventListener("focusin", show);
+      }
+    </script>
   </body>
 </html>
