@@ -12,8 +12,9 @@ const profiles = [
     ? [{ brand: "linkedin" as const, name: "LinkedIn", url: site.linkedin.url }]
     : []),
 ];
+// 36 px buttons with a 44 px hit area; scale on press.
 const iconButtonClasses =
-  "group relative grid size-9 cursor-pointer place-items-center rounded-full text-ink hover:bg-teal-3 hover:text-link";
+  "group hit-area relative grid size-9 cursor-pointer place-items-center rounded-full text-ink hover:bg-teal-3 hover:text-link motion-safe:transition-transform motion-safe:duration-fast motion-safe:ease-standard motion-safe:active:scale-97";
 ---
 
 <!-- On the content grid, so the header lines up with the hero, post headers
@@ -21,18 +22,19 @@ const iconButtonClasses =
 <header class="content-grid">
   <div class="col-breakout flex items-center gap-2 border-be border-line py-6 sm:gap-4">
     <!-- py-1: clear space of the j's dot around the logo -->
-    <a href="/" class="me-auto block py-1 leading-none" aria-label="joost.engineer, home">
+    <a href="/" class="hit-area me-auto block py-1 leading-none" aria-label="joost.engineer, home">
       <Logo variant="wordmark" id="hdr-wordmark" class="hidden h-6.5 w-auto sm:block" />
       <Logo variant="mark" id="hdr-mark" class="block h-7 w-auto sm:hidden" />
     </a>
 
     <nav class="me-2 hidden type-ui sm:block" aria-label="Main">
-      <a href="/" class="text-ink no-underline hover:text-link">
+      <a href="/" class="hit-area text-ink no-underline hover:text-link">
         Writing
       </a>
     </nav>
 
-    <ul class="hidden list-none sm:flex" aria-label="Profiles">
+    <!-- gap-2: 36 px buttons 44 px apart, so their 44 px hit areas don't overlap. -->
+    <ul class="hidden list-none gap-2 sm:flex" aria-label="Profiles">
       {profiles.map((p) => (
         <li>
           <a class={iconButtonClasses} href={p.url} aria-label={p.name} rel="me noopener">
@@ -63,7 +65,7 @@ const iconButtonClasses =
         <li>
           <a
             href="/"
-            class="flex items-center gap-2 rounded-sm px-2.5 py-2 text-ink no-underline type-ui hover:bg-teal-2 hover:text-link"
+            class="flex min-h-11 items-center gap-2 rounded-sm px-2.5 text-ink no-underline type-ui hover:bg-teal-2 hover:text-link"
           >
             Writing
           </a>
@@ -73,7 +75,7 @@ const iconButtonClasses =
             <a
               href={p.url}
               rel="me noopener"
-              class="flex items-center gap-2 rounded-sm px-2.5 py-2 text-ink no-underline type-ui hover:bg-teal-2 hover:text-link"
+              class="flex min-h-11 items-center gap-2 rounded-sm px-2.5 text-ink no-underline type-ui hover:bg-teal-2 hover:text-link"
             >
               <BrandLogo brand={p.brand} />
               {p.name}

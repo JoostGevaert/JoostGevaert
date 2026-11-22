@@ -7,6 +7,17 @@
 @import "./tokens.css";
 @import "./theme.css";
 
+/* Hover only where there is a real pointer that can hover (BRAND.md,
+   Layout): touch screens never get stuck hover states. Applies to every
+   hover:, group-hover: and peer-hover: utility. */
+@custom-variant hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+}
+
 /* Colors follow color-scheme through light-dark() tokens. The theme switch
    also sets data-theme on <html> to the resolved theme (Auto resolves to light
    or dark): a hook for the few things that aren't colors, like swapping a
@@ -53,6 +64,18 @@
 @utility focus-ring {
   outline: max(2px, 0.08em) solid var(--focus);
   outline-offset: 0.25em;
+}
+
+/* Touch target of at least 44 x 44 px for a visibly smaller control: an
+   invisible ::after grows the hit area around it, never shrinking it. */
+@utility hit-area {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline: min(0px, (100% - 44px) / 2);
+    inset-block: min(0px, (100% - 44px) / 2);
+  }
 }
 
 /* Card lists: as many 16rem columns as fit, no breakpoints. */
@@ -113,9 +136,12 @@
   [role="radio"] {
     touch-action: manipulation;
   }
+  /* Keyboard focus only; never outline: none. A part that draws its own
+     ring (the theme switch, a card link) makes this outline transparent,
+     which forced-colors mode still shows. */
   :focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    outline: max(2px, 0.08em) solid var(--focus);
+    outline-offset: 0.25em;
   }
   a {
     color: var(--link);
