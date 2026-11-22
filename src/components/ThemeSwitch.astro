@@ -34,7 +34,7 @@ const invertedClasses = "origin-center rotate-180 transform-fill";
 >
   {options.map((o) => (
     <g
-      class="group cursor-pointer outline-none"
+      class="group cursor-pointer outline-transparent"
       data-theme={o.theme}
       role="radio"
       tabindex="-1"
@@ -81,7 +81,7 @@ const invertedClasses = "origin-center rotate-180 transform-fill";
 
 <!-- is:inline so it runs while the page parses, before first paint: a bundled
      module runs later, and the indicator would visibly swing from Light to the
-     stored choice. The page's data-theme itself is set even earlier, in
+     stored choice. The page's color-scheme itself is set even earlier, in
      BaseLayout's <head>. Inline scripts aren't deduplicated, so this is an
      IIFE whose steps tolerate re-running: init is guarded per instance and
      applyTheme updates every instance rendered so far (desktop + menu). -->
@@ -96,8 +96,13 @@ const invertedClasses = "origin-center rotate-180 transform-fill";
     const resolve = (t) =>
       t === "auto" ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : t;
 
+    // Every color token is light-dark(), so the choice is color-scheme on
+    // :root ("light dark" for Auto); data-theme is the resolved theme, a hook
+    // for scripts (charts) and the dark: variant.
     function applyTheme(theme) {
-      document.documentElement.dataset.theme = resolve(theme);
+      const root = document.documentElement;
+      root.style.colorScheme = theme === "auto" ? "light dark" : theme;
+      root.dataset.theme = resolve(theme);
       localStorage.setItem("theme", theme);
       document.querySelectorAll("[data-theme-switch]").forEach((root) => {
         const indicator = root.querySelector("[data-theme-indicator]");

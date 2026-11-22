@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { color } from "../lib/tokens";
 
 interface Props {
   title: string;
@@ -56,37 +57,44 @@ const imageUrl = image && new URL(image, Astro.site);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="alternate" type="application/rss+xml" title="joost.engineer" href="/rss.xml" />
-    <meta name="theme-color" content="#fcfcfd" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#111113" media="(prefers-color-scheme: dark)" />
-    <!-- Set the resolved theme before first paint (Auto, following the system, is the default). -->
+    <meta name="theme-color" content={color("bg", "light")} media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content={color("bg", "dark")} media="(prefers-color-scheme: dark)" />
+    <!-- Apply the stored theme before first paint. Every color token is a
+         light-dark() value, so the choice is just color-scheme on :root
+         (Auto, "light dark", follows the system and is the default);
+         data-theme carries the resolved theme as a hook for scripts. -->
     <script is:inline>
       (() => {
         const s = localStorage.getItem("theme");
-        const t =
-          s === "light" || s === "dark"
-            ? s
-            : matchMedia("(prefers-color-scheme: dark)").matches
+        const t = s === "light" || s === "dark" ? s : "auto";
+        const root = document.documentElement;
+        root.style.colorScheme = t === "auto" ? "light dark" : t;
+        root.dataset.theme =
+          t === "auto"
+            ? matchMedia("(prefers-color-scheme: dark)").matches
               ? "dark"
-              : "light";
-        document.documentElement.dataset.theme = t;
+              : "light"
+            : t;
       })();
     </script>
   </head>
   <body>
     <a
-      class="sr-only rounded-sm border border-line bg-surface px-4 py-2 type-ui focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-40"
+      class="sr-only rounded-sm border border-line bg-surface px-4 py-2 type-ui focus:not-sr-only focus:absolute focus:inset-s-4 focus:inset-bs-4 focus:z-40"
       href="#main"
     >
       Skip to content
     </a>
-    <!-- Sticky: slides out while scrolling down, back in on scrolling up (script below). -->
+    <!-- Sticky: slides out while scrolling down, back in on scrolling up (script below).
+         Under reduced motion it hides and shows without sliding. -->
     <div
       data-site-header
-      class="sticky top-0 z-30 bg-bg transition-transform duration-fast ease-standard data-hidden:-translate-y-full motion-reduce:transition-none"
+      class="sticky inset-bs-0 z-30 bg-bg data-hidden:-translate-y-full motion-safe:transition-transform motion-safe:duration-fast motion-safe:ease-standard"
     >
       <Header />
     </div>
-    <main id="main" class="mx-auto max-w-300 px-6 pt-10 pb-16">
+    <!-- Pages lay themselves out on the content grid (col-breakout, col-full). -->
+    <main id="main" class="pbs-10 pbe-16">
       <slot />
     </main>
     <Footer />

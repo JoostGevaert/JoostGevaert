@@ -33,19 +33,16 @@ export default defineConfig({
       filename: "tokens.css",
       variableName,
       transform: (token) => token.$extensions?.[CSS_OVERRIDE_EXT]?.value,
+      // Light on :root; the dark theme's color tokens follow in a marked
+      // block that scripts/light-dark.mjs folds into light-dark() values and
+      // removes. One set of tokens, no [data-theme] blocks.
       permutations: [
         { input: { theme: "light" }, prepare: (c) => `:root {\n${c}\n}` },
         {
-          // System default: dark when the OS asks for it and no explicit choice is stored.
           input: { theme: "dark" },
           include: themed,
           prepare: (c) =>
-            `@media (prefers-color-scheme: dark) {\n  :root:not([data-theme="light"]) {\n${c}\n  }\n}`,
-        },
-        {
-          input: { theme: "dark" },
-          include: themed,
-          prepare: (c) => `:root[data-theme="dark"] {\n${c}\n}`,
+            `/* dark permutation, merged by scripts/light-dark.mjs */\n:root {\n${c}\n}`,
         },
       ],
     }),

@@ -1,4 +1,7 @@
 ---
+// Post cards in an intrinsic grid (BRAND.md, Layout): as many 16rem columns
+// as fit. Each card is one link: the title's link is stretched over the card
+// with ::after, and the focus ring moves from the link to the card.
 import TypeTag from "./TypeTag.astro";
 import { isoDate } from "../../lib/format";
 import type { Post } from "../../lib/posts";
@@ -9,19 +12,28 @@ interface Props {
 const { posts } = Astro.props;
 ---
 
-<ol class="list-none border-b border-line">
+<ol class="card-grid list-none">
   {posts.map((p) => (
-    <li class="flex flex-col gap-2 border-t border-line py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-      <a href={`/posts/${p.id}/`} class="group grid gap-1 text-ink no-underline">
-        <span class="text-balance type-subheading group-hover:text-link">{p.data.title}</span>
-        {p.data.description && <span class="text-ink-muted type-small">{p.data.description}</span>}
-      </a>
-      <div class="-order-1 flex shrink-0 items-center gap-2 sm:order-0">
+    <li class="group @container relative flex flex-col gap-2 rounded-md border border-line bg-surface p-6 transition-colors duration-fast ease-standard hover:border-teal-7 has-focus-visible:focus-ring">
+      <div class="flex items-center gap-2">
         <time class="text-link type-label" datetime={isoDate(p.data.date)}>
           {isoDate(p.data.date)}
         </time>
         <TypeTag type={p.data.type} />
       </div>
+      <h3 class="type-subheading">
+        <a
+          href={`/posts/${p.id}/`}
+          class="text-ink no-underline outline-transparent transition-colors duration-fast ease-standard group-hover:text-link after:absolute after:inset-0 after:rounded-md"
+        >
+          {p.data.title}
+        </a>
+      </h3>
+      {p.data.description && (
+        <p class="line-clamp-3 text-ink-muted type-small @md:line-clamp-none">
+          {p.data.description}
+        </p>
+      )}
     </li>
   ))}
 </ol>

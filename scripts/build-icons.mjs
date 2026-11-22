@@ -7,6 +7,11 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import sharp from "sharp";
 
+// Manifest colors from the token files (their sRGB fallbacks), not typed in.
+const tokens = JSON.parse(
+  readFileSync(new URL("../tokens/color/scales.light.tokens.json", import.meta.url), "utf8"),
+).color;
+
 const asset = (f) => new URL(`../design-system/assets/logos/${f}`, import.meta.url);
 const pub = (f) => new URL(`../public/${f}`, import.meta.url);
 const light = readFileSync(asset("je-tile-light.svg"), "utf8"); // ink tile, for light chrome
@@ -74,8 +79,8 @@ writeFileSync(
       description: "Joost Gevaert's blog for his (thought) experiments and side projects.",
       start_url: "/",
       display: "standalone",
-      background_color: "#fcfcfd",
-      theme_color: "#1c2024",
+      background_color: tokens.bg.$value.hex,
+      theme_color: tokens.ink.$value.hex,
       icons: [
         { src: "/icon-192.png", sizes: "192x192", type: "image/png" },
         { src: "/icon-512.png", sizes: "512x512", type: "image/png" },

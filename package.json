@@ -3,8 +3,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "tz build && astro dev",
-    "build": "tz build && astro sync && tsc && astro build",
+    "dev": "pnpm tokens:css && astro dev",
+    "build": "pnpm tokens:css && astro sync && tsc && astro build",
     "preview": "astro preview",
     "test": "vitest run",
     "lint": "eslint . && stylelint \"src/**/*.{css,astro}\"",
@@ -13,6 +13,7 @@
     "astro": "astro",
     "tokens:export": "node scripts/export-tokens.mjs",
     "tokens:check": "tz check",
+    "tokens:css": "tz build && node scripts/light-dark.mjs",
     "icons": "node scripts/build-icons.mjs",
     "textures": "node scripts/build-textures.mjs",
     "fonts": "node scripts/build-fonts.mjs"

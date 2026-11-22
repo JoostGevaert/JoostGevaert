@@ -4,11 +4,11 @@
       "1": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.051,
-            0.0745,
-            0.0824
+            0.182,
+            0.0104,
+            209.3
           ],
           "hex": "#0d1315"
         },
@@ -17,11 +17,11 @@
       "2": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.0784,
-            0.102,
-            0.1059
+            0.212,
+            0.0099,
+            209.3
           ],
           "hex": "#141a1b"
         },
@@ -30,11 +30,11 @@
       "3": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.0902,
-            0.1529,
-            0.1647
+            0.26,
+            0.022,
+            209.3
           ],
           "hex": "#17272a"
         },
@@ -43,11 +43,11 @@
       "4": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.098,
-            0.1922,
-            0.2078
+            0.296,
+            0.0309,
+            209.3
           ],
           "hex": "#193135"
         },
@@ -56,11 +56,11 @@
       "5": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.1216,
-            0.2314,
-            0.251
+            0.334,
+            0.0348,
+            209.3
           ],
           "hex": "#1f3b40"
         },
@@ -69,11 +69,11 @@
       "6": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.1608,
-            0.2784,
-            0.298
+            0.377,
+            0.0373,
+            209.3
           ],
           "hex": "#29474c"
         },
@@ -82,11 +82,11 @@
       "7": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.2039,
-            0.3412,
-            0.3647
+            0.434,
+            0.0418,
+            209.3
           ],
           "hex": "#34575d"
         },
@@ -95,11 +95,11 @@
       "8": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.2706,
-            0.4431,
-            0.4706
+            0.519,
+            0.0499,
+            209.3
           ],
           "hex": "#457178"
         },
@@ -108,11 +108,11 @@
       "9": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.3216,
-            0.5569,
-            0.5961
+            0.61,
+            0.0641,
+            209.3
           ],
           "hex": "#528e98"
         },
@@ -121,11 +121,11 @@
       "10": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.2706,
-            0.5059,
-            0.5451
+            0.568,
+            0.0641,
+            209.3
           ],
           "hex": "#45818b"
         },
@@ -134,11 +134,11 @@
       "11": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.5373,
-            0.7569,
-            0.7922
+            0.775,
+            0.0596,
+            209.3
           ],
           "hex": "#89c1ca"
         },
@@ -147,11 +147,11 @@
       "12": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.8275,
-            0.9333,
-            0.949
+            0.93,
+            0.0289,
+            209.3
           ],
           "hex": "#d3eef2"
         },
@@ -161,11 +161,11 @@
     "bg": {
       "$type": "color",
       "$value": {
-        "colorSpace": "srgb",
+        "colorSpace": "oklch",
         "components": [
-          0.0667,
-          0.0667,
-          0.0745
+          0.179,
+          0.0041,
+          286
         ],
         "hex": "#111113"
       },
@@ -174,11 +174,11 @@
     "surface": {
       "$type": "color",
       "$value": {
-        "colorSpace": "srgb",
+        "colorSpace": "oklch",
         "components": [
-          0.0941,
-          0.098,
-          0.1059
+          0.213,
+          0.0042,
+          264.5
         ],
         "hex": "#18191b"
       },
@@ -187,11 +187,11 @@
     "ink": {
       "$type": "color",
       "$value": {
-        "colorSpace": "srgb",
+        "colorSpace": "oklch",
         "components": [
-          0.9294,
-          0.9333,
-          0.9412
+          0.949,
+          0.0029,
+          264.5
         ],
         "hex": "#edeef0"
       },
@@ -200,11 +200,11 @@
     "ink-muted": {
       "$type": "color",
       "$value": {
-        "colorSpace": "srgb",
+        "colorSpace": "oklch",
         "components": [
-          0.6902,
-          0.7059,
-          0.7294
+          0.769,
+          0.0096,
+          258.3
         ],
         "hex": "#b0b4ba"
       },
@@ -213,11 +213,11 @@
     "line": {
       "$type": "color",
       "$value": {
-        "colorSpace": "srgb",
+        "colorSpace": "oklch",
         "components": [
-          0.1804,
-          0.1922,
-          0.2078
+          0.312,
+          0.0083,
+          255.6
         ],
         "hex": "#2e3135"
       },
@@ -226,11 +226,11 @@
     "guide": {
       "$type": "color",
       "$value": {
-        "colorSpace": "srgb",
+        "colorSpace": "oklch",
         "components": [
-          0.2392,
-          0.3725,
-          0.3922
+          0.461,
+          0.0401,
+          207.5
         ],
         "hex": "#3d5f64"
       },
@@ -239,11 +239,11 @@
     "grid-cell": {
       "$type": "color",
       "$value": {
-        "colorSpace": "srgb",
+        "colorSpace": "oklch",
         "components": [
-          0.1412,
-          0.2157,
-          0.2275
+          0.322,
+          0.025,
+          208.3
         ],
         "hex": "#24373a"
       },
@@ -263,11 +263,11 @@
       "teal": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.5373,
-            0.7569,
-            0.7922
+            0.775,
+            0.0593,
+            208.5
           ],
           "hex": "#89c1ca"
         },
@@ -276,11 +276,11 @@
       "plum": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.8157,
-            0.5882,
-            0.7451
+            0.741,
+            0.087,
+            338.4
           ],
           "hex": "#d096be"
         },
@@ -289,11 +289,11 @@
       "indigo": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.5569,
-            0.6039,
-            0.8353
+            0.699,
+            0.0878,
+            275.1
           ],
           "hex": "#8e9ad5"
         },
@@ -302,11 +302,11 @@
       "violet": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.6824,
-            0.6,
-            0.8078
+            0.72,
+            0.0789,
+            302.6
           ],
           "hex": "#ae99ce"
         },
@@ -315,11 +315,11 @@
       "gray": {
         "$type": "color",
         "$value": {
-          "colorSpace": "srgb",
+          "colorSpace": "oklch",
           "components": [
-            0.6039,
-            0.6118,
-            0.6471
+            0.694,
+            0.0133,
+            276
           ],
           "hex": "#9a9ca5"
         },

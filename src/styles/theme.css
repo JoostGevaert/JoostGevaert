@@ -90,6 +90,10 @@
   --radius-pill: var(--radius-pill);
 }
 
+:root {
+  --type-display-font-size: clamp(2rem, 1.55rem + 1.6vw, 2.75rem);
+  --type-heading-font-size: clamp(1.5rem, 1.3rem + 0.6vw, 1.75rem);
+}
 @utility type-display {
   font: var(--type-display);
   letter-spacing: var(--type-display-letter-spacing);

@@ -7,8 +7,105 @@
 @import "./tokens.css";
 @import "./theme.css";
 
-/* The theme switch sets data-theme on <html> (Auto resolves to light or dark). */
+/* Hover only where there is a real pointer that can hover (BRAND.md,
+   Layout): touch screens never get stuck hover states. Applies to every
+   hover:, group-hover: and peer-hover: utility. */
+@custom-variant hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @slot;
+    }
+  }
+}
+
+/* Colors follow color-scheme through light-dark() tokens. The theme switch
+   also sets data-theme on <html> to the resolved theme (Auto resolves to light
+   or dark): a hook for the few things that aren't colors, like swapping a
+   texture image. */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Layout widths (BRAND.md, Layout): running text and wide figures. */
+@theme {
+  /* Any transition without its own tokens: duration-fast, ease-standard
+     (never Tailwind's ease-in-out default). */
+  --default-transition-duration: var(--duration-fast);
+  --default-transition-timing-function: var(--ease-standard);
+  --container-content: 42rem;
+  --container-breakout: 64rem;
+}
+
+/* Content grid with named lines: `content` (running text, the default for
+   children), `breakout` (figures, charts, maps) and `full` (hero, textures,
+   full-bleed images), with space-4 (1.5rem) gutters. Children pick a track
+   with col-breakout / col-full, so nothing needs a wrapper div. The default
+   sits in :where() so a col-* utility always wins. */
+@utility content-grid {
+  --breakout-side: calc((var(--container-breakout) - var(--container-content)) / 2);
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--space-4), 1fr)
+    [breakout-start] minmax(0, var(--breakout-side))
+    [content-start] min(var(--container-content), 100% - 2 * var(--space-4))
+    [content-end] minmax(0, var(--breakout-side))
+    [breakout-end] minmax(var(--space-4), 1fr)
+    [full-end];
+  :where(&) > * {
+    grid-column: content;
+  }
+}
+@utility col-content {
+  grid-column: content;
+}
+@utility col-breakout {
+  grid-column: breakout;
+}
+@utility col-full {
+  grid-column: full;
+}
+
+/* The focus ring (BRAND.md, Layout: Focus), for things that take it from a
+   focused child, like a whole-card link. */
+@utility focus-ring {
+  outline: max(2px, 0.08em) solid var(--focus);
+  outline-offset: 0.25em;
+}
+
+/* Touch target of at least 44 x 44 px for a visibly smaller control: an
+   invisible ::after grows the hit area around it, never shrinking it. */
+@utility hit-area {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline: min(0px, (100% - 44px) / 2);
+    inset-block: min(0px, (100% - 44px) / 2);
+  }
+}
+
+/* Icons sized by their text (BRAND.md, Icons): a 1.25em box, never shrunk
+   by its flex parent. Brand logos sit a little smaller, 1.125em. */
+@utility icon-box {
+  inline-size: 1.25em;
+  block-size: 1.25em;
+  flex: none;
+}
+@utility brand-box {
+  inline-size: 1.125em;
+  block-size: 1.125em;
+  flex: none;
+}
+
+/* Card lists: as many 16rem columns as fit, no breakpoints. */
+@utility card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: var(--space-3);
+}
+
+/* Flow spacing above a block in a post: flow-10 = 40 px (see [data-prose]). */
+@utility flow-* {
+  --flow-space: calc(var(--spacing) * --value(integer));
+}
 
 /* <summary> without the disclosure triangle, in every engine. */
 @utility no-marker {
@@ -18,18 +115,50 @@
   }
 }
 
-/* stylelint-disable selector-max-type -- document-wide defaults for elements no component renders (html, body, rendered links and headings) */
+/* stylelint-disable selector-max-type, selector-max-attribute -- document-wide defaults (after good-css.com) for elements no component renders: html, body, rendered links, headings and form controls */
 @layer base {
+  /* Preflight already sets border-box; restated here as the house reset.
+     min-width: 0 lets flex and grid children shrink below their content. */
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+    min-width: 0;
+  }
   html {
     background: var(--bg);
     color: var(--ink);
+    font-synthesis: none;
+    scrollbar-gutter: stable;
   }
   body {
     font: var(--type-body);
+    text-wrap: pretty;
+    overflow-wrap: break-word;
   }
+  /* No zoom on focus in mobile Safari. */
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1rem);
+  }
+  /* No double-tap-to-zoom delay on controls. */
+  a,
+  button,
+  summary,
+  label,
+  input,
+  select,
+  textarea,
+  [role="radio"] {
+    touch-action: manipulation;
+  }
+  /* Keyboard focus only; never outline: none. A part that draws its own
+     ring (the theme switch, a card link) makes this outline transparent,
+     which forced-colors mode still shows. */
   :focus-visible {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
+    outline: max(2px, 0.08em) solid var(--focus);
+    outline-offset: 0.25em;
   }
   a {
     color: var(--link);
@@ -43,17 +172,33 @@
     text-wrap: balance;
   }
 }
-/* stylelint-enable selector-max-type */
+/* stylelint-enable selector-max-type, selector-max-attribute */
 
 /* Rendered Markdown: posts are MDX, so their elements can't carry classes.
    Every selector below targets markup inside [data-prose]. */
 /* stylelint-disable selector-max-type, selector-max-attribute -- rendered Markdown (MDX) can't take utility classes */
 [data-prose] {
-  & :where(p, ul, ol, pre, blockquote, table) + :where(p, ul, ol, pre, blockquote, table) {
-    margin-top: 1em;
+  /* Flow spacing: each block sets its distance to the one above. Headings
+     get 2em above and 0.5em below. Blocks inside blocks (a callout's
+     paragraphs, a caption) keep 1em between siblings. */
+  & > * + * {
+    margin-block-start: var(--flow-space, 1em);
+  }
+  & > :where(h2, h3, h4) {
+    --flow-space: 2em;
+    margin-block-end: 0.5em;
+  }
+  & > :where(h2, h3, h4) + * {
+    --flow-space: 0;
+  }
+  & > :where(header) + * {
+    --flow-space: var(--space-5);
+  }
+  & > * :where(p, ul, ol, pre, blockquote, table) + :where(p, ul, ol, pre, blockquote, table) {
+    margin-block-start: 1em;
   }
   & :where(ul, ol) {
-    padding-left: 1.25em;
+    padding-inline-start: 1.25em;
   }
   & :where(ul) {
     list-style: disc;
@@ -63,13 +208,9 @@
   }
   & :where(h2) {
     font: var(--type-heading);
-    margin-top: var(--space-5);
-    margin-bottom: var(--space-2);
   }
   & :where(h3) {
     font: var(--type-subheading);
-    margin-top: var(--space-4);
-    margin-bottom: var(--space-2);
   }
   & :where(:not(pre) > code) {
     font: var(--type-code);
@@ -77,14 +218,20 @@
     background: var(--teal-2);
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
-    padding: 0.05em 0.3em;
+    padding-block: 0.05em;
+    padding-inline: 0.3em;
   }
   & :where(pre) {
     font: var(--type-code);
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
-    padding: var(--space-3) var(--space-4);
+    padding-block: var(--space-3);
+    padding-inline: var(--space-4);
     overflow-x: auto;
+  }
+  /* Digits line up in table columns. */
+  & :where(table) {
+    font-variant-numeric: tabular-nums;
   }
   & :where(figcaption p) {
     margin: 0;
