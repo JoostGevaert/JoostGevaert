@@ -82,6 +82,19 @@
   }
 }
 
+/* Icons sized by their text (BRAND.md, Icons): a 1.25em box, never shrunk
+   by its flex parent. Brand logos sit a little smaller, 1.125em. */
+@utility icon-box {
+  inline-size: 1.25em;
+  block-size: 1.25em;
+  flex: none;
+}
+@utility brand-box {
+  inline-size: 1.125em;
+  block-size: 1.125em;
+  flex: none;
+}
+
 /* Card lists: as many 16rem columns as fit, no breakpoints. */
 @utility card-grid {
   display: grid;
