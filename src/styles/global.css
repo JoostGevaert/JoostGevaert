@@ -26,6 +26,10 @@
 
 /* Layout widths (BRAND.md, Layout): running text and wide figures. */
 @theme {
+  /* Any transition without its own tokens: duration-fast, ease-standard
+     (never Tailwind's ease-in-out default). */
+  --default-transition-duration: var(--duration-fast);
+  --default-transition-timing-function: var(--ease-standard);
   --container-content: 42rem;
   --container-breakout: 64rem;
 }

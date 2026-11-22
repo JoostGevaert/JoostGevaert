@@ -14,7 +14,7 @@ const { posts } = Astro.props;
 
 <ol class="card-grid list-none">
   {posts.map((p) => (
-    <li class="group @container relative flex flex-col gap-2 rounded-md border border-line bg-surface p-6 hover:border-teal-7 has-focus-visible:focus-ring">
+    <li class="group @container relative flex flex-col gap-2 rounded-md border border-line bg-surface p-6 transition-colors duration-fast ease-standard hover:border-teal-7 has-focus-visible:focus-ring">
       <div class="flex items-center gap-2">
         <time class="text-link type-label" datetime={isoDate(p.data.date)}>
           {isoDate(p.data.date)}
@@ -24,7 +24,7 @@ const { posts } = Astro.props;
       <h3 class="type-subheading">
         <a
           href={`/posts/${p.id}/`}
-          class="text-ink no-underline outline-transparent group-hover:text-link after:absolute after:inset-0 after:rounded-md"
+          class="text-ink no-underline outline-transparent transition-colors duration-fast ease-standard group-hover:text-link after:absolute after:inset-0 after:rounded-md"
         >
           {p.data.title}
         </a>
