@@ -16,66 +16,71 @@ const iconButtonClasses =
   "group relative grid size-9 cursor-pointer place-items-center rounded-full text-ink hover:bg-teal-3 hover:text-link";
 ---
 
-<header class="mx-auto flex max-w-300 items-center gap-2 border-be border-line px-4 py-6 sm:gap-4 sm:px-6">
-  <!-- py-1: clear space of the j's dot around the logo -->
-  <a href="/" class="me-auto block py-1 leading-none" aria-label="joost.engineer, home">
-    <Logo variant="wordmark" id="hdr-wordmark" class="hidden h-6.5 w-auto sm:block" />
-    <Logo variant="mark" id="hdr-mark" class="block h-7 w-auto sm:hidden" />
-  </a>
-
-  <nav class="me-2 hidden type-ui sm:block" aria-label="Main">
-    <a href="/" class="text-ink no-underline hover:text-link">
-      Writing
+<!-- On the content grid, so the header lines up with the hero, post headers
+     and figures (breakout track). -->
+<header class="content-grid">
+  <div class="col-breakout flex items-center gap-2 border-be border-line py-6 sm:gap-4">
+    <!-- py-1: clear space of the j's dot around the logo -->
+    <a href="/" class="me-auto block py-1 leading-none" aria-label="joost.engineer, home">
+      <Logo variant="wordmark" id="hdr-wordmark" class="hidden h-6.5 w-auto sm:block" />
+      <Logo variant="mark" id="hdr-mark" class="block h-7 w-auto sm:hidden" />
     </a>
-  </nav>
 
-  <ul class="hidden list-none sm:flex" aria-label="Profiles">
-    {profiles.map((p) => (
-      <li>
-        <a class={iconButtonClasses} href={p.url} aria-label={p.name} rel="me noopener">
-          <BrandLogo brand={p.brand} />
-          <span
-            class="pointer-events-none absolute inset-s-1/2 inset-bs-full z-10 mbs-1.5 -translate-x-1/2 rounded-sm border border-line bg-surface px-2 py-0.5 whitespace-nowrap text-ink opacity-0 type-ui group-hover:opacity-100 group-focus-visible:opacity-100 rtl:translate-x-1/2"
-            aria-hidden="true"
-          >
-            {p.name}
-          </span>
-        </a>
-      </li>
-    ))}
-  </ul>
+    <nav class="me-2 hidden type-ui sm:block" aria-label="Main">
+      <a href="/" class="text-ink no-underline hover:text-link">
+        Writing
+      </a>
+    </nav>
 
-  <ThemeSwitch />
-
-  <!-- Narrow screens: links and profiles move into the menu, with their names. -->
-  <details class="group/menu relative sm:hidden">
-    <summary
-      class:list={[iconButtonClasses, "no-marker group-open/menu:bg-teal-3"]}
-      aria-label="Menu"
-    >
-      <Icon name="menu" size={20} />
-    </summary>
-    <ul class="absolute inset-e-0 inset-bs-full z-20 mbs-2 min-w-45 list-none rounded-md border border-line bg-surface py-2">
-      <li>
-        <a
-          href="/"
-          class="flex items-center gap-2 px-4 py-2 text-ink no-underline type-ui hover:bg-teal-2 hover:text-link"
-        >
-          Writing
-        </a>
-      </li>
+    <ul class="hidden list-none sm:flex" aria-label="Profiles">
       {profiles.map((p) => (
         <li>
-          <a
-            href={p.url}
-            rel="me noopener"
-            class="flex items-center gap-2 px-4 py-2 text-ink no-underline type-ui hover:bg-teal-2 hover:text-link"
-          >
+          <a class={iconButtonClasses} href={p.url} aria-label={p.name} rel="me noopener">
             <BrandLogo brand={p.brand} />
-            {p.name}
+            <span
+              class="pointer-events-none absolute inset-s-1/2 inset-bs-full z-10 mbs-1.5 -translate-x-1/2 rounded-sm border border-line bg-surface px-2 py-0.5 whitespace-nowrap text-ink opacity-0 type-ui group-hover:opacity-100 group-focus-visible:opacity-100 rtl:translate-x-1/2"
+              aria-hidden="true"
+            >
+              {p.name}
+            </span>
           </a>
         </li>
       ))}
     </ul>
-  </details>
+
+    <ThemeSwitch />
+
+    <!-- Narrow screens: links and profiles move into the menu, with their names. -->
+    <details class="group/menu relative sm:hidden">
+      <summary
+        class:list={[iconButtonClasses, "no-marker group-open/menu:bg-teal-3"]}
+        aria-label="Menu"
+      >
+        <Icon name="menu" size={20} />
+      </summary>
+      <!-- Concentric corners: radius-md (12 px) = radius-sm items (6 px) + p-1.5 (6 px). -->
+      <ul class="absolute inset-e-0 inset-bs-full z-20 mbs-2 min-w-45 list-none rounded-md border border-line bg-surface p-1.5">
+        <li>
+          <a
+            href="/"
+            class="flex items-center gap-2 rounded-sm px-2.5 py-2 text-ink no-underline type-ui hover:bg-teal-2 hover:text-link"
+          >
+            Writing
+          </a>
+        </li>
+        {profiles.map((p) => (
+          <li>
+            <a
+              href={p.url}
+              rel="me noopener"
+              class="flex items-center gap-2 rounded-sm px-2.5 py-2 text-ink no-underline type-ui hover:bg-teal-2 hover:text-link"
+            >
+              <BrandLogo brand={p.brand} />
+              {p.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </details>
+  </div>
 </header>

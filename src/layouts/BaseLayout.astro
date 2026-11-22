@@ -92,7 +92,8 @@ const imageUrl = image && new URL(image, Astro.site);
     >
       <Header />
     </div>
-    <main id="main" class="mx-auto max-w-300 px-6 pbs-10 pbe-16">
+    <!-- Pages lay themselves out on the content grid (col-breakout, col-full). -->
+    <main id="main" class="pbs-10 pbe-16">
       <slot />
     </main>
     <Footer />

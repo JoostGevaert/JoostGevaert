@@ -21,7 +21,7 @@ import {
 export const currentTheme = (): Theme =>
   document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 
-export function kit(theme: Theme) {
+export function kit(theme: Theme, width?: number) {
   const ink = color("ink", theme),
     muted = color("ink-muted", theme),
     line = color("line", theme);
@@ -63,6 +63,7 @@ export function kit(theme: Theme) {
   /** Plot.plot with the house style; options you pass win. */
   const plot = (options: Plot.PlotOptions) =>
     Plot.plot({
+      width: width ?? 640,
       marginTop: 24,
       style: {
         fontFamily: "var(--font-mono)",
@@ -79,6 +80,8 @@ export function kit(theme: Theme) {
 
   return {
     theme,
+    /** The container's width in px; plot() uses it. */
+    width,
     Plot,
     plot,
     scales,
@@ -97,18 +100,24 @@ export function kit(theme: Theme) {
 }
 export type ChartKit = ReturnType<typeof kit>;
 
-/** Render a chart into `el` now and again whenever the theme changes. */
+/**
+ * Render a chart into `el`, sized to its container: again whenever the theme
+ * changes or the container's width does. `plot()` fills the width.
+ */
 export function renderPlot(el: Element, build: (k: ChartKit) => Element) {
-  let last: Theme | undefined;
+  let last = "";
   const draw = () => {
     const t = currentTheme();
-    if (t === last) return;
-    last = t;
-    el.replaceChildren(build(kit(t)));
+    const width = Math.round(el.clientWidth) || 640;
+    const key = `${t} ${width}`;
+    if (key === last) return;
+    last = key;
+    el.replaceChildren(build(kit(t, width)));
   };
   draw();
   new MutationObserver(draw).observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["data-theme"],
   });
+  new ResizeObserver(draw).observe(el);
 }

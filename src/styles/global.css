@@ -13,6 +13,60 @@
    texture image. */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
+/* Layout widths (BRAND.md, Layout): running text and wide figures. */
+@theme {
+  --container-content: 42rem;
+  --container-breakout: 64rem;
+}
+
+/* Content grid with named lines: `content` (running text, the default for
+   children), `breakout` (figures, charts, maps) and `full` (hero, textures,
+   full-bleed images), with space-4 (1.5rem) gutters. Children pick a track
+   with col-breakout / col-full, so nothing needs a wrapper div. The default
+   sits in :where() so a col-* utility always wins. */
+@utility content-grid {
+  --breakout-side: calc((var(--container-breakout) - var(--container-content)) / 2);
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--space-4), 1fr)
+    [breakout-start] minmax(0, var(--breakout-side))
+    [content-start] min(var(--container-content), 100% - 2 * var(--space-4))
+    [content-end] minmax(0, var(--breakout-side))
+    [breakout-end] minmax(var(--space-4), 1fr)
+    [full-end];
+  :where(&) > * {
+    grid-column: content;
+  }
+}
+@utility col-content {
+  grid-column: content;
+}
+@utility col-breakout {
+  grid-column: breakout;
+}
+@utility col-full {
+  grid-column: full;
+}
+
+/* The focus ring (BRAND.md, Layout: Focus), for things that take it from a
+   focused child, like a whole-card link. */
+@utility focus-ring {
+  outline: max(2px, 0.08em) solid var(--focus);
+  outline-offset: 0.25em;
+}
+
+/* Card lists: as many 16rem columns as fit, no breakpoints. */
+@utility card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: var(--space-3);
+}
+
+/* Flow spacing above a block in a post: flow-10 = 40 px (see [data-prose]). */
+@utility flow-* {
+  --flow-space: calc(var(--spacing) * --value(integer));
+}
+
 /* <summary> without the disclosure triangle, in every engine. */
 @utility no-marker {
   list-style: none;
@@ -81,7 +135,23 @@
    Every selector below targets markup inside [data-prose]. */
 /* stylelint-disable selector-max-type, selector-max-attribute -- rendered Markdown (MDX) can't take utility classes */
 [data-prose] {
-  & :where(p, ul, ol, pre, blockquote, table) + :where(p, ul, ol, pre, blockquote, table) {
+  /* Flow spacing: each block sets its distance to the one above. Headings
+     get 2em above and 0.5em below. Blocks inside blocks (a callout's
+     paragraphs, a caption) keep 1em between siblings. */
+  & > * + * {
+    margin-block-start: var(--flow-space, 1em);
+  }
+  & > :where(h2, h3, h4) {
+    --flow-space: 2em;
+    margin-block-end: 0.5em;
+  }
+  & > :where(h2, h3, h4) + * {
+    --flow-space: 0;
+  }
+  & > :where(header) + * {
+    --flow-space: var(--space-5);
+  }
+  & > * :where(p, ul, ol, pre, blockquote, table) + :where(p, ul, ol, pre, blockquote, table) {
     margin-block-start: 1em;
   }
   & :where(ul, ol) {
@@ -95,11 +165,9 @@
   }
   & :where(h2) {
     font: var(--type-heading);
-    margin-block: var(--space-5) var(--space-2);
   }
   & :where(h3) {
     font: var(--type-subheading);
-    margin-block: var(--space-4) var(--space-2);
   }
   & :where(:not(pre) > code) {
     font: var(--type-code);
