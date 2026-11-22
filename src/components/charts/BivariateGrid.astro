@@ -1,0 +1,24 @@
+---
+// The 3x3 bivariate legend (BRAND.md, Data): first digit teal, second plum,
+// indigo where both are high. Same fills in both themes. Rows run from high
+// plum at the top to low plum at the bottom.
+const rows = [
+  ["bg-biv-02", "bg-biv-12", "bg-biv-22"],
+  ["bg-biv-01", "bg-biv-11", "bg-biv-21"],
+  ["bg-biv-00", "bg-biv-10", "bg-biv-20"],
+];
+---
+
+<div class="grid justify-start gap-2">
+  <p class="text-ink-muted type-label">↑ plum</p>
+  <div
+    class="grid grid-cols-3 gap-0.5"
+    role="img"
+    aria-label="Bivariate color grid, 3 by 3: teal increases to the right, plum increases upward"
+  >
+    {rows.flat().map((fill) => (
+      <div class:list={["size-12", fill]} />
+    ))}
+  </div>
+  <p class="text-ink-muted type-label">teal →</p>
+</div>
