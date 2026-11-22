@@ -192,6 +192,21 @@ tw.push(`  --spacing: var(--space-1);`);
 for (const { name } of src.radius.tokens)
   tw.push(`  --radius-${name.replace("radius-", "")}: var(--${name});`);
 tw.push("}", "");
+// Fluid titles (BRAND.md, Type): display and heading scale with the viewport
+// between a minimum and their token size, from 320 to 1240 px wide. Every
+// other style stays fixed. Overrides the font-size part of the shorthand.
+const fluid = {
+  display: "clamp(2rem, 1.55rem + 1.6vw, 2.75rem)",
+  heading: "clamp(1.5rem, 1.3rem + 0.6vw, 1.75rem)",
+};
+tw.push(":root {");
+for (const [name, value] of Object.entries(fluid)) {
+  const style = src.type.groups.flatMap((g) => g.styles).find((s) => s.name === name);
+  if (!style || !value.endsWith(`${parseFloat(style.fontSize) / 16}rem)`))
+    throw new Error(`Fluid ${name} must end at its token size (${style?.fontSize})`);
+  tw.push(`  --type-${name}-font-size: ${value};`);
+}
+tw.push("}");
 // Type styles as utilities: the font shorthand plus letter spacing.
 for (const g of src.type.groups) {
   for (const s of g.styles) {

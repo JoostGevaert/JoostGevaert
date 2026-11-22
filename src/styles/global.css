@@ -118,6 +118,10 @@
     padding-inline: var(--space-4);
     overflow-x: auto;
   }
+  /* Digits line up in table columns. */
+  & :where(table) {
+    font-variant-numeric: tabular-nums;
+  }
   & :where(figcaption p) {
     margin: 0;
   }

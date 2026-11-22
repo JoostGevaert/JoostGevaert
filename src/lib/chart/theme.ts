@@ -67,6 +67,8 @@ export function kit(theme: Theme) {
       style: {
         fontFamily: "var(--font-mono)",
         fontSize: "12px",
+        // Axis ticks line up digit for digit.
+        fontVariantNumeric: "tabular-nums",
         color: muted,
         background: "transparent",
         overflow: "visible",
