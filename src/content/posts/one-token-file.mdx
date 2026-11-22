@@ -1,0 +1,93 @@
+---
+title: One token file, a few CSS rules and three data colors
+description: How joost.engineer is built, from the design system's token list to the colors of its charts.
+date: 2026-11-22
+type: notes
+repo: JoostGevaert/JoostGevaert
+---
+
+import PaletteDemo from "../../components/charts/PaletteDemo.astro";
+import BivariateGrid from "../../components/charts/BivariateGrid.astro";
+
+Before this blog had a single post, it had a design system: a logo, a type family, one interface color, three data colors and a list of rules. This first post is about how those rules become the page you're reading. Three layers do the work: one file of tokens, a handful of CSS habits I took from [good-css.com](https://good-css.com/), and a palette for charts and maps. All of it is in the repo.
+
+## One file for every value
+
+Every color on this page comes from a single file, `tokens.json`, written during the design of the site. It holds 69 colors, the spacing steps, radii, two easing curves and two durations. A script turns it into DTCG token files, and [Terrazzo](https://terrazzo.app/) compiles those into CSS custom properties.
+
+If a value is typed into a stylesheet by hand, it drifts. With one source, the light and dark themes can't disagree about what `teal-10` is.
+
+<Callout title="Method">
+  Run `pnpm tokens:export` after changing `tokens.json`, then `pnpm build`. The build runs Terrazzo
+  first.
+</Callout>
+
+### One token, two themes
+
+All colors are written in OKLCH: lightness, chroma, hue. Equal steps in lightness look equal, and a hue stays the same hue as it gets lighter or darker. That's what lets a 12-step teal scale work as hover, pressed and border states without inventing new values.
+
+Each color is emitted once, with both of its values:
+
+```css
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(oklch(99.1% 0.0013 286.4), oklch(17.9% 0.0041 286));
+}
+```
+
+The theme switch only sets `color-scheme` on `:root`: `light`, `dark`, or `light dark` to follow the system. There is no second block of dark values to keep in sync, and native form controls and scrollbars follow along for free. Terrazzo can't write `light-dark()` yet, so a small post-build step merges its two outputs into one.
+
+## CSS that does the boring things right
+
+You don't need to be a CSS specialist to get the basics right. [good-css.com](https://good-css.com/) collects the small, unglamorous rules that make a site hold up on a phone, with a keyboard and in a second language. These are the ones I kept:
+
+- **A short reset.** `box-sizing: border-box` and `min-width: 0` on everything, so a long word or a code block can't push a flex item wider than its parent. Form inputs at `max(16px, 1rem)`, so phones don't zoom in when you tap them. `scrollbar-gutter: stable`, so the page doesn't jump when a scrollbar appears.
+- **Text that wraps well.** `text-wrap: balance` on headings, `pretty` on everything else, and `overflow-wrap: break-word` so a long URL never widens the page. `font-synthesis: none`, because a browser-made bold is a worse bold.
+- **Logical properties.** `margin-inline` and `padding-block` instead of left, right, top and bottom. It costs nothing in English and is right in every other writing direction.
+- **Layouts without breakpoints.** Card lists are an intrinsic grid, `repeat(auto-fill, minmax(min(100%, 16rem), 1fr))`, which picks its own number of columns. Components that live at different widths, like charts and post cards, respond to their container with container queries, not to the viewport.
+- **A content grid with named lines.** Running text sits on the `content` track (42rem, about 70 characters), figures and maps on `breakout` (64rem), and textures on `full`. A map can run wider than the text without a single wrapper div.
+- **Spacing from the parent.** Inside a post, each element after the first gets a top margin of 1em; elsewhere, parents set the spacing with `gap` and children carry no outer margins.
+- **Controls you can hit.** Every control has a target of at least 44 by 44 px, even when it looks smaller. Focus rings appear on `:focus-visible` only and are never removed. Hover styles live under `(hover: hover) and (pointer: fine)`, so touch screens don't get stuck in a hover state.
+- **Motion that asks first.** Anything that moves sits inside `prefers-reduced-motion: no-preference`. Transitions name their properties (never `transition: all`), stay under 300 ms and never ease in. The one exception is the 450 ms swing of the theme switch, top right: its overshoot needs the time.
+
+None of this is visible when it works, which is the point. You only notice these rules when a site breaks them.
+
+The site uses Tailwind, with one rule of my own on top: utilities only. A missing value becomes a token, missing behavior a named utility, and a repeated set of classes a component. The linter fails on arbitrary values like `w-[37px]`, so the token file stays the only place a number can come from.
+
+## Three colors for data
+
+Teal is the only color of the interface: links, buttons, focus rings, the dots in the logo. Teal, plum and indigo together are the colors of every chart, map and illustration. They are samples of one color field: four corners (light gray, teal, plum and indigo) blended in OKLab, so everything in between is a real mix and not a guess.
+
+From that field come four kinds of palette, each for one shape of data:
+
+| Data                          | Tokens                                                                          |
+| ----------------------------- | ------------------------------------------------------------------------------- |
+| One series                    | `brand`, teal-10                                                                |
+| Several series, in this order | `cat-teal`, `cat-plum`, `cat-indigo`, `cat-violet`, then `cat-gray` for "other" |
+| Amounts                       | `seq-teal-1…7`, and the same in plum and indigo                                 |
+| Data with a meaningful middle | `div-1…9`: plum, gray at the middle, teal                                       |
+| Two variables at once         | `biv-00…22`, a 3×3 grid                                                         |
+
+The rules that come with them matter more than the colors:
+
+- **Lines change with the theme, fills don't.** Categorical colors get a lighter dark-mode value, so a line stays visible on a dark ground. Sequential, diverging and bivariate fills are identical in both themes: a map shouldn't mean something different when you switch to dark mode.
+- **Never by color alone.** Series are labeled in a legend or at the end of the line. Colors that must be told apart differ in lightness, not only in hue.
+- **A middle has to be real.** A diverging scale needs a true zero or reference value at `div-5`, with the data symmetric around it. Otherwise it's a sequential scale pretending.
+- **At most seven classes, and 3×3 for two variables.** Beyond that, the classes can't be told apart.
+- **Data with its own colors keeps them.** Geology, land use, temperature or a rowing club's blades come with colors people already read. There, and above five categories, I use another palette and say why in the figure note.
+
+<Figure caption="Stroke rate per rower over a 2,000 m piece (made-up data), in the categorical order, and a diverging grid with plum below zero and teal above. Switch the theme: the lines lighten, the grid doesn't.">
+  <PaletteDemo />
+</Figure>
+
+The bivariate grid follows [Joshua Stevens' 3×3 scheme](https://www.joshuastevens.net/cartography/make-a-bivariate-choropleth-map/), rebuilt around Bedrock.engineer's teal. The first digit is teal, the second plum, and where both are high they meet in indigo. Lightness falls steadily toward that corner, so even in grayscale the nine classes stay apart.
+
+<Figure caption="The bivariate legend: teal increases to the right, plum upward, indigo where both are high.">
+  <BivariateGrid />
+</Figure>
+
+The charts are drawn with [Observable Plot](https://observablehq.com/plot/) and a small theme module that reads the same tokens. When you flip the theme switch, they redraw with the other theme's line colors.
+
+## What's next
+
+Now that the foundations are in place, the next posts are about the things I build on them: side projects, maps and the occasional thought experiment, written down before I build anything.
