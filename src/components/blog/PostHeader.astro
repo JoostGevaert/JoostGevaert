@@ -12,14 +12,14 @@ const { post, texture } = Astro.props;
 const { title, description, date, type } = post.data;
 ---
 
-<header class="relative isolate mb-10 overflow-hidden rounded-md border border-line bg-surface px-6 pt-10 pb-6 sm:px-10 sm:pt-16 sm:pb-10">
+<header class="relative isolate mbe-10 overflow-clip rounded-md border border-line bg-surface px-6 pbs-10 pbe-6 sm:px-10 sm:pbs-16 sm:pbe-10">
   <Texture kind={texture} strength="card" />
-  <div class="relative mb-4 flex items-center gap-2">
+  <div class="relative mbe-4 flex items-center gap-2">
     <time class="text-link type-label" datetime={isoDate(date)}>
       {isoDate(date)}
     </time>
     <TypeTag type={type} />
   </div>
   <h1 class="relative max-w-2xl type-heading sm:type-display">{title}</h1>
-  {description && <p class="relative mt-4 max-w-prose text-ink-muted type-lede">{description}</p>}
+  {description && <p class="relative mbs-4 max-w-prose text-ink-muted type-lede">{description}</p>}
 </header>

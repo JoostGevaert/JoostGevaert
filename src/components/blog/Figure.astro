@@ -26,7 +26,7 @@ const slotHtml = hasSlot ? await Astro.slots.render("default") : "";
   )}
   {!url && hasSlot && <div set:html={slotHtml} />}
   {(caption || (url && hasSlot)) && (
-    <figcaption class="mt-2 text-ink-muted type-small">
+    <figcaption class="mbs-2 text-ink-muted type-small">
       {caption}
       {url && hasSlot && <Fragment set:html={slotHtml} />}
     </figcaption>

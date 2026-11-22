@@ -9,7 +9,7 @@ interface Props {
 }
 const { kind, strength = "card" } = Astro.props;
 const ext = kind === "drawing" ? "webp" : "svg";
-const imgClasses = "absolute top-0 right-0 h-full w-auto max-w-none";
+const imgClasses = "absolute inset-e-0 inset-bs-0 h-full w-auto max-w-none";
 ---
 
 <!-- Fades in from the left so the title sits on a clean ground. -->

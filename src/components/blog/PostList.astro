@@ -9,9 +9,9 @@ interface Props {
 const { posts } = Astro.props;
 ---
 
-<ol class="list-none border-b border-line">
+<ol class="list-none border-be border-line">
   {posts.map((p) => (
-    <li class="flex flex-col gap-2 border-t border-line py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+    <li class="flex flex-col gap-2 border-bs border-line py-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
       <a href={`/posts/${p.id}/`} class="group grid gap-1 text-ink no-underline">
         <span class="text-balance type-subheading group-hover:text-link">{p.data.title}</span>
         {p.data.description && <span class="text-ink-muted type-small">{p.data.description}</span>}

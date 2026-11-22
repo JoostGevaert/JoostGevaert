@@ -21,14 +21,43 @@
   }
 }
 
-/* stylelint-disable selector-max-type -- document-wide defaults for elements no component renders (html, body, rendered links and headings) */
+/* stylelint-disable selector-max-type, selector-max-attribute -- document-wide defaults (after good-css.com) for elements no component renders: html, body, rendered links, headings and form controls */
 @layer base {
+  /* Preflight already sets border-box; restated here as the house reset.
+     min-width: 0 lets flex and grid children shrink below their content. */
+  *,
+  ::before,
+  ::after {
+    box-sizing: border-box;
+    min-width: 0;
+  }
   html {
     background: var(--bg);
     color: var(--ink);
+    font-synthesis: none;
+    scrollbar-gutter: stable;
   }
   body {
     font: var(--type-body);
+    text-wrap: pretty;
+    overflow-wrap: break-word;
+  }
+  /* No zoom on focus in mobile Safari. */
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1rem);
+  }
+  /* No double-tap-to-zoom delay on controls. */
+  a,
+  button,
+  summary,
+  label,
+  input,
+  select,
+  textarea,
+  [role="radio"] {
+    touch-action: manipulation;
   }
   :focus-visible {
     outline: 2px solid var(--focus);
@@ -46,17 +75,17 @@
     text-wrap: balance;
   }
 }
-/* stylelint-enable selector-max-type */
+/* stylelint-enable selector-max-type, selector-max-attribute */
 
 /* Rendered Markdown: posts are MDX, so their elements can't carry classes.
    Every selector below targets markup inside [data-prose]. */
 /* stylelint-disable selector-max-type, selector-max-attribute -- rendered Markdown (MDX) can't take utility classes */
 [data-prose] {
   & :where(p, ul, ol, pre, blockquote, table) + :where(p, ul, ol, pre, blockquote, table) {
-    margin-top: 1em;
+    margin-block-start: 1em;
   }
   & :where(ul, ol) {
-    padding-left: 1.25em;
+    padding-inline-start: 1.25em;
   }
   & :where(ul) {
     list-style: disc;
@@ -66,13 +95,11 @@
   }
   & :where(h2) {
     font: var(--type-heading);
-    margin-top: var(--space-5);
-    margin-bottom: var(--space-2);
+    margin-block: var(--space-5) var(--space-2);
   }
   & :where(h3) {
     font: var(--type-subheading);
-    margin-top: var(--space-4);
-    margin-bottom: var(--space-2);
+    margin-block: var(--space-4) var(--space-2);
   }
   & :where(:not(pre) > code) {
     font: var(--type-code);
@@ -80,13 +107,15 @@
     background: var(--teal-2);
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
-    padding: 0.05em 0.3em;
+    padding-block: 0.05em;
+    padding-inline: 0.3em;
   }
   & :where(pre) {
     font: var(--type-code);
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
-    padding: var(--space-3) var(--space-4);
+    padding-block: var(--space-3);
+    padding-inline: var(--space-4);
     overflow-x: auto;
   }
   & :where(figcaption p) {
