@@ -7,7 +7,10 @@
 @import "./tokens.css";
 @import "./theme.css";
 
-/* The theme switch sets data-theme on <html> (Auto resolves to light or dark). */
+/* Colors follow color-scheme through light-dark() tokens. The theme switch
+   also sets data-theme on <html> to the resolved theme (Auto resolves to light
+   or dark): a hook for the few things that aren't colors, like swapping a
+   texture image. */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* <summary> without the disclosure triangle, in every engine. */

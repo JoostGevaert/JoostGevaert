@@ -8,8 +8,9 @@ import dark from "../../tokens/color/scales.dark.tokens.json";
 type Tree = Record<string, any>;
 const sets = { light: [light, semantic], dark: [dark, semantic] } as const;
 
-/** Hex value of a color token by its CSS name, e.g. "teal-10", "biv-22", "ink". */
-export function color(name: string, theme: "light" | "dark" = "light"): string {
+type Value = { colorSpace: "oklch"; components: [number, number, number]; hex: string };
+
+function lookup(name: string, theme: "light" | "dark"): Value {
   const m = name.match(/^(teal|seq-teal|seq-plum|seq-indigo|div|biv|cat)-(.+)$/);
   const path = m ? [...m[1].split("-"), m[2]] : [name];
   for (const set of sets[theme]) {
@@ -23,10 +24,24 @@ export function color(name: string, theme: "light" | "dark" = "light"): string {
           .slice(1, -1)
           .replace(/^color\./, "")
           .replace(/\./g, "-");
-        return color(ref, theme);
+        return lookup(ref, theme);
       }
-      return v.hex;
+      return v as Value;
     }
   }
   throw new Error(`Unknown color token: ${name}`);
+}
+
+/**
+ * sRGB hex of a color token by its CSS name, e.g. "teal-10", "biv-22", "ink":
+ * the fallback the token files carry for places that can't read OKLCH
+ * (Satori social cards, the web manifest, chart interpolation).
+ */
+export const color = (name: string, theme: "light" | "dark" = "light"): string =>
+  lookup(name, theme).hex;
+
+/** The token's design value, as an `oklch(L C H)` CSS string. */
+export function oklch(name: string, theme: "light" | "dark" = "light"): string {
+  const [l, c, h] = lookup(name, theme).components;
+  return `oklch(${l} ${c} ${h})`;
 }

@@ -17,7 +17,7 @@ pnpm deploy    # run the GitHub Pages workflow on main (pushing to main does the
 
 `design-system/tokens.json` is the design session's token list. `pnpm tokens:export` turns it into:
 
-- DTCG files in `tokens/` (light/dark resolver `tokens/joost.resolver.json`), which `tz build` compiles to `src/styles/tokens.css`;
+- DTCG files in `tokens/` (light/dark resolver `tokens/joost.resolver.json`), colors in OKLCH with an sRGB `hex` fallback. `pnpm tokens:css` (`tz build`, then `scripts/light-dark.mjs`) compiles them to `src/styles/tokens.css`, where every themed color is one `light-dark(<light>, <dark>)` value and `:root` has `color-scheme: light dark`. The theme switch sets `color-scheme` on `:root` (`light`, `dark`, or `light dark` for Auto) and `data-theme` to the resolved theme as a hook;
 - `src/styles/theme.css`, Tailwind's theme: token colors (`text-ink`, `bg-teal-3`), fonts, radii, `space-1` as the spacing unit (so `p-4` = 16 px = `space-3`, `p-6` = 24 px = `space-4`), and `type-*` and `opacity-texture-*` utilities.
 
 Style with utilities only. A missing value becomes a token, missing behavior an `@utility` in `src/styles/global.css`, and a repeated set of utilities a component. No class rules in stylesheets and no arbitrary values (`w-[37px]`): ESLint and Stylelint fail on both. Class strings kept in a variable are named `*Classes` so the linter checks them.

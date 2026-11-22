@@ -19,7 +19,7 @@ If a value is typed into a stylesheet by hand, it drifts. With one source, the l
 
 ### What gets generated
 
-The light theme lands on `:root`, the dark theme on `:root[data-theme="dark"]` and on the system preference.
+Each color is written once, as `light-dark(<light>, <dark>)` on `:root`. The theme switch only sets `color-scheme`: `light`, `dark`, or `light dark` to follow the system.
 
 ```js
 const variableName = (token) => `--${token.id.replace(/^color\./, "").replace(/\./g, "-")}`;

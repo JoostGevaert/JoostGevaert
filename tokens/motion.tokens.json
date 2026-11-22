@@ -13,12 +13,12 @@
     "standard": {
       "$type": "cubicBezier",
       "$value": [
-        0,
-        0,
-        0.58,
+        0.23,
+        1,
+        0.32,
         1
       ],
-      "$description": "Plain changes that should not draw attention: hover and focus colors."
+      "$description": "A strong ease-out for plain changes that should not draw attention: hover and focus colors, press feedback."
     }
   },
   "duration": {
@@ -28,7 +28,7 @@
         "value": 150,
         "unit": "ms"
       },
-      "$description": "Color changes on hover and focus (links, buttons, brand logos, the switch's triangles), with ease-standard."
+      "$description": "Color changes on hover and focus (links, buttons, brand logos, the switch's triangles) and press feedback, with ease-standard."
     },
     "swing": {
       "$type": "duration",
