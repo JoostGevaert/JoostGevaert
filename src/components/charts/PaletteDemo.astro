@@ -3,8 +3,11 @@
 // cell grid. Used by the post "One token file, a few CSS rules and three data colors".
 ---
 
-<div class="my-4" data-chart="lines"></div>
-<div class="my-4" data-chart="cells"></div>
+<!-- Container-sized: each chart takes its wrapper's width (renderPlot). -->
+<div class="flex flex-col gap-4">
+  <div class="@container" data-chart="lines"></div>
+  <div class="@container" data-chart="cells"></div>
+</div>
 
 <script>
   import { renderPlot } from "../../lib/chart/theme";

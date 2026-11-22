@@ -14,7 +14,8 @@ const slotHtml = hasSlot ? await Astro.slots.render("default") : "";
 // With an image, the slot is the caption; without, the slot is the figure body.
 ---
 
-<figure class="my-10">
+<!-- Breakout track: figures, charts and maps may run wider than the text. -->
+<figure class="col-breakout flex flex-col gap-2 flow-10">
   {url && (
     <img
       class="block h-auto max-w-full rounded-sm border border-line"
@@ -26,7 +27,7 @@ const slotHtml = hasSlot ? await Astro.slots.render("default") : "";
   )}
   {!url && hasSlot && <div set:html={slotHtml} />}
   {(caption || (url && hasSlot)) && (
-    <figcaption class="mt-2 text-ink-muted type-small">
+    <figcaption class="max-w-content text-ink-muted type-small">
       {caption}
       {url && hasSlot && <Fragment set:html={slotHtml} />}
     </figcaption>

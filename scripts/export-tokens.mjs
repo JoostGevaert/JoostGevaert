@@ -22,13 +22,38 @@ const set = (obj, path, val) => {
   for (const p of path.slice(0, -1)) o = o[p] ??= {};
   o[path.at(-1)] = val;
 };
-// DTCG 2025.10 color object; keeps the design session's hex for reference.
+// DTCG 2025.10 color object. Colors stay in OKLCH, as the design system
+// writes them; `hex` is the sRGB fallback DTCG allows, computed here (gamut
+// clipped) for places that can't read OKLCH: social cards, the web manifest,
+// chart interpolation.
 const color = (v) => {
   if (v.startsWith("{")) return ref(v);
-  const n = parseInt(v.slice(1), 16);
-  const c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((x) => +(x / 255).toFixed(4));
-  return { colorSpace: "srgb", components: c, hex: v };
+  const m = v.match(/^oklch\(\s*([\d.]+)(%?)\s+([\d.]+)\s+([\d.]+)\s*\)$/);
+  if (!m) throw new Error(`Unsupported color (expected oklch()): ${v}`);
+  const l = m[2] ? Number(m[1]) / 100 : Number(m[1]);
+  const components = [l, Number(m[3]), Number(m[4])];
+  return { colorSpace: "oklch", components, hex: oklchToHex(components) };
 };
+function oklchToHex([L, C, H]) {
+  const a = C * Math.cos((H * Math.PI) / 180),
+    b = C * Math.sin((H * Math.PI) / 180);
+  const l = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3;
+  const m = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3;
+  const s = (L - 0.0894841775 * a - 1.291485548 * b) ** 3;
+  const rgb = [
+    4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
+    -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+    -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s,
+  ];
+  const gamma = (c) => (c <= 0.0031308 ? 12.92 * c : 1.055 * c ** (1 / 2.4) - 0.055);
+  return (
+    "#" +
+    rgb
+      .map((c) => Math.round(Math.min(1, Math.max(0, gamma(c))) * 255))
+      .map((c) => c.toString(16).padStart(2, "0"))
+      .join("")
+  );
+}
 const token = (value, usage) => ({ $type: "color", $value: color(value), $description: usage });
 
 const light = {},
@@ -167,6 +192,21 @@ tw.push(`  --spacing: var(--space-1);`);
 for (const { name } of src.radius.tokens)
   tw.push(`  --radius-${name.replace("radius-", "")}: var(--${name});`);
 tw.push("}", "");
+// Fluid titles (BRAND.md, Type): display and heading scale with the viewport
+// between a minimum and their token size, from 320 to 1240 px wide. Every
+// other style stays fixed. Overrides the font-size part of the shorthand.
+const fluid = {
+  display: "clamp(2rem, 1.55rem + 1.6vw, 2.75rem)",
+  heading: "clamp(1.5rem, 1.3rem + 0.6vw, 1.75rem)",
+};
+tw.push(":root {");
+for (const [name, value] of Object.entries(fluid)) {
+  const style = src.type.groups.flatMap((g) => g.styles).find((s) => s.name === name);
+  if (!style || !value.endsWith(`${parseFloat(style.fontSize) / 16}rem)`))
+    throw new Error(`Fluid ${name} must end at its token size (${style?.fontSize})`);
+  tw.push(`  --type-${name}-font-size: ${value};`);
+}
+tw.push("}");
 // Type styles as utilities: the font shorthand plus letter spacing.
 for (const g of src.type.groups) {
   for (const s of g.styles) {

@@ -3,85 +3,86 @@
  * ------------------------------------------- */
 
 :root {
+  color-scheme: light dark;
 /* Page background. */
-  --bg: rgb(98.82% 98.82% 99.22%);
+  --bg: light-dark(oklch(99.1% 0.0013 286.4), oklch(17.9% 0.0041 286));
   /* Bivariate map class 00: low teal, low plum. Maps and charts only, never UI; identical in both themes. */
-  --biv-00: rgb(90.59% 91.76% 92.94%);
+  --biv-00: oklch(93.6% 0.0052 247.9);
   /* Bivariate map class 01: low teal, mid plum. Maps and charts only, never UI; identical in both themes. */
-  --biv-01: rgb(85.49% 71.37% 80.78%);
+  --biv-01: oklch(81.5% 0.0521 338.5);
   /* Bivariate map class 02: low teal, high plum. Maps and charts only, never UI; identical in both themes. */
-  --biv-02: rgb(70.59% 48.63% 63.92%);
+  --biv-02: oklch(65.5% 0.0868 338.4);
   /* Bivariate map class 10: mid teal, low plum. Maps and charts only, never UI; identical in both themes. */
-  --biv-10: rgb(63.14% 80.39% 83.14%);
+  --biv-10: oklch(81.9% 0.0472 208.2);
   /* Bivariate map class 11: mid teal, mid plum. Maps and charts only, never UI; identical in both themes. */
-  --biv-11: rgb(59.22% 63.53% 76.86%);
+  --biv-11: oklch(71.5% 0.0512 271);
   /* Bivariate map class 12: mid teal, high plum. Maps and charts only, never UI; identical in both themes. */
-  --biv-12: rgb(49.8% 41.96% 61.57%);
+  --biv-12: oklch(56.6% 0.0788 302.3);
   /* Bivariate map class 20: high teal, low plum. Maps and charts only, never UI; identical in both themes. */
-  --biv-20: rgb(39.22% 63.53% 67.84%);
+  --biv-20: oklch(67.4% 0.0659 210);
   /* Bivariate map class 21: high teal, mid plum. Maps and charts only, never UI; identical in both themes. */
-  --biv-21: rgb(33.33% 50.98% 62.35%);
+  --biv-21: oklch(58.6% 0.0665 237.7);
   /* Bivariate map class 22: high teal, high plum (the indigo corner). Maps and charts only, never UI; identical in both themes. */
-  --biv-22: rgb(27.45% 30.98% 51.76%);
+  --biv-22: oklch(44.5% 0.0876 275);
   /* The brand color: buttons and solid fills. */
   --brand: var(--teal-10);
   /* Categorical color for lines, bars and points. 'Other', or a fifth series. More than five categories: use another palette. Lighter in dark mode so it stays visible. */
-  --cat-gray: rgb(43.53% 45.1% 48.63%);
+  --cat-gray: light-dark(oklch(55.5% 0.0147 266.6), oklch(69.4% 0.0133 276));
   /* Categorical color for lines, bars and points. Third series. Lighter in dark mode so it stays visible. */
-  --cat-indigo: rgb(27.45% 30.98% 51.76%);
+  --cat-indigo: light-dark(oklch(44.5% 0.0876 275), oklch(69.9% 0.0878 275.1));
   /* Categorical color for lines, bars and points. Second series. Lighter in dark mode so it stays visible. */
-  --cat-plum: rgb(70.59% 48.63% 63.92%);
+  --cat-plum: light-dark(oklch(65.5% 0.0868 338.4), oklch(74.1% 0.087 338.4));
   /* Categorical color for lines, bars and points. First series, and the only one when a chart has one series. Lighter in dark mode so it stays visible. */
-  --cat-teal: rgb(27.06% 50.59% 54.51%);
+  --cat-teal: light-dark(oklch(56.7% 0.0641 209.4), oklch(77.5% 0.0593 208.5));
   /* Categorical color for lines, bars and points. Fourth series. Lighter in dark mode so it stays visible. */
-  --cat-violet: rgb(49.8% 41.96% 61.57%);
+  --cat-violet: light-dark(oklch(56.6% 0.0788 302.3), oklch(72% 0.0789 302.6));
   /* Diverging scale plum ← gray → teal, step 1 of 9 (plum side). For data with a meaningful middle. */
-  --div-1: rgb(51.37% 30.98% 44.71%);
+  --div-1: oklch(49.9% 0.0847 340.1);
   /* Diverging scale plum ← gray → teal, step 2 of 9 (plum side). For data with a meaningful middle. */
-  --div-2: rgb(65.88% 43.92% 58.82%);
+  --div-2: oklch(61.6% 0.0872 339.4);
   /* Diverging scale plum ← gray → teal, step 3 of 9 (plum side). For data with a meaningful middle. */
-  --div-3: rgb(78.04% 60% 72.16%);
+  --div-3: oklch(73.5% 0.0686 338.7);
   /* Diverging scale plum ← gray → teal, step 4 of 9 (plum side). For data with a meaningful middle. */
-  --div-4: rgb(87.06% 76.47% 83.92%);
+  --div-4: oklch(84.6% 0.0395 336.6);
   /* Diverging scale plum ← gray → teal, step 5 of 9 (the neutral middle). For data with a meaningful middle. */
-  --div-5: rgb(90.59% 91.76% 92.94%);
+  --div-5: oklch(93.6% 0.0052 247.9);
   /* Diverging scale plum ← gray → teal, step 6 of 9 (teal side). For data with a meaningful middle. */
-  --div-6: rgb(70.2% 83.14% 85.49%);
+  --div-6: oklch(84.8% 0.036 209.8);
   /* Diverging scale plum ← gray → teal, step 7 of 9 (teal side). For data with a meaningful middle. */
-  --div-7: rgb(51.37% 71.76% 75.29%);
+  --div-7: oklch(74.6% 0.056 209.4);
   /* Diverging scale plum ← gray → teal, step 8 of 9 (teal side). For data with a meaningful middle. */
-  --div-8: rgb(34.51% 58.43% 62.75%);
+  --div-8: oklch(63.3% 0.0652 210.3);
   /* Diverging scale plum ← gray → teal, step 9 of 9 (teal side). For data with a meaningful middle. */
-  --div-9: rgb(20.78% 44.31% 48.24%);
-  /* Color changes on hover and focus (links, buttons, brand logos, the switch's triangles), with ease-standard. */
+  --div-9: oklch(51.3% 0.0638 209.7);
+  /* Color changes on hover and focus (links, buttons, brand logos, the switch's triangles) and press feedback, with ease-standard. */
   --duration-fast: 150ms;
   /* Swings with ease-overshoot: the theme switch indicator's 60° rotation. */
   --duration-swing: 450ms;
   /* Bedrock.engineer's overshooting swing: the theme switch indicator, and other small parts that snap into place. */
   --ease-overshoot: cubic-bezier(0.175, 0.885, 0.32, 1.1);
-  /* Plain changes that should not draw attention: hover and focus colors. */
-  --ease-standard: cubic-bezier(0, 0, 0.58, 1);
+  /* A strong ease-out for plain changes that should not draw attention: hover and focus colors, press feedback. */
+  --ease-standard: cubic-bezier(0.23, 1, 0.32, 1);
   /* Focus rings, 2px with 2px offset. */
   --focus: var(--teal-9);
   --font-mono: "Source Code Pro", ui-monospace, monospace;
   --font-sans: "Source Sans 3", system-ui, sans-serif;
   --font-serif: "Source Serif 4", "Georgia", serif;
   /* Drawing-paper grid and grid-texture lines behind the drawing. */
-  --grid-cell: rgb(84.31% 90.2% 91.37%);
+  --grid-cell: light-dark(oklch(91.5% 0.0165 211), oklch(32.2% 0.025 208.3));
   /* Construction lines in technical drawings: baseline, x-height, dimensions. */
-  --guide: rgb(66.27% 78.04% 80%);
+  --guide: light-dark(oklch(80.9% 0.033 208.8), oklch(46.1% 0.0401 207.5));
   /* Body text, titles and the logo letters, on bg or surface (15:1+ in both themes). */
-  --ink: rgb(10.98% 12.55% 14.12%);
+  --ink: light-dark(oklch(24.1% 0.0097 248.2), oklch(94.9% 0.0029 264.5));
   /* Secondary text: ledes, captions, nav (5.9:1 light, 9:1 dark on bg). */
-  --ink-muted: rgb(37.65% 39.22% 42.35%);
+  --ink-muted: light-dark(oklch(50.2% 0.0136 264.4), oklch(76.9% 0.0096 258.3));
   /* Hairline borders on cards and section rules. The system uses borders, not shadows. */
-  --line: rgb(87.84% 88.24% 90.2%);
+  --line: light-dark(oklch(91% 0.0068 277.2), oklch(31.2% 0.0083 255.6));
   /* Links and teal text such as the date line. */
   --link: var(--teal-11);
   /* The teal dots of the logo: j, period and i. Lighter in dark mode so they stay visible. */
-  --logo-dot: var(--teal-10);
+  --logo-dot: light-dark(var(--teal-10), var(--teal-11));
   /* Icons and large or bold text on a brand (teal-10) fill, in both themes, such as the theme switch's chosen icon (4.4:1). Small body-size text on teal needs a teal-11 fill instead (5.5:1). */
-  --on-brand: rgb(100% 100% 100%);
+  --on-brand: oklch(100% 0 0);
   /* Background texture behind a post header, masked to fade in from the left. */
   --opacity-texture-card: 0.18;
   /* Background texture behind the home-page hero. */
@@ -97,47 +98,47 @@
   /* The j.e app tile and favicon background (22% of its side). */
   --radius-tile: 22%;
   /* Sequential indigo (the diagonal of the color field) scale, step 1 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes. */
-  --seq-indigo-1: rgb(90.59% 91.76% 92.94%);
+  --seq-indigo-1: oklch(93.6% 0.0052 247.9);
   /* Sequential indigo (the diagonal of the color field) scale, step 2 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes. */
-  --seq-indigo-2: rgb(74.51% 77.65% 85.1%);
+  --seq-indigo-2: oklch(82.6% 0.028 267.5);
   /* Sequential indigo (the diagonal of the color field) scale, step 3 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes. */
-  --seq-indigo-3: rgb(59.22% 63.53% 76.86%);
+  --seq-indigo-3: oklch(71.5% 0.0512 271);
   /* Sequential indigo (the diagonal of the color field) scale, step 4 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes. */
-  --seq-indigo-4: rgb(42.75% 47.06% 64.31%);
+  --seq-indigo-4: oklch(58.1% 0.0691 273.3);
   /* Sequential indigo (the diagonal of the color field) scale, step 5 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes. */
-  --seq-indigo-5: rgb(27.45% 30.98% 51.76%);
+  --seq-indigo-5: oklch(44.5% 0.0876 275);
   /* Sequential indigo (the diagonal of the color field) scale, step 6 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes. */
-  --seq-indigo-6: rgb(21.96% 25.1% 43.53%);
+  --seq-indigo-6: oklch(38.8% 0.0803 274.7);
   /* Sequential indigo (the diagonal of the color field) scale, step 7 of 7, from light gray to deep indigo. Map and chart fills; the same in both themes. */
-  --seq-indigo-7: rgb(16.86% 19.22% 35.69%);
+  --seq-indigo-7: oklch(33% 0.0743 275.4);
   /* Sequential plum scale, step 1 of 7, from light gray to deep plum. Map and chart fills; the same in both themes. */
-  --seq-plum-1: rgb(90.59% 91.76% 92.94%);
+  --seq-plum-1: oklch(93.6% 0.0052 247.9);
   /* Sequential plum scale, step 2 of 7, from light gray to deep plum. Map and chart fills; the same in both themes. */
-  --seq-plum-2: rgb(88.24% 81.57% 86.67%);
+  --seq-plum-2: oklch(87.5% 0.0256 333.8);
   /* Sequential plum scale, step 3 of 7, from light gray to deep plum. Map and chart fills; the same in both themes. */
-  --seq-plum-3: rgb(85.49% 71.37% 80.78%);
+  --seq-plum-3: oklch(81.5% 0.0521 338.5);
   /* Sequential plum scale, step 4 of 7, from light gray to deep plum. Map and chart fills; the same in both themes. */
-  --seq-plum-4: rgb(78.04% 60% 72.16%);
+  --seq-plum-4: oklch(73.5% 0.0686 338.7);
   /* Sequential plum scale, step 5 of 7, from light gray to deep plum. Map and chart fills; the same in both themes. */
-  --seq-plum-5: rgb(70.59% 48.63% 63.92%);
+  --seq-plum-5: oklch(65.5% 0.0868 338.4);
   /* Sequential plum scale, step 6 of 7, from light gray to deep plum. Map and chart fills; the same in both themes. */
-  --seq-plum-6: rgb(60.78% 39.61% 54.12%);
+  --seq-plum-6: oklch(57.7% 0.0857 339.2);
   /* Sequential plum scale, step 7 of 7, from light gray to deep plum. Map and chart fills; the same in both themes. */
-  --seq-plum-7: rgb(51.37% 30.98% 44.71%);
+  --seq-plum-7: oklch(49.9% 0.0847 340.1);
   /* Sequential teal scale, step 1 of 7, from light gray to deep teal. Map and chart fills; the same in both themes. */
-  --seq-teal-1: rgb(90.59% 91.76% 92.94%);
+  --seq-teal-1: oklch(93.6% 0.0052 247.9);
   /* Sequential teal scale, step 2 of 7, from light gray to deep teal. Map and chart fills; the same in both themes. */
-  --seq-teal-2: rgb(76.86% 86.27% 87.84%);
+  --seq-teal-2: oklch(87.8% 0.0262 208.7);
   /* Sequential teal scale, step 3 of 7, from light gray to deep teal. Map and chart fills; the same in both themes. */
-  --seq-teal-3: rgb(63.14% 80.39% 83.14%);
+  --seq-teal-3: oklch(81.9% 0.0472 208.2);
   /* Sequential teal scale, step 4 of 7, from light gray to deep teal. Map and chart fills; the same in both themes. */
-  --seq-teal-4: rgb(51.37% 71.76% 75.29%);
+  --seq-teal-4: oklch(74.6% 0.056 209.4);
   /* Sequential teal scale, step 5 of 7, from light gray to deep teal. Map and chart fills; the same in both themes. */
-  --seq-teal-5: rgb(39.22% 63.53% 67.84%);
+  --seq-teal-5: oklch(67.4% 0.0659 210);
   /* Sequential teal scale, step 6 of 7, from light gray to deep teal. Map and chart fills; the same in both themes. */
-  --seq-teal-6: rgb(29.8% 53.73% 58.04%);
+  --seq-teal-6: oklch(59.3% 0.0653 210.5);
   /* Sequential teal scale, step 7 of 7, from light gray to deep teal. Map and chart fills; the same in both themes. */
-  --seq-teal-7: rgb(20.78% 44.31% 48.24%);
+  --seq-teal-7: oklch(51.3% 0.0638 209.7);
   /* Gaps inside labels and between icons and text. */
   --space-1: 4px;
   /* Tight stacks: label above a title. */
@@ -151,33 +152,33 @@
   /* Between page sections; hero padding. */
   --space-6: 64px;
   /* Cards, panels, the hero. Sits on bg. */
-  --surface: rgb(100% 100% 100%);
+  --surface: light-dark(oklch(100% 0 0), oklch(21.3% 0.0042 264.5));
   /* Bedrock.engineer teal scale, step 1. App background tint. */
-  --teal-1: rgb(97.25% 98.43% 98.43%);
+  --teal-1: light-dark(oklch(98.6% 0.003 209.3), oklch(18.2% 0.0104 209.3));
   /* Bedrock.engineer teal scale, step 2. Subtle background: code blocks, table stripes. */
-  --teal-2: rgb(94.9% 97.25% 97.65%);
+  --teal-2: light-dark(oklch(97.4% 0.0063 209.3), oklch(21.2% 0.0099 209.3));
   /* Bedrock.engineer teal scale, step 3. Tinted fill: badges, selected rows. */
-  --teal-3: rgb(89.02% 94.9% 95.69%);
+  --teal-3: light-dark(oklch(95% 0.0163 209.3), oklch(26% 0.022 209.3));
   /* Bedrock.engineer teal scale, step 4. Tinted fill, hover. */
-  --teal-4: rgb(83.53% 92.16% 93.73%);
+  --teal-4: light-dark(oklch(92.5% 0.0245 209.3), oklch(29.6% 0.0309 209.3));
   /* Bedrock.engineer teal scale, step 5. Tinted fill, pressed. */
-  --teal-5: rgb(77.65% 89.02% 90.98%);
+  --teal-5: light-dark(oklch(89.7% 0.0315 209.3), oklch(33.4% 0.0348 209.3));
   /* Bedrock.engineer teal scale, step 6. Subtle teal border. */
-  --teal-6: rgb(71.37% 85.49% 87.84%);
+  --teal-6: light-dark(oklch(86.4% 0.0382 209.3), oklch(37.7% 0.0373 209.3));
   /* Bedrock.engineer teal scale, step 7. Teal border, dividers on tinted areas. */
-  --teal-7: rgb(63.14% 80.39% 83.14%);
+  --teal-7: light-dark(oklch(81.9% 0.0467 209.3), oklch(43.4% 0.0418 209.3));
   /* Bedrock.engineer teal scale, step 8. Strong teal border, hover outlines. */
-  --teal-8: rgb(49.8% 72.55% 76.47%);
+  --teal-8: light-dark(oklch(75% 0.0618 209.3), oklch(51.9% 0.0499 209.3));
   /* Bedrock.engineer teal scale, step 9. Solid teal; focus ring. */
-  --teal-9: rgb(32.16% 55.69% 59.61%);
+  --teal-9: oklch(61% 0.0641 209.3);
   /* Bedrock.engineer teal scale, step 10. THE brand teal: solid fills, primary buttons, logo dots in light mode. Graphics only on white (4.4:1): use teal-11 for body-size text. */
-  --teal-10: rgb(27.06% 50.59% 54.51%);
+  --teal-10: oklch(56.8% 0.0641 209.3);
   /* Bedrock.engineer teal scale, step 11. Teal text and links (5.5:1 on white in light; 9.5:1 on the dark ground). Logo dots in dark mode. */
-  --teal-11: rgb(20.78% 44.31% 48.24%);
+  --teal-11: light-dark(oklch(51.3% 0.0641 209.3), oklch(77.5% 0.0596 209.3));
   /* Bedrock.engineer teal scale, step 12. Darkest teal text, headings on teal-3. */
-  --teal-12: rgb(8.24% 18.43% 20%);
+  --teal-12: light-dark(oklch(28.7% 0.0327 209.3), oklch(93% 0.0289 209.3));
   /* Bedrock.engineer teal scale, step 10. THE brand teal: solid fills, primary buttons, logo dots in light mode. Graphics only on white (4.4:1): use teal-11 for body-size text. */
-  --texture: var(--teal-10);
+  --texture: light-dark(var(--teal-10), var(--teal-11));
   /* All running text. Keep lines under 70 characters. */
   --type-body: var(--type-body-font-weight) var(--type-body-font-size)/var(--type-body-line-height) var(--type-body-font-family);
   /* All running text. Keep lines under 70 characters. */
@@ -298,116 +299,4 @@
   --type-wordmark-letter-spacing: -0.04em;
   /* The wordmark, only as the logo. Use the SVG files where possible. */
   --type-wordmark-line-height: 1;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-/* Page background. */
-    --bg: rgb(6.67% 6.67% 7.45%);
-    /* Categorical color for lines, bars and points. 'Other', or a fifth series. More than five categories: use another palette. Lighter in dark mode so it stays visible. */
-    --cat-gray: rgb(60.39% 61.18% 64.71%);
-    /* Categorical color for lines, bars and points. Third series. Lighter in dark mode so it stays visible. */
-    --cat-indigo: rgb(55.69% 60.39% 83.53%);
-    /* Categorical color for lines, bars and points. Second series. Lighter in dark mode so it stays visible. */
-    --cat-plum: rgb(81.57% 58.82% 74.51%);
-    /* Categorical color for lines, bars and points. First series, and the only one when a chart has one series. Lighter in dark mode so it stays visible. */
-    --cat-teal: rgb(53.73% 75.69% 79.22%);
-    /* Categorical color for lines, bars and points. Fourth series. Lighter in dark mode so it stays visible. */
-    --cat-violet: rgb(68.24% 60% 80.78%);
-    /* Drawing-paper grid and grid-texture lines behind the drawing. */
-    --grid-cell: rgb(14.12% 21.57% 22.75%);
-    /* Construction lines in technical drawings: baseline, x-height, dimensions. */
-    --guide: rgb(23.92% 37.25% 39.22%);
-    /* Body text, titles and the logo letters, on bg or surface (15:1+ in both themes). */
-    --ink: rgb(92.94% 93.33% 94.12%);
-    /* Secondary text: ledes, captions, nav (5.9:1 light, 9:1 dark on bg). */
-    --ink-muted: rgb(69.02% 70.59% 72.94%);
-    /* Hairline borders on cards and section rules. The system uses borders, not shadows. */
-    --line: rgb(18.04% 19.22% 20.78%);
-    /* The teal dots of the logo: j, period and i. Lighter in dark mode so they stay visible. */
-    --logo-dot: var(--teal-11);
-    /* Cards, panels, the hero. Sits on bg. */
-    --surface: rgb(9.41% 9.8% 10.59%);
-    /* Bedrock.engineer teal scale, step 1. App background tint. */
-    --teal-1: rgb(5.1% 7.45% 8.24%);
-    /* Bedrock.engineer teal scale, step 2. Subtle background: code blocks, table stripes. */
-    --teal-2: rgb(7.84% 10.2% 10.59%);
-    /* Bedrock.engineer teal scale, step 3. Tinted fill: badges, selected rows. */
-    --teal-3: rgb(9.02% 15.29% 16.47%);
-    /* Bedrock.engineer teal scale, step 4. Tinted fill, hover. */
-    --teal-4: rgb(9.8% 19.22% 20.78%);
-    /* Bedrock.engineer teal scale, step 5. Tinted fill, pressed. */
-    --teal-5: rgb(12.16% 23.14% 25.1%);
-    /* Bedrock.engineer teal scale, step 6. Subtle teal border. */
-    --teal-6: rgb(16.08% 27.84% 29.8%);
-    /* Bedrock.engineer teal scale, step 7. Teal border, dividers on tinted areas. */
-    --teal-7: rgb(20.39% 34.12% 36.47%);
-    /* Bedrock.engineer teal scale, step 8. Strong teal border, hover outlines. */
-    --teal-8: rgb(27.06% 44.31% 47.06%);
-    /* Bedrock.engineer teal scale, step 9. Solid teal; focus ring. */
-    --teal-9: rgb(32.16% 55.69% 59.61%);
-    /* Bedrock.engineer teal scale, step 10. THE brand teal: solid fills, primary buttons, logo dots in light mode. Graphics only on white (4.4:1): use teal-11 for body-size text. */
-    --teal-10: rgb(27.06% 50.59% 54.51%);
-    /* Bedrock.engineer teal scale, step 11. Teal text and links (5.5:1 on white in light; 9.5:1 on the dark ground). Logo dots in dark mode. */
-    --teal-11: rgb(53.73% 75.69% 79.22%);
-    /* Bedrock.engineer teal scale, step 12. Darkest teal text, headings on teal-3. */
-    --teal-12: rgb(82.75% 93.33% 94.9%);
-    /* Bedrock.engineer teal scale, step 10. THE brand teal: solid fills, primary buttons, logo dots in light mode. Graphics only on white (4.4:1): use teal-11 for body-size text. */
-    --texture: var(--teal-11);
-  }
-}
-
-:root[data-theme="dark"] {
-/* Page background. */
-  --bg: rgb(6.67% 6.67% 7.45%);
-  /* Categorical color for lines, bars and points. 'Other', or a fifth series. More than five categories: use another palette. Lighter in dark mode so it stays visible. */
-  --cat-gray: rgb(60.39% 61.18% 64.71%);
-  /* Categorical color for lines, bars and points. Third series. Lighter in dark mode so it stays visible. */
-  --cat-indigo: rgb(55.69% 60.39% 83.53%);
-  /* Categorical color for lines, bars and points. Second series. Lighter in dark mode so it stays visible. */
-  --cat-plum: rgb(81.57% 58.82% 74.51%);
-  /* Categorical color for lines, bars and points. First series, and the only one when a chart has one series. Lighter in dark mode so it stays visible. */
-  --cat-teal: rgb(53.73% 75.69% 79.22%);
-  /* Categorical color for lines, bars and points. Fourth series. Lighter in dark mode so it stays visible. */
-  --cat-violet: rgb(68.24% 60% 80.78%);
-  /* Drawing-paper grid and grid-texture lines behind the drawing. */
-  --grid-cell: rgb(14.12% 21.57% 22.75%);
-  /* Construction lines in technical drawings: baseline, x-height, dimensions. */
-  --guide: rgb(23.92% 37.25% 39.22%);
-  /* Body text, titles and the logo letters, on bg or surface (15:1+ in both themes). */
-  --ink: rgb(92.94% 93.33% 94.12%);
-  /* Secondary text: ledes, captions, nav (5.9:1 light, 9:1 dark on bg). */
-  --ink-muted: rgb(69.02% 70.59% 72.94%);
-  /* Hairline borders on cards and section rules. The system uses borders, not shadows. */
-  --line: rgb(18.04% 19.22% 20.78%);
-  /* The teal dots of the logo: j, period and i. Lighter in dark mode so they stay visible. */
-  --logo-dot: var(--teal-11);
-  /* Cards, panels, the hero. Sits on bg. */
-  --surface: rgb(9.41% 9.8% 10.59%);
-  /* Bedrock.engineer teal scale, step 1. App background tint. */
-  --teal-1: rgb(5.1% 7.45% 8.24%);
-  /* Bedrock.engineer teal scale, step 2. Subtle background: code blocks, table stripes. */
-  --teal-2: rgb(7.84% 10.2% 10.59%);
-  /* Bedrock.engineer teal scale, step 3. Tinted fill: badges, selected rows. */
-  --teal-3: rgb(9.02% 15.29% 16.47%);
-  /* Bedrock.engineer teal scale, step 4. Tinted fill, hover. */
-  --teal-4: rgb(9.8% 19.22% 20.78%);
-  /* Bedrock.engineer teal scale, step 5. Tinted fill, pressed. */
-  --teal-5: rgb(12.16% 23.14% 25.1%);
-  /* Bedrock.engineer teal scale, step 6. Subtle teal border. */
-  --teal-6: rgb(16.08% 27.84% 29.8%);
-  /* Bedrock.engineer teal scale, step 7. Teal border, dividers on tinted areas. */
-  --teal-7: rgb(20.39% 34.12% 36.47%);
-  /* Bedrock.engineer teal scale, step 8. Strong teal border, hover outlines. */
-  --teal-8: rgb(27.06% 44.31% 47.06%);
-  /* Bedrock.engineer teal scale, step 9. Solid teal; focus ring. */
-  --teal-9: rgb(32.16% 55.69% 59.61%);
-  /* Bedrock.engineer teal scale, step 10. THE brand teal: solid fills, primary buttons, logo dots in light mode. Graphics only on white (4.4:1): use teal-11 for body-size text. */
-  --teal-10: rgb(27.06% 50.59% 54.51%);
-  /* Bedrock.engineer teal scale, step 11. Teal text and links (5.5:1 on white in light; 9.5:1 on the dark ground). Logo dots in dark mode. */
-  --teal-11: rgb(53.73% 75.69% 79.22%);
-  /* Bedrock.engineer teal scale, step 12. Darkest teal text, headings on teal-3. */
-  --teal-12: rgb(82.75% 93.33% 94.9%);
-  /* Bedrock.engineer teal scale, step 10. THE brand teal: solid fills, primary buttons, logo dots in light mode. Graphics only on white (4.4:1): use teal-11 for body-size text. */
-  --texture: var(--teal-11);
 }

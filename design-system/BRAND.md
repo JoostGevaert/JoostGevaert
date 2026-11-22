@@ -66,9 +66,13 @@ One hue for the interface: **Bedrock.engineer's teal**, a muted steel blue (OKLC
 | 9–10 | Solid color. **teal-10 is the brand color** |
 | 11–12 | Text |
 
+All colors are written in **OKLCH** (lightness, chroma, hue), the perceptual space the whole palette was built in: equal steps in lightness look equal, and a hue stays the same hue as it gets lighter or darker. The teal scale uses Bedrock.engineer's original values (hue 209.3); the neutrals and data colors are their exact OKLCH equivalents. Every color is **one token with a light and a dark value**: there is no separate dark palette to keep in sync.
+
 Semantic tokens sit on top: `bg`, `surface`, `ink`, `ink-muted`, `line` for the page; `brand` (teal-10) for solid fills; `link` (teal-11) for links and teal text; `logo-dot` for the logo's dots; `focus` (teal-9) for focus rings; `guide` and `grid-cell` for drawings.
 
-Contrast: `ink` on `bg` is over 15:1 in both themes, `ink-muted` 5.9:1 (light) and 9:1 (dark). teal-10 on white is 4.4:1, enough for graphics and large text but not body text: use `link` (teal-11, 5.5:1) for anything you read.
+Derived colors: don't invent new hex values. A step of the scale covers hover, pressed and tinted fills (`teal-4` for hover on `teal-3`, and so on). Where a color is needed at reduced strength, such as a texture or an overlay, mix it in OKLCH: `color-mix(in oklch, var(--texture) 22%, transparent)`.
+
+Contrast: `ink` on `bg` is over 15:1 in both themes, `ink-muted` 5.9:1 (light) and 9:1 (dark). teal-10 on white is 4.4:1, enough for graphics and large text but not body text: use `link` (teal-11, 5.5:1) for anything you read. The other way round, `on-brand` (white) on a `brand` fill is also 4.4:1: fine for icons and large or bold text; for small text on teal, fill with teal-11 instead.
 
 Links, buttons, focus and the logo dots are always teal. Plum and indigo never appear in the interface for decoration. The one exception is something that *is* data: post-type tags carry a small dot in their category color (experiments teal, maps indigo, notes plum), because the same categories appear in charts.
 
@@ -88,6 +92,8 @@ All data colors are samples of one **color field**: four corners blended in OKLa
 
 Fills (sequential, diverging, bivariate) are the same in both themes: a map shouldn't change with the theme. Lines and points use the categorical colors, which have a lighter dark-mode version.
 
+Live examples, drawn with these tokens in both themes, are the **Data visualization** components: ChartColors, BarCharts, SequentialMap, DivergingMap and BivariateMap. Copy their code as a starting point.
+
 The bivariate grid follows Joshua Stevens' 3×3 scheme, rebuilt around Bedrock teal: first digit teal, second plum, indigo where both are high. Lightness falls steadily toward the indigo corner, so the classes stay apart without relying on hue alone. Don't go beyond 3×3: more classes can't be told apart.
 
 ### Pictures: the full palette
@@ -104,6 +110,11 @@ The Source family, all open source (SIL OFL) and loaded from Google Fonts.
 
 Titles use sentence case and balanced wrapping. Blog titles are always Sans, never Mono.
 
+- **Fluid titles:** `display` and `heading` scale with the viewport between a minimum and their token size: `display` `clamp(2rem, 1.55rem + 1.6vw, 2.75rem)` (32 → 44 px), `heading` `clamp(1.5rem, 1.3rem + 0.6vw, 1.75rem)` (24 → 28 px), between 320 and 1240 px wide. Everything else stays fixed: reading text doesn't change size.
+- **Wrapping:** `text-wrap: balance` on headings, `text-wrap: pretty` on everything else; `overflow-wrap: break-word` so long URLs and repo names never widen the page.
+- **No fake styles:** `font-synthesis: none`; load the weights you use.
+- **Numbers:** `font-variant-numeric: tabular-nums` where digits must line up (tables, chart axes, timers, stroke rates), not globally.
+
 ## Textures
 
 Faint backgrounds behind the hero and post headers, at `texture-hero` (22%) or `texture-card` (18%) opacity, stroked in `texture`. A post sets one in its front matter with `texture:`; the default depends on its type:
@@ -119,14 +130,37 @@ The contours come from the distance field of the j.e letters: terraces inside, r
 
 ## Social cards
 
-The image shown when a link is shared (`og:image`, 1200 × 630 px). Layout: the wordmark top left, a date and post-type line in `label` style, the title in `display` style bottom left, and a strip of unequal color blocks (indigo, teal, plum) along the bottom edge. Behind it by default: the post's texture at 30%. A post with a striking result can show that instead: its own chart or map, at card size, on the right.
+The image shown when a link is shared (`og:image`, 1200 × 630 px). Layout: the wordmark top left, a date and post-type line in `label` style, the title in `display` style bottom left, and a strip of unequal color blocks (indigo, teal, plum) along the bottom edge. Behind it by default: the post's texture at 30%. A post with a striking result can show that instead: its own chart or map, at card size, on the right. See the SocialCard component.
 
 ## Layout
 
 - Spacing steps `space-1` (4 px) to `space-6` (64 px). Cards pad `space-4`, grids gap `space-3`, sections sit `space-6` apart.
-- Radii: `radius-sm` for small parts, `radius-md` for cards and post headers, `radius-lg` for the hero, `radius-pill` for segmented controls.
-- Content up to 1200 px wide.
-- A three-way theme switch (System, Light, Dark) sits at the top right, styled as a `radius-pill` segmented control; System is the default. It is the Bedrock.engineer switch, restyled.
+- Radii: `radius-sm` for small parts, `radius-md` for cards and post headers, `radius-lg` for the hero, `radius-pill` for buttons and chips.
+- **Content grid** with named lines: `content` (42rem, about 70 characters of body text) for running text, `breakout` (64rem) for figures, charts and maps, `full` for the hero, textures and full-bleed images; gutters 1.5rem. Children pick a track with `grid-column`, so a post never needs wrapper divs to let a map run wider than the text.
+- **Flow spacing:** inside a post, `.prose > * + *` gets `margin-block-start: var(--flow-space, 1em)`; headings 2em above, 0.5em below. Elsewhere, parents set spacing with `gap`, children don't carry outer margins.
+- **Concentric radius:** a rounded thing inside a rounded thing gets outer radius = inner radius + padding.
+- **Hit area:** every control is at least 44 × 44 px to touch, visibly smaller ones (the 36 px header logo buttons, chips) get an invisible `::after` that extends the target.
+- **Whole-card links:** a post card is one link (the title's link stretched over the card with `::after`); the focus ring moves to the card via `:has(:focus-visible)`.
+- **Focus:** `:focus-visible` only, `outline: max(2px, 0.08em) solid var(--focus)`, `outline-offset: 0.25em`. Never `outline: none`.
+- **Hover** styles only under `@media (hover: hover) and (pointer: fine)`, so touch screens don't get stuck hover states.
+- **Theme switch:** Bedrock.engineer's triangle toggle (three triangles: Light, Auto, Dark; a rotating triangle marks the choice), restyled: triangles `teal-3` with a `teal-6` hairline (hover `teal-4`), the indicator solid `teal-10` in both themes, Lucide `sun`, `sun-moon` and `moon` at 1.5 px in `ink-muted`, `on-brand` on the indicator, focus ring 2 px `teal-9`. Same size (40 px sides), rotation (`ease-overshoot`, `duration-swing`), keyboard behavior and `localStorage` key as Bedrock's. Auto (follow the system) is the default. Top right of the header.
+
+## Motion
+
+Motion is rare and functional: it shows that something changed state, never decorates. Nothing moves on its own, nothing loops, nothing animates on scroll or page load.
+
+- **Opt-in:** transforms and movement live inside `@media (prefers-reduced-motion: no-preference)`; under `reduce` they happen instantly. Color and opacity fades may stay, they don't move anything.
+- **Named properties:** transition `color`, `background-color`, `transform`… by name; never `transition: all`.
+- **Short:** interface transitions stay under 300 ms. The theme switch's 450 ms swing is the one deliberate exception: the overshoot needs the time.
+- **No `ease-in`** on interface elements: things start fast and settle.
+- **Press feedback:** buttons and chips scale to 0.97 on `:active`, over `duration-fast` with `ease-standard`.
+
+| Token | Value | Use |
+|---|---|---|
+| `ease-overshoot` | `cubic-bezier(0.175, 0.885, 0.32, 1.1)` | Bedrock.engineer's overshooting swing: the theme switch indicator, and other small parts that snap into place |
+| `duration-swing` | 450 ms | Swings with `ease-overshoot`: the theme switch indicator's 60° rotation |
+| `ease-standard` | `cubic-bezier(0.23, 1, 0.32, 1)` | A strong ease-out for plain changes that shouldn't draw attention: hover and focus colors, press feedback |
+| `duration-fast` | 150 ms | Color changes on hover and focus, and press feedback, with `ease-standard` |
 
 ## Icons
 
@@ -150,7 +184,7 @@ Spec, for Lucide and custom icons alike:
 
 Use:
 
-- **Sizes:** 16 px next to `small` and `label` text, 20 px next to `ui` and `body`, 24 px next to headings. Center icons on the text's x-height, not its line box.
+- **Sizes:** relative to the text they sit with, not in px: a box of about 1.25em (Lucide's 1 px padding makes the drawing match the text's cap height), `flex: none`, aligned to the text's center. That comes to about 16 px next to `small` and `label`, 20 px next to `ui` and `body`, 24 px next to headings. In a notice that wraps, the icon box is `1lh` tall and aligns to the first line.
 - **Color:** `ink` by default, `ink-muted` for secondary icons. `link` teal only when the icon itself is clickable. Data colors (`cat-*`) only inside a legend or a post-type tag.
 - **With words:** in navigation and buttons an icon goes with a word, never instead of one, except for universal controls (close, menu, search, the theme switch).
 - **One set:** never mix in icons from another library. If Lucide lacks something, draw it to the spec.
@@ -177,4 +211,16 @@ Where they appear:
 
 ## Building with it
 
-The site is built with Astro, with tokens compiled by Terrazzo as in bedrock-web. Export `tokens.json` to DTCG token files and generate CSS custom properties from them; never paste values into stylesheets by hand.
+The site is built with Astro, with tokens compiled by Terrazzo as in bedrock-web. Export `tokens.json` to DTCG token files and generate CSS custom properties from them; never paste values into stylesheets by hand. Keep the teal scale in Bedrock's original OKLCH values in the DTCG files; Terrazzo writes the hex fallbacks.
+
+CSS foundations (after [good-css.com](https://good-css.com/)):
+
+- **Reset:** `box-sizing: border-box` and `min-width: 0` on everything; form inputs `font-size: max(16px, 1rem)` (no zoom on phones); `scrollbar-gutter: stable`; `touch-action: manipulation` on controls; full-height heroes in `svh`.
+- **Themes, one set of tokens:** every color token is emitted once, as `--ink: light-dark(oklch(…), oklch(…))`, with `color-scheme: light dark` on `:root` and `<meta name="color-scheme" content="light dark">`. The theme switch then only sets `color-scheme` on `:root`: `light`, `dark`, or `light dark` for Auto. Native controls and scrollbars follow for free, and there are no duplicated `[data-theme]` blocks to keep in sync. If Terrazzo can't emit `light-dark()`, a small post-build step can. Anything that isn't CSS follows the same `color-scheme`: inline the logo SVGs with `fill: var(--ink)` / `var(--logo-dot)`, because `<picture>` with `prefers-color-scheme` follows the system, not the switch.
+- **Logical properties:** `margin-inline`, `padding-block`, `inset-inline-start` and so on, not left/right/top/bottom.
+- **Intrinsic grids** for card lists: `repeat(auto-fill, minmax(min(100%, 16rem), 1fr))`, no breakpoints.
+- **Container queries** for components that live in different widths (post cards, charts, maps): `container-type: inline-size` on their wrapper.
+- **`overflow: clip`** instead of `hidden` where nothing needs to scroll.
+- **Single-line labels** (buttons, chips, tags) may use `text-box: trim-both cap alphabetic` for true optical centering.
+
+The step-by-step build plan is the **Build plan** section (`build-plan.md`). Reference material for building sits in `reference/`: Bedrock.engineer's setup files (`reference/bedrock-web/`), rendered HTML sheets of everything in this system (`reference/sheets/`) and the scripts that generated the assets (`reference/scripts/`).
