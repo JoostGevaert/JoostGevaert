@@ -99,6 +99,9 @@ const imageUrl = image && new URL(image, Astro.site);
     </main>
     <Footer />
     <script>
+      import "../scripts/popup-link";
+    </script>
+    <script>
       import { initialHeaderScroll, nextHeaderScroll } from "../lib/header-scroll";
 
       const header = document.querySelector<HTMLElement>("[data-site-header]");

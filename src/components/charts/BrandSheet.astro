@@ -1,0 +1,117 @@
+---
+// The design system on one sheet: logo, type, the interface teal and the data
+// colors. Every swatch is a token utility, so the sheet follows the theme switch
+// like the rest of the page (fills for data stay the same in both themes).
+import Logo from "../Logo.astro";
+
+const tealClasses = [
+  "bg-teal-1",
+  "bg-teal-2",
+  "bg-teal-3",
+  "bg-teal-4",
+  "bg-teal-5",
+  "bg-teal-6",
+  "bg-teal-7",
+  "bg-teal-8",
+  "bg-teal-9",
+  "bg-teal-10",
+  "bg-teal-11",
+  "bg-teal-12",
+];
+const categorical = [
+  { name: "teal", swatchClasses: "bg-cat-teal" },
+  { name: "plum", swatchClasses: "bg-cat-plum" },
+  { name: "indigo", swatchClasses: "bg-cat-indigo" },
+  { name: "violet", swatchClasses: "bg-cat-violet" },
+  { name: "other", swatchClasses: "bg-cat-gray" },
+];
+const sequentialClasses = [
+  "bg-seq-teal-1",
+  "bg-seq-teal-2",
+  "bg-seq-teal-3",
+  "bg-seq-teal-4",
+  "bg-seq-teal-5",
+  "bg-seq-teal-6",
+  "bg-seq-teal-7",
+];
+const divergingClasses = [
+  "bg-div-1",
+  "bg-div-2",
+  "bg-div-3",
+  "bg-div-4",
+  "bg-div-5",
+  "bg-div-6",
+  "bg-div-7",
+  "bg-div-8",
+  "bg-div-9",
+];
+const surfaces = [
+  { name: "bg", swatchClasses: "bg-bg" },
+  { name: "surface", swatchClasses: "bg-surface" },
+  { name: "line", swatchClasses: "bg-line" },
+  { name: "ink-muted", swatchClasses: "bg-ink-muted" },
+  { name: "ink", swatchClasses: "bg-ink" },
+];
+---
+
+<div class="grid gap-8 rounded-lg border border-line bg-surface p-6 sm:p-8">
+  <section class="flex flex-wrap items-center justify-between gap-6" aria-label="Logo">
+    <Logo variant="wordmark" id="sheet-wordmark" class="h-8 w-auto" />
+    <Logo variant="mark" id="sheet-mark" class="h-10 w-auto" />
+  </section>
+
+  <section class="grid gap-2" aria-label="Type">
+    <p class="text-link type-label">Type: one family, three voices</p>
+    <p class="text-ink type-heading">Source Sans 3 for titles</p>
+    <p class="text-ink type-lede">Source Serif 4 for reading, like this sentence.</p>
+    <p class="text-ink type-code">Source Code Pro for data: 2026-11-23, 31.4 spm</p>
+  </section>
+
+  <section class="grid gap-2" aria-label="Interface color">
+    <p class="text-link type-label">Interface: teal, 12 steps</p>
+    <div class="grid grid-cols-12 gap-0.5">
+      {tealClasses.map((fill, i) => (
+        <div class="grid gap-1">
+          <div class:list={["h-10 rounded-sm border border-line", fill]} />
+          <span class="text-center text-ink-muted type-label">{i + 1}</span>
+        </div>
+      ))}
+    </div>
+    <div class="flex flex-wrap gap-4 pbs-2">
+      {surfaces.map(({ name, swatchClasses }) => (
+        <span class="flex items-center gap-2 text-ink-muted type-small">
+          <span class:list={["size-4 rounded-sm border border-line", swatchClasses]} />
+          {name}
+        </span>
+      ))}
+    </div>
+  </section>
+
+  <section class="grid gap-3" aria-label="Data colors">
+    <p class="text-link type-label">Data: teal, plum and indigo</p>
+    <div class="flex flex-wrap gap-4">
+      {categorical.map(({ name, swatchClasses }) => (
+        <span class="flex items-center gap-2 text-ink-muted type-small">
+          <span class:list={["size-3 rounded-pill", swatchClasses]} />
+          {name}
+        </span>
+      ))}
+    </div>
+    <div class="grid gap-1">
+      <div class="grid grid-cols-7 gap-0.5">
+        {sequentialClasses.map((fill) => (
+          <div class:list={["h-3 rounded-sm", fill]} />
+        ))}
+      </div>
+      <span class="text-ink-muted type-small">Amounts: little to much</span>
+    </div>
+    <div class="grid gap-1">
+      <div class="grid grid-cols-9 gap-0.5">
+        {divergingClasses.map((fill) => (
+          <div class:list={["h-3 rounded-sm", fill]} />
+        ))}
+      </div>
+      <span class="text-ink-muted type-small">A real middle: below, zero, above</span>
+    </div>
+  </section>
+</div>
