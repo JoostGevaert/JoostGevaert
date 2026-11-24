@@ -1,7 +1,14 @@
 ---
 // The 3x3 bivariate legend (BRAND.md, Data): first digit teal, second plum,
 // indigo where both are high. Same fills in both themes. Rows run from high
-// plum at the top to low plum at the bottom.
+// plum at the top to low plum at the bottom. Axis labels name the variables.
+interface Props {
+  /** The teal variable, increasing to the right. */
+  x?: string;
+  /** The plum variable, increasing upward. */
+  y?: string;
+}
+const { x = "teal", y = "plum" } = Astro.props;
 const rows = [
   ["bg-biv-02", "bg-biv-12", "bg-biv-22"],
   ["bg-biv-01", "bg-biv-11", "bg-biv-21"],
@@ -10,15 +17,15 @@ const rows = [
 ---
 
 <div class="grid justify-start gap-2">
-  <p class="text-ink-muted type-label">↑ plum</p>
+  <p class="text-ink-muted type-label">↑ {y}</p>
   <div
     class="grid grid-cols-3 gap-0.5"
     role="img"
-    aria-label="Bivariate color grid, 3 by 3: teal increases to the right, plum increases upward"
+    aria-label={`Bivariate color grid, 3 by 3: ${x} increases to the right, ${y} increases upward`}
   >
     {rows.flat().map((fill) => (
       <div class:list={["size-12", fill]} />
     ))}
   </div>
-  <p class="text-ink-muted type-label">teal →</p>
+  <p class="text-ink-muted type-label">{x} →</p>
 </div>

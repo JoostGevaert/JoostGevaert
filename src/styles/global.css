@@ -32,6 +32,8 @@
   --default-transition-timing-function: var(--ease-standard);
   --container-content: 42rem;
   --container-breakout: 64rem;
+  /* The glossary popup card: 22rem, but never wider than the screen minus a margin. */
+  --container-card: min(22rem, calc(100vw - 24px));
 }
 
 /* Content grid with named lines: `content` (running text, the default for

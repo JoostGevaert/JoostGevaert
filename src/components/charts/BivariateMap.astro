@@ -1,0 +1,40 @@
+---
+// Two variables on one map (BRAND.md, Data): biv-00…22, first digit teal (cafés),
+// second plum (bike racks), indigo where both are high. Three quantile classes
+// each. Made-up data on real A5 cells around Amsterdam, ported from the design
+// system's BivariateMap component. Fills are the same in both themes.
+import { a5Cells as polygons } from "./a5-cells";
+import BivariateGrid from "./BivariateGrid.astro";
+import { classify, pathData } from "../../lib/chart/cells";
+
+// fillClasses[teal][plum]
+const fillClasses = [
+  ["fill-biv-00", "fill-biv-01", "fill-biv-02"],
+  ["fill-biv-10", "fill-biv-11", "fill-biv-12"],
+  ["fill-biv-20", "fill-biv-21", "fill-biv-22"],
+];
+const cafes = classify(polygons, 1.3, 3);
+const racks = classify(polygons, 4.1, 3);
+---
+
+<div class="flex flex-col gap-2">
+  <p class="text-ink type-ui">Cafés and bike racks together, A5 cells</p>
+  <div class="flex flex-wrap items-end gap-6">
+    <div class="min-w-64 flex-1 overflow-clip rounded-sm">
+      <svg
+        class="block h-auto w-full"
+        viewBox="0 0 1000 382"
+        role="img"
+        aria-label="Map of A5 cells around Amsterdam: teal where there are many cafés, plum where there are many bike racks, indigo where there are many of both (made-up data)"
+      >
+        {polygons.map((p, i) => (
+          <path
+            d={pathData(p)}
+            class:list={[fillClasses[cafes[i]!]![racks[i]!], "stroke-surface stroke-1"]}
+          />
+        ))}
+      </svg>
+    </div>
+    <BivariateGrid x="cafés" y="bike racks" />
+  </div>
+</div>

@@ -1,0 +1,149 @@
+---
+title: Make agents build apps with your style
+description: A design system is where you write down your style rules. Once they're written down, an agent can follow them, so the apps you build together look and feel like your brand.
+date: 2026-11-23
+type: notes
+repo: JoostGevaert/JoostGevaert
+---
+
+import BrandSheet from "../../components/charts/BrandSheet.astro";
+import PaletteDemo from "../../components/charts/PaletteDemo.astro";
+import SequentialMap from "../../components/charts/SequentialMap.astro";
+import BivariateMap from "../../components/charts/BivariateMap.astro";
+
+When I start a web app, the first thing I make isn't a page. It's a [design system](../glossary.md#design-system): the written-down answer to "what does this look like, and why?" Now that a [coding agent](../glossary.md#agent) writes most of my code, I do this more carefully than ever, for two reasons.
+
+Without written rules, you keep correcting the agent on the same things. A slightly different blue here, a new font there, a button that doesn't match the last one. Every session starts from zero, so every correction has to be made again.
+
+And rules prevent the mistakes you can't spot yourself. If you've never built a website, you won't notice that the text is hard to read in [dark mode](../glossary.md#dark-mode), that a page scrolls sideways on a phone, or that a button is too small to tap. The agent won't either, unless a rule tells it to look.
+
+This post shows the design system behind this site: what's in it, how I made it, and how it ends up on every page. It's meant to be taken apart. At the end there's a prompt to hand to your agent, so it can read this post and help you make your own. Words with a dotted underline are in the [glossary](/glossary/): hover over them or tap them.
+
+## The whole system on one sheet
+
+<Figure caption="The design system of joost.engineer. Switch the theme at the top right: every color on the sheet follows, because each one is a token.">
+  <BrandSheet />
+</Figure>
+
+That's all of it:
+
+- **A logo.** The wordmark joost.engineer and its short form, j.e, each with teal dots.
+- **One type family, three voices.** Source Sans for titles, Source Serif for reading, Source Code Pro for anything that is data: dates, numbers, code.
+- **One interface color.** Teal, in 12 steps from almost white to almost black. Links, buttons and focus rings use it, and nothing else does.
+- **Three data colors.** Teal, plum and indigo, for every chart and map.
+- **A light and a dark version** of every color.
+- **A short list of rules.** Borders instead of shadows. Data in mono. Sentence case for titles. No exclamation marks.
+
+Fewer choices make for a stronger look, and they leave the agent less room to improvise.
+
+## How I made it
+
+I made it with [Claude Design](https://claude.ai), by describing what I wanted and refining sheets of logos, colors and charts until they felt right. That was the fun part. But what matters is what came out: a folder of plain files that any person or agent can read.
+
+- [`BRAND.md`](https://github.com/JoostGevaert/JoostGevaert/blob/main/design-system/BRAND.md), the rules in plain English, in [Markdown](../glossary.md#markdown). Each rule comes with its reason: "Fills are the same in both themes: a map shouldn't change with the theme."
+- [`tokens.json`](https://github.com/JoostGevaert/JoostGevaert/blob/main/design-system/tokens.json), every value in the system as a named [token](../glossary.md#token), in [JSON](../glossary.md#json). Each token says what it's for: `teal-10` is "the brand teal: solid fills, primary buttons, logo dots in light mode".
+- The logo files, and a few example charts and maps.
+
+You don't need a design tool to get there. A conversation with any assistant can produce the same two files. A design tool just lets you look at the result while you decide.
+
+The reasons matter more than they seem. An agent will meet cases the rules didn't foresee, like a new kind of chart or a warning message. With the reasons written down, it can make the call you would have made.
+
+## From one file to every page
+
+### Tokens
+
+Every color, spacing step and corner radius on this page comes from `tokens.json`. A small script turns it into [CSS](../glossary.md#css), the language that tells the browser how a page should look. Nothing is typed in by hand. If a value is typed in by hand, it drifts: after a few weeks you have five almost-identical teals. With one file as the source, there is only one.
+
+Each color has two values, one for light mode and one for dark, and the browser picks the right one. They're written in [OKLCH](../glossary.md#oklch), a way of writing colors in which equal steps look equal. That's what makes a 12-step scale work: step 4 is the hover color for step 3, step 5 the pressed one, without inventing new colors.
+
+### A few habits that hold up
+
+Most of the rules that make a site work well are small and invisible. I took mine from [good-css.com](https://good-css.com/), and wrote them into the design system so the agent applies them every time:
+
+- **Readable everywhere.** Long words and URLs wrap instead of pushing the page wider than the phone. Text inputs are large enough that phones don't zoom in when you tap them.
+- **Layouts that adapt by themselves.** Lists of cards choose their own number of columns, and charts adapt to the space they're given ([container queries](../glossary.md#container-query)) instead of to the screen. Fewer [breakpoints](../glossary.md#breakpoint) means fewer layouts to check.
+- **Controls you can hit.** Every button and link is at least 44 by 44 pixels to the finger, and shows a clear outline when you reach it with the keyboard. That's part of [accessibility](../glossary.md#accessibility).
+- **Motion that asks first.** Anything that moves stays still for people who have asked their device for less motion.
+
+### Fonts that come with the site
+
+The fonts are part of the site itself: they're [self-hosted](../glossary.md#self-hosting), not loaded from Google Fonts.
+
+<Callout title="Why not Google Fonts?" collapsed>
+  When a page loads its fonts from Google, every visitor's browser contacts Google's servers and
+  hands over its IP address, without the visitor being asked. In January 2022 [a court in
+  Munich](https://www.gesetze-bayern.de/Content/Document/Y-300-Z-GRURRS-B-2022-N-612) ruled that
+  this breaks the GDPR and awarded a visitor €100 in damages, which set off a wave of warning
+  letters to small websites in Germany. Self-hosting means the font files ship with your own site,
+  so there's nothing to leak. With an agent it costs one line in your rules: "Fonts ship with the
+  site; no font CDNs."
+</Callout>
+
+## Colors for data
+
+Teal, plum and indigo are samples of one color field. Picture a square with light gray, teal, plum and indigo in its corners, blended smoothly. Everything in between is a real mix, so the colors always belong together. From that field come four kinds of palette, each for one shape of data:
+
+| Data                          | Colors                                                |
+| ----------------------------- | ----------------------------------------------------- |
+| Several series, in this order | teal, plum, indigo, violet, then gray for "other"     |
+| Amounts                       | seven steps of teal (or plum, or indigo)              |
+| Data with a meaningful middle | plum below, gray at the middle, teal above            |
+| Two variables at once         | a 3 by 3 grid: teal, plum, indigo where both are high |
+
+The rules that come with them matter more than the colors:
+
+- **Lines change with the theme, fills don't.** Lines get a lighter color in dark mode, so they stay visible. Map and grid fills stay the same, because a map shouldn't mean something different when you switch to dark mode.
+- **Never by color alone.** Every series has a label, and colors that must be told apart also differ in lightness.
+- **A middle has to be real.** A two-sided scale needs a true zero in the middle. Otherwise it's a one-sided scale pretending.
+- **At most seven classes, and 3 by 3 for two variables.** Beyond that, people can't tell them apart.
+
+<Figure caption="Stroke rate per rower over a 2,000 m piece (made-up data), in the order of the series colors, and a grid with plum below zero and teal above. Switch the theme: the lines lighten, the grid doesn't.">
+  <PaletteDemo />
+</Figure>
+
+The same colors work on maps. These two use made-up data on real cells of the [A5 grid](https://github.com/felixpalmer/a5), a way of dividing the world into equal pentagons, around Amsterdam.
+
+<Figure caption="One amount: seven steps of teal, light for few, deep for many. Made-up data.">
+  <SequentialMap />
+</Figure>
+
+<Figure caption="Two amounts at once, after Joshua Stevens' 3 by 3 scheme: teal for cafés, plum for bike racks, indigo where there are many of both. Made-up data.">
+  <BivariateMap />
+</Figure>
+
+The two-variable grid follows [Joshua Stevens' bivariate scheme](https://www.joshuastevens.net/cartography/make-a-bivariate-choropleth-map/), rebuilt around Bedrock.engineer's teal. Its lightness falls steadily toward the indigo corner, so even in grayscale the nine classes stay apart.
+
+## Rules the agent can't skip
+
+Written rules are a good start, but an agent under pressure will still cut corners. So the most important rule is also checked by a program.
+
+The site uses [Tailwind](../glossary.md#tailwind), which styles pages with short class names generated from the tokens: `text-ink`, `bg-teal-3`. Tailwind also lets you type any value you like, such as `w-[37px]`, and that's exactly where styles drift. A [linter](../glossary.md#linter) blocks those: if a class isn't a token, the [build](../glossary.md#build) fails, and the agent has to fix it before anything goes live. A missing value becomes a new token, so the token file stays the only place a value can come from.
+
+The last piece is one file that points the agent at all of this: [`AGENTS.md`](../glossary.md#agentsmd) at the top of the [repository](../glossary.md#repo). Claude Code, Codex and most other agents read it at the start of every session. Mine says, among other things:
+
+```md
+Before changing anything visual, read design-system/BRAND.md.
+Every value comes from design-system/tokens.json:
+a missing value becomes a token.
+```
+
+## Hand this to your agent
+
+Copy this into your agent, in an empty folder for your new project:
+
+```text
+Read https://joost.engineer/posts/apps-with-your-style/
+and the files it links: design-system/BRAND.md and
+design-system/tokens.json in the GitHub repository
+JoostGevaert/JoostGevaert. I want the same structure for
+my own project, in my own style.
+
+Interview me one question at a time about my brand: its
+name, logo, fonts, colors, the feel I'm after and what my
+data looks like. Recommend an answer for each question.
+Then write design-system/BRAND.md and
+design-system/tokens.json for me, and an AGENTS.md that
+tells you to follow them. Don't build any pages yet.
+```
+
+Then bend the result to your taste: argue with the colors, drop the rules you don't need, add the ones your business does. The next post is about the other half: the tech stack, written down the same way, and putting a first site online.

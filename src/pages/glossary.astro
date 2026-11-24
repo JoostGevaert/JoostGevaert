@@ -1,0 +1,13 @@
+---
+// The glossary page. Its source is src/content/glossary.md: one ### heading per
+// term, whose first paragraph posts show in a popup (src/plugins/remark-glossary.mjs).
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Content, frontmatter } from "../content/glossary.md";
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <article data-prose class="content-grid">
+    <h1 class="type-display text-ink">{frontmatter.title}</h1>
+    <Content />
+  </article>
+</BaseLayout>

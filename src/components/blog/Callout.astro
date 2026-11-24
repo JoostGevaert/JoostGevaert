@@ -1,15 +1,37 @@
 ---
 // An aside set off by a hairline and a teal rule (borders, not shadows).
+// With `collapsed`, only the title shows until the reader opens it (<details>).
 interface Props {
   /** Short label in label style, e.g. "Note", "Method", "Result". */
   title?: string;
+  /** Start closed: for a reason or detail most readers can skip. */
+  collapsed?: boolean;
 }
-const { title = "Note" } = Astro.props;
+const { title = "Note", collapsed = false } = Astro.props;
+const boxClasses =
+  "flex flex-col gap-1 rounded-sm border border-s-3 border-teal-6 border-s-brand bg-teal-2 px-6 py-4 flow-6";
 ---
 
-<aside class="flex flex-col gap-1 rounded-sm border border-s-3 border-teal-6 border-s-brand bg-teal-2 px-6 py-4 flow-6">
-  <p class="text-link type-label">{title}</p>
-  <div>
-    <slot />
-  </div>
-</aside>
+{collapsed ? (
+  <details class:list={[boxClasses, "group"]}>
+    <summary class="no-marker flex cursor-pointer items-center gap-2 text-link type-label focus-visible:focus-ring">
+      <span
+        class="inline-block group-open:rotate-90 motion-safe:transition-transform"
+        aria-hidden="true"
+      >
+        ›
+      </span>
+      {title}
+    </summary>
+    <div>
+      <slot />
+    </div>
+  </details>
+) : (
+  <aside class={boxClasses}>
+    <p class="text-link type-label">{title}</p>
+    <div>
+      <slot />
+    </div>
+  </aside>
+)}
